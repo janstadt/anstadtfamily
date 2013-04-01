@@ -1,0 +1,147 @@
+section#content{
+	background:#fff;
+	min-height:200px;
+	div#pageElements{
+		position:relative;
+	}
+}
+div#loading{
+	margin:0 auto;
+	width:64px;
+	height:64px;
+	background: url("../img/loading.gif") no-repeat transparent;
+}
+#loginContainer{position:relative;}
+#header{
+	position:relative;
+	.header-logo{
+		height:230px;
+	}
+	#masthead {
+		.border-radius(10px, 0, 0, 10px);
+		background-color:#fff;
+		padding:20px;
+		#slider{background:url("../img/masthead.jpg");height:475px;}
+	}
+	#categories{
+		position:absolute;
+		left:368px;
+		ul {
+			list-style-type:none;
+			padding:0;
+			margin:0;
+			cursor:pointer;
+			background-color:#fff;
+			li {
+				padding:5px 0;
+				a{
+					display:auto;
+					color:#fff;
+				}
+			}
+			li:hover {
+				background-color:@commonColor;
+			}
+		}
+	}
+	#navigation {
+		height:42px;
+		text-transform:uppercase;
+		text-shadow: 0 1px 0 rgba(0,0,0,.15);
+		background-color:@commonColor;
+		margin:0;
+		#loginModal{
+			text-transform:none;
+		}
+		div.navbar-inner{
+			.border-radius(0);
+			.gradient(@commonColor,@commonColor, #8dbc9e);
+		}
+		ul.nav {
+			 li.dropdown.open > .dropdown-toggle,
+			 li.dropdown.active > .dropdown-toggle,
+			 li.dropdown.open.active > .dropdown-toggle {
+			  color: #555555;
+			  background-color: #e5e5e5;
+			}
+			margin:0;
+			text-align:center;
+			list-style-type: none;
+			li.hide{
+				display:none !important;
+			}
+			li {
+				display:inline;
+				margin:0 30px;
+				.transition-duration(.5s);
+				a {
+					text-decoration:none;
+					.caret{
+					 border-top-color: #fff;
+					 border-bottom-color: #fff;
+					}
+				}
+				a, a:hover, a:visited, a:active {
+					color:#fff;
+				}
+			}
+			li.dropdown { 
+				display: inline-block; 
+				li { 
+					display: auto; 
+					text-align:left;
+					margin: 0;
+				}
+			}
+			li#categorieslink ul{
+				a, a:visited, a:active {
+					text-transform: none;
+					color:@textColor;
+				}
+				a:hover{
+					color:#fff;
+					background-color:@commonColor;
+				}
+			}
+			li:hover, li.active{
+				a{
+				background-color: inherit;
+				border-bottom:2px solid #fff;
+				}
+			}
+		}
+	}
+
+	.loginHeader{
+		list-style-type:none;	
+		position:absolute;
+					top:0;
+					right:30px;
+		li#loginLi, li#logoutLi {
+					
+					text-align:right;
+					margin: 0;
+					border: 1px solid #fff;
+					border-top: none;
+					padding: 5px 10px;
+					.border-radius(0px, 5px, 5px, 0px);
+					background-color:#fff;
+					a{
+						border-bottom:1px solid #fff;
+						text-transform: none;
+						.caret{
+							border-top-color: @textColor;
+							border-bottom-color: @textColor;
+						}
+					}
+					a, a:visited, a:active {
+						color:@textColor;
+					}
+					ul a:hover{
+						color:#fff;
+						background-color:@commonColor;
+					}
+			}
+			}
+
+}

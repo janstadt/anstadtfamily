@@ -1,0 +1,16 @@
+﻿<form id="photo-album">
+    <div class="control-group">
+        <label class="control-label" for="title"><%- i18n.Title %></label>
+        <div class="controls">
+            <input type="text" id="title" name="Title" data-error-style="inline" />
+        </div>
+    </div>
+    <% if(model.Id) { %>
+        <div class="control-group">
+            <label class="control-label" for="photos"><%- i18n.Photos %></label>
+        </div>
+    <%} %>
+    <div class="submit">
+        <button type="button" class="btn btn-primary" id="saveAlbum"><%- i18n.Save %></button>
+    </div>
+</form>

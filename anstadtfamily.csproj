@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63E4D3BC-1498-4636-9CBC-F53E4A33F90A}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>photoshare</RootNamespace>
+    <AssemblyName>photoshare</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.12.1\lib\net40\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\packages\EntityFramework.Extended.5.0.0.68\lib\net40\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Mvc">
+      <HintPath>..\packages\ImageResizer.Mvc.3.3.3\lib\ImageResizer.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.SeamCarving">
+      <HintPath>..\packages\ImageResizer.Plugins.SeamCarving.3.3.3\lib\ImageResizer.Plugins.SeamCarving.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Watermark">
+      <HintPath>..\packages\ImageResizer.Plugins.Watermark.3.3.3\lib\ImageResizer.Plugins.Watermark.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack">
+      <HintPath>..\packages\ServiceStack.3.9.28\lib\net35\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=3.9.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.9.32\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.FluentValidation.Mvc3">
+      <HintPath>..\packages\ServiceStack.Mvc.3.9.28\lib\net40\ServiceStack.FluentValidation.Mvc3.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.9.32\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite, Version=3.9.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.32\lib\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.MySql">
+      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.32\lib\ServiceStack.OrmLite.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.SqlServer">
+      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.3.9.28\lib\ServiceStack.OrmLite.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Razor">
+      <HintPath>..\packages\ServiceStack.Razor.3.9.28\lib\net40\ServiceStack.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.3.9.29\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.ServiceInterface">
+      <HintPath>..\packages\ServiceStack.3.9.28\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.3.9.32\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\ServiceStack.Razor.3.9.28\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\ServiceStack.Razor.3.9.28\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\ServiceStack.Razor.3.9.28\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\ServiceStack.Razor.3.9.28\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5.2\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AppHost.cs" />
+    <Compile Include="App_Start\WebServiceExamples.cs" />
+    <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\SecureController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Enums\TagTypes.cs" />
+    <Compile Include="Enums\Login.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Attributes.cs" />
+    <Compile Include="Helpers\IoC.cs" />
+    <Compile Include="Helpers\JsonNetResult.cs" />
+    <Compile Include="Helpers\Mappers.cs" />
+    <Compile Include="Interfaces\ITagsService.cs" />
+    <Compile Include="Interfaces\ITagRepository.cs" />
+    <Compile Include="Interfaces\IPhotoService.cs" />
+    <Compile Include="Interfaces\IPhotoRepository.cs" />
+    <Compile Include="Interfaces\IAlbumService.cs" />
+    <Compile Include="Interfaces\IAlbumRepository.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Interfaces\IDalRepository.cs" />
+    <Compile Include="Interfaces\ISecureController.cs" />
+    <Compile Include="Interfaces\IHomeController.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Enums\AccessLevel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\SlideshowModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\FavoriteModel.cs" />
+    <Compile Include="Models\photoShareEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>photoShareEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TagModel.cs" />
+    <Compile Include="Models\PhotoAlbumModel.cs" />
+    <Compile Include="Models\PhotoModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Mvc.Bundler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\ISessionRepository.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Repositories\AlbumRepository.cs" />
+    <Compile Include="Repositories\TagRepository.cs" />
+    <Compile Include="Repositories\PhotoRepository.cs" />
+    <Compile Include="Repositories\SessionRepository.cs" />
+    <Compile Include="Interfaces\ISessionService.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
+    <Compile Include="Services\AlbumService.cs" />
+    <Compile Include="Services\TagsService.cs" />
+    <Compile Include="Services\PhotosService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\SessionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bundler\bundler.js" />
+    <Content Include="bundler\node.exe" />
+    <Content Include="bundler\node_modules\clean-css\index.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\clean.js" />
+    <Content Include="bundler\node_modules\clean-css\node_modules\optimist\index.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\browser.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\cake.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\coffee-script.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\command.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\grammar.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\helpers.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\index.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\lexer.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\nodes.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\optparse.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\parser.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\repl.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\rewriter.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\scope.js" />
+    <Content Include="bundler\node_modules\less\lib\less\browser.js" />
+    <Content Include="bundler\node_modules\less\lib\less\colors.js" />
+    <Content Include="bundler\node_modules\less\lib\less\cssmin.js" />
+    <Content Include="bundler\node_modules\less\lib\less\functions.js" />
+    <Content Include="bundler\node_modules\less\lib\less\index.js" />
+    <Content Include="bundler\node_modules\less\lib\less\parser.js" />
+    <Content Include="bundler\node_modules\less\lib\less\rhino.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\alpha.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\anonymous.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\assignment.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\call.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\color.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\comment.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\condition.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\dimension.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\directive.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\element.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\expression.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\import.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\javascript.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\keyword.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\media.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\mixin.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\operation.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\paren.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\quoted.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\rule.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\ruleset.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\selector.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\url.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\value.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\variable.js" />
+    <Content Include="bundler\node_modules\lib\parse-js.js" />
+    <Content Include="bundler\node_modules\lib\process.js" />
+    <Content Include="bundler\node_modules\lib\squeeze-more.js" />
+    <Content Include="bundler\node_modules\sass\lib\sass.js" />
+    <Content Include="bundler\node_modules\step\lib\step.js" />
+    <Content Include="bundler\node_modules\uglify-js.js" />
+    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.dll" />
+    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.dll.CodeAnalysisLog.xml" />
+    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.pdb" />
+    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.pkgdef" />
+    <Content Include="bundler\vs2010-extension\extension.vsixmanifest" />
+    <Content Include="bundler\vs2010-extension\favicon.ico" />
+    <Content Include="bundler\vs2010-extension\ServiceStack-logo.png" />
+    <None Include="Content\css\bootstrap\accordion.less" />
+    <None Include="Content\css\bootstrap\alerts.less" />
+    <None Include="Content\css\bootstrap\bootstrap.less" />
+    <None Include="Content\css\bootstrap\breadcrumbs.less" />
+    <None Include="Content\css\bootstrap\button-groups.less" />
+    <None Include="Content\css\bootstrap\buttons.less" />
+    <None Include="Content\css\bootstrap\carousel.less" />
+    <None Include="Content\css\bootstrap\close.less" />
+    <None Include="Content\css\bootstrap\code.less" />
+    <None Include="Content\css\bootstrap\component-animations.less" />
+    <None Include="Content\css\bootstrap\dropdowns.less" />
+    <None Include="Content\css\bootstrap\forms.less" />
+    <None Include="Content\css\bootstrap\grid.less" />
+    <None Include="Content\css\bootstrap\hero-unit.less" />
+    <None Include="Content\css\bootstrap\labels-badges.less" />
+    <None Include="Content\css\bootstrap\layouts.less" />
+    <None Include="Content\css\bootstrap\media.less" />
+    <None Include="Content\css\bootstrap\mixins.less" />
+    <None Include="Content\css\bootstrap\modals.less" />
+    <None Include="Content\css\bootstrap\navbar.less" />
+    <None Include="Content\css\bootstrap\navs.less" />
+    <None Include="Content\css\bootstrap\pager.less" />
+    <None Include="Content\css\bootstrap\pagination.less" />
+    <None Include="Content\css\bootstrap\popovers.less" />
+    <None Include="Content\css\bootstrap\progress-bars.less" />
+    <None Include="Content\css\bootstrap\reset.less" />
+    <None Include="Content\css\bootstrap\responsive-1200px-min.less" />
+    <None Include="Content\css\bootstrap\responsive-767px-max.less" />
+    <None Include="Content\css\bootstrap\responsive-768px-979px.less" />
+    <None Include="Content\css\bootstrap\responsive-navbar.less" />
+    <None Include="Content\css\bootstrap\responsive-utilities.less" />
+    <None Include="Content\css\bootstrap\responsive.less" />
+    <None Include="Content\css\bootstrap\scaffolding.less" />
+    <None Include="Content\css\bootstrap\sprites.less" />
+    <None Include="Content\css\bootstrap\tables.less" />
+    <None Include="Content\css\bootstrap\thumbnails.less" />
+    <None Include="Content\css\bootstrap\tooltip.less" />
+    <None Include="Content\css\bootstrap\type.less" />
+    <None Include="Content\css\bootstrap\utilities.less" />
+    <None Include="Content\css\bootstrap\variables.less" />
+    <None Include="Content\css\bootstrap\wells.less" />
+    <None Include="Content\css\common.less" />
+    <None Include="Content\css\elements.less" />
+    <None Include="Content\css\site.less" />
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\css\bootstrap-responsive.css" />
+    <Content Include="Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <None Include="Content\css\test.less" />
+    <Content Include="Content\img\bg.jpg" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\masthead.jpg" />
+    <Content Include="Content\js\application.js" />
+    <Content Include="Content\js\config.js" />
+    <Content Include="Content\js\nls\global.js" />
+    <Content Include="Content\js\pages.js" />
+    <Content Include="Content\js\loader.js" />
+    <Content Include="Content\js\shared\lib\backbone-min.js" />
+    <Content Include="Content\js\shared\lib\backbone-validation-amd.js" />
+    <Content Include="Content\js\shared\lib\backbone-validation.js" />
+    <Content Include="Content\js\shared\lib\backbone.queryparams.js" />
+    <Content Include="Content\js\shared\lib\backbone.subroute.js" />
+    <Content Include="Content\js\shared\lib\backbone.validation.bootstrap.js" />
+    <Content Include="Content\js\shared\lib\bootbox.min.js" />
+    <Content Include="Content\js\shared\lib\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\js\shared\lib\bootstrap.js" />
+    <Content Include="Content\js\shared\lib\bootstrap.min.js" />
+    <Content Include="Content\js\shared\lib\i18n.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\css\style.css" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\canvas-to-blob.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\cors\jquery.xdr-transport.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\jquery.fileupload-fp.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\jquery.fileupload-ui.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\jquery.fileupload.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\jquery.iframe-transport.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\load-image.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\main.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\tmpl.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.file.upload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Content\js\shared\lib\jquery.imagesloaded.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.masonry.js" />
+    <Content Include="Content\js\shared\lib\jquery.masonry.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.wookmark.js" />
+    <Content Include="Content\js\shared\lib\less-1.3.3.min.js" />
+    <Content Include="Content\js\shared\lib\moment.js" />
+    <Content Include="Content\js\shared\lib\require.js" />
+    <Content Include="Content\js\router.js" />
+    <Content Include="Content\js\shared\lib\serialize-object.js" />
+    <Content Include="Content\js\shared\lib\ss-validation.js" />
+    <Content Include="Content\js\shared\lib\tag-it.min.js" />
+    <Content Include="Content\js\shared\lib\text.js" />
+    <Content Include="Content\js\shared\models\favoritesModel.js" />
+    <Content Include="Content\js\shared\plugins\use.js" />
+    <Content Include="Content\js\templates\contactTemplate.html" />
+    <Content Include="Content\js\templates\blogTemplate.html" />
+    <Content Include="Content\js\templates\aboutTemplate.html" />
+    <Content Include="Content\js\templates\babyRatesTemplate.html" />
+    <Content Include="Content\js\templates\photoAlbumTemplate.html" />
+    <Content Include="Content\js\templates\userTemplate.html" />
+    <Content Include="Content\js\templates\settingsTemplate.html" />
+    <Content Include="Content\js\templates\loginTemplate.html" />
+    <Content Include="Content\js\templates\portfolioTemplate.html" />
+    <Content Include="Content\js\templates\ratesTemplate.html" />
+    <Content Include="Content\js\widgets\breadcrumbs\breadcrumbTemplate.html" />
+    <Content Include="Content\js\widgets\carousel\carouselModel.js" />
+    <Content Include="Content\js\widgets\carousel\carouselTemplate.html" />
+    <Content Include="Content\js\widgets\carousel\carouselView.js" />
+    <Content Include="Content\js\widgets\carousel\nls\carousel.js" />
+    <Content Include="Content\js\widgets\breadcrumbs\nls\breadcrumbs.js" />
+    <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsModel.js" />
+    <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsTemplate.html" />
+    <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsView.js" />
+    <Content Include="Content\js\widgets\tag\tagModel.js" />
+    <Content Include="Content\js\widgets\tag\tagTemplate.html" />
+    <Content Include="Content\js\widgets\tag\tagView.js" />
+    <Content Include="Content\js\widgets\tag\nls\tag.js" />
+    <Content Include="Content\js\widgets\secure\photoalbums\photoAlbumItemView.js" />
+    <Content Include="Content\js\widgets\secure\photoalbum\photoAlbumInfoView.js" />
+    <Content Include="Content\js\widgets\secure\photoalbum\photoAlbumCollection.js" />
+    <Content Include="Content\js\widgets\secure\photoalbum\createPhotoAlbumTemplate.html" />
+    <Content Include="Content\js\widgets\secure\photoalbum\nls\photoAlbum.js" />
+    <Content Include="Content\js\widgets\secure\photoalbum\photoAlbumModel.js" />
+    <Content Include="Content\js\widgets\secure\photoalbums\photoAlbumItemTemplate.html" />
+    <Content Include="Content\js\widgets\secure\photoalbum\photoAlbumView.js" />
+    <Content Include="Content\js\widgets\secure\photoalbum\photoAlbumTemplate.html" />
+    <Content Include="Content\js\widgets\secure\photos\nls\photos.js" />
+    <Content Include="Content\js\widgets\secure\photos\photosCollection.js" />
+    <Content Include="Content\js\widgets\secure\photos\photoItemTemplate.html" />
+    <Content Include="Content\js\widgets\secure\photos\photoItemView.js" />
+    <Content Include="Content\js\widgets\secure\photos\photosTemplate.html" />
+    <Content Include="Content\js\widgets\secure\photos\photosView.js" />
+    <Content Include="Content\js\widgets\photo\photoCollection.js" />
+    <Content Include="Content\js\widgets\secure\photoalbums\nls\photoAlbums.js" />
+    <Content Include="Content\js\widgets\secure\photoalbums\photoAlbumsCollection.js" />
+    <Content Include="Content\js\widgets\secure\photoalbums\photoAlbumsTemplate.html" />
+    <Content Include="Content\js\widgets\secure\photoalbums\photoAlbumsView.js" />
+    <Content Include="Content\js\widgets\secure\user\userView.js" />
+    <Content Include="Content\js\widgets\secure\user\userModel.js" />
+    <Content Include="Content\js\widgets\secure\user\userTemplate.html" />
+    <Content Include="Content\js\widgets\secure\user\userInfoView.js" />
+    <Content Include="Content\js\widgets\secure\user\nls\user.js" />
+    <Content Include="Content\js\widgets\templateLoader\templateLoaderView.js" />
+    <Content Include="Content\js\widgets\listnavigation\listItemTemplate.html" />
+    <Content Include="Content\js\widgets\listnavigation\listItemView.js" />
+    <Content Include="Content\js\widgets\listnavigation\listNavigationCollection.js" />
+    <Content Include="Content\js\widgets\listnavigation\listNavigationTemplate.html" />
+    <Content Include="Content\js\widgets\listnavigation\listNavigationView.js" />
+    <Content Include="Content\js\widgets\listnavigation\listNavigationModel.js" />
+    <Content Include="Content\js\widgets\listnavigation\nls\listNavigation.js" />
+    <Content Include="Content\js\widgets\photo\photoModel.js" />
+    <Content Include="Content\js\widgets\photo\photoTemplate.html" />
+    <Content Include="Content\js\widgets\photo\photoView.js" />
+    <Content Include="Content\js\widgets\photo\nls\photo.js" />
+    <Content Include="Content\js\widgets\login\sessionModel.js" />
+    <Content Include="Content\js\widgets\modal\modalModel.js" />
+    <Content Include="Content\js\widgets\modal\modalTemplate.html" />
+    <Content Include="Content\js\widgets\modal\modalView.js" />
+    <Content Include="Content\js\widgets\modal\nls\modal.js" />
+    <Content Include="Content\js\widgets\login\loginModel.js" />
+    <Content Include="Content\js\widgets\login\loginTemplate.html" />
+    <Content Include="Content\js\widgets\login\loginView.js" />
+    <Content Include="Content\js\widgets\login\nls\login.js" />
+    <Content Include="Content\js\widgets\footer\footerTemplate.html" />
+    <Content Include="Content\js\widgets\footer\footerView.js" />
+    <Content Include="Content\js\widgets\footer\nls\footer.js" />
+    <Content Include="Content\js\widgets\header\headerModel.js" />
+    <Content Include="Content\js\widgets\header\headerView.js" />
+    <Content Include="Content\js\widgets\header\nls\header.js" />
+    <Content Include="Content\js\widgets\upload\uploadModel.js" />
+    <Content Include="Content\js\widgets\upload\uploadTemplate.html" />
+    <Content Include="Content\js\widgets\upload\uploadView.js" />
+    <Content Include="Content\js\widgets\upload\nls\upload.js" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="default.htm" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="jqunback-1.51.min.js" />
+    <Content Include="README.jQuery.vsdoc.txt" />
+    <Content Include="README.txt" />
+    <Content Include="Content\js\shared\lib\backbone.js" />
+    <Content Include="Content\js\shared\lib\jquery-1.7.2-vsdoc.js" />
+    <Content Include="Content\js\shared\lib\jquery-1.7.2.js" />
+    <Content Include="Content\js\shared\lib\jquery-1.7.2.min.js" />
+    <Content Include="Content\js\shared\lib\jquery-ui-1.8.24.js" />
+    <Content Include="Content\js\shared\lib\jquery-ui-1.8.24.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.validate-vsdoc.js" />
+    <Content Include="Content\js\shared\lib\jquery.validate.js" />
+    <Content Include="Content\js\shared\lib\jquery.validate.min.js" />
+    <Content Include="Content\js\shared\lib\modernizr-1.7.js" />
+    <Content Include="Content\js\shared\lib\modernizr-1.7.min.js" />
+    <Content Include="Content\js\shared\lib\underscore.js" />
+    <Content Include="Content\js\shared\lib\underscore.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\js\shared\lib\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\js\shared\lib\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\js\shared\lib\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\js\shared\lib\MicrosoftAjax.js" />
+    <Content Include="Content\js\shared\lib\MicrosoftAjax.debug.js" />
+    <Content Include="Content\js\shared\lib\MicrosoftMvcAjax.js" />
+    <Content Include="Content\js\shared\lib\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Content\js\shared\lib\MicrosoftMvcValidation.js" />
+    <Content Include="Content\js\shared\lib\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Secure\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\_BaseLayout.cshtml" />
+    <Content Include="Views\Shared\_CarouselLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bundler\bundler.cmd" />
+    <None Include="bundler\coffee.cmd" />
+    <None Include="bundler\node_modules\coffee-script\package.json" />
+    <None Include="bundler\node_modules\less\package.json" />
+    <None Include="bundler\node_modules\sass\package.json" />
+    <None Include="bundler\node_modules\step\package.json" />
+    <None Include="bundler\vs2010-extension\BundlerRunOnSave.dll.lastcodeanalysissucceeded" />
+    <None Include="bundler\vs2010-extension\BundlerRunOnSave.vsix" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <EntityDeploy Include="Models\photoShareEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>photoShareEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Content\js\templates\homeTemplate.html" />
+    <Content Include="Content\js\widgets\header\headerTemplate.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6868</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

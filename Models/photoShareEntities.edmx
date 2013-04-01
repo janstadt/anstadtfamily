@@ -1,0 +1,712 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="photoshareModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="photoshareModelStoreContainer">
+          <EntitySet Name="comments" EntityType="photoshareModel.Store.comments" store:Type="Tables" Schema="photoshare" />
+          <EntitySet Name="favoritealbums" EntityType="photoshareModel.Store.favoritealbums" store:Type="Tables" Schema="photoshare" />
+          <EntitySet Name="favoritephotos" EntityType="photoshareModel.Store.favoritephotos" store:Type="Tables" Schema="photoshare" />
+          <EntitySet Name="photoalbums" EntityType="photoshareModel.Store.photoalbums" store:Type="Tables" Schema="photoshare" />
+          <EntitySet Name="photos" EntityType="photoshareModel.Store.photos" store:Type="Tables" Schema="photoshare" />
+          <EntitySet Name="tags" EntityType="photoshareModel.Store.tags" store:Type="Tables" Schema="photoshare" />
+          <EntitySet Name="users" EntityType="photoshareModel.Store.users" store:Type="Tables" Schema="photoshare" />
+          <AssociationSet Name="Album" Association="photoshareModel.Store.Album">
+            <End Role="photoalbums" EntitySet="photoalbums" />
+            <End Role="photos" EntitySet="photos" />
+          </AssociationSet>
+          <AssociationSet Name="CommentsOwner" Association="photoshareModel.Store.CommentsOwner">
+            <End Role="users" EntitySet="users" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FavoriatesOwner" Association="photoshareModel.Store.FavoriatesOwner">
+            <End Role="users" EntitySet="users" />
+            <End Role="favoritealbums" EntitySet="favoritealbums" />
+          </AssociationSet>
+          <AssociationSet Name="FavoritePhoto" Association="photoshareModel.Store.FavoritePhoto">
+            <End Role="photos" EntitySet="photos" />
+            <End Role="favoritephotos" EntitySet="favoritephotos" />
+          </AssociationSet>
+          <AssociationSet Name="FavoritePhotoOwner" Association="photoshareModel.Store.FavoritePhotoOwner">
+            <End Role="users" EntitySet="users" />
+            <End Role="favoritephotos" EntitySet="favoritephotos" />
+          </AssociationSet>
+          <AssociationSet Name="FavoritesAlbum" Association="photoshareModel.Store.FavoritesAlbum">
+            <End Role="photoalbums" EntitySet="photoalbums" />
+            <End Role="favoritealbums" EntitySet="favoritealbums" />
+          </AssociationSet>
+          <AssociationSet Name="Owner" Association="photoshareModel.Store.Owner">
+            <End Role="users" EntitySet="users" />
+            <End Role="photos" EntitySet="photos" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoComment" Association="photoshareModel.Store.PhotoComment">
+            <End Role="photos" EntitySet="photos" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="TagOwner" Association="photoshareModel.Store.TagOwner">
+            <End Role="users" EntitySet="users" />
+            <End Role="tags" EntitySet="tags" />
+          </AssociationSet>
+          <AssociationSet Name="userAlbums" Association="photoshareModel.Store.userAlbums">
+            <End Role="users" EntitySet="users" />
+            <End Role="photoalbums" EntitySet="photoalbums" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="Text" Type="text" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Owner" Type="guid" Nullable="false" />
+          <Property Name="PhotoId" Type="guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="favoritealbums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="AlbumId" Type="guid" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Owner" Type="guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="favoritephotos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="PhotoId" Type="guid" Nullable="false" />
+          <Property Name="Owner" Type="guid" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="photoalbums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="Title" Type="text" Nullable="false" />
+          <Property Name="Owner" Type="guid" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="IsSlideshow" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="photos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="Title" Type="text" />
+          <Property Name="Owner" Type="guid" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Caption" Type="text" />
+          <Property Name="FileName" Type="text" Nullable="false" />
+          <Property Name="AlbumId" Type="guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Owner" Type="guid" Nullable="false" />
+          <Property Name="ParentId" Type="guid" Nullable="false" />
+          <Property Name="Type" Type="text" Nullable="false" />
+          <Property Name="IsCategory" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Email" Type="text" Nullable="false" />
+          <Property Name="Username" Type="text" Nullable="false" />
+          <Property Name="Id" Type="guid" Nullable="false" />
+          <Property Name="DbId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ActivationDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivationDate" Type="datetime" />
+        </EntityType>
+        <Association Name="Album">
+          <End Role="photoalbums" Type="photoshareModel.Store.photoalbums" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photoalbums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photos">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CommentsOwner">
+          <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="photoshareModel.Store.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoriatesOwner">
+          <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="favoritealbums" Type="photoshareModel.Store.favoritealbums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritealbums">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoritePhoto">
+          <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="favoritephotos" Type="photoshareModel.Store.favoritephotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritephotos">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoritePhotoOwner">
+          <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="favoritephotos" Type="photoshareModel.Store.favoritephotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritephotos">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoritesAlbum">
+          <End Role="photoalbums" Type="photoshareModel.Store.photoalbums" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="favoritealbums" Type="photoshareModel.Store.favoritealbums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photoalbums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritealbums">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Owner">
+          <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photos">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhotoComment">
+          <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="photoshareModel.Store.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TagOwner">
+          <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tags" Type="photoshareModel.Store.tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tags">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userAlbums">
+          <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="photoalbums" Type="photoshareModel.Store.photoalbums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photoalbums">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="photoshareModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="photoshareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="comments" EntityType="photoshareModel.comment" />
+          <EntitySet Name="users" EntityType="photoshareModel.user" />
+          <AssociationSet Name="CommentsOwner" Association="photoshareModel.CommentsOwner">
+            <End Role="users" EntitySet="users" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <EntitySet Name="photos" EntityType="photoshareModel.photo" />
+          <AssociationSet Name="PhotoComment" Association="photoshareModel.PhotoComment">
+            <End Role="photo" EntitySet="photos" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="Owner" Association="photoshareModel.Owner">
+            <End Role="user" EntitySet="users" />
+            <End Role="photo" EntitySet="photos" />
+          </AssociationSet>
+          <EntitySet Name="favoritealbums" EntityType="photoshareModel.favoritealbum" />
+          <EntitySet Name="favoritephotos" EntityType="photoshareModel.favoritephoto" />
+          <EntitySet Name="photoalbums" EntityType="photoshareModel.photoalbum" />
+          <AssociationSet Name="FavoriatesOwner" Association="photoshareModel.FavoriatesOwner">
+            <End Role="user" EntitySet="users" />
+            <End Role="favoritealbum" EntitySet="favoritealbums" />
+          </AssociationSet>
+          <AssociationSet Name="FavoritesAlbum" Association="photoshareModel.FavoritesAlbum">
+            <End Role="photoalbum" EntitySet="photoalbums" />
+            <End Role="favoritealbum" EntitySet="favoritealbums" />
+          </AssociationSet>
+          <AssociationSet Name="FavoritePhoto1" Association="photoshareModel.FavoritePhoto1">
+            <End Role="photo" EntitySet="photos" />
+            <End Role="favoritephoto" EntitySet="favoritephotos" />
+          </AssociationSet>
+          <AssociationSet Name="FavoritePhotoOwner" Association="photoshareModel.FavoritePhotoOwner">
+            <End Role="user" EntitySet="users" />
+            <End Role="favoritephoto" EntitySet="favoritephotos" />
+          </AssociationSet>
+          <AssociationSet Name="Album" Association="photoshareModel.Album">
+            <End Role="photoalbum" EntitySet="photoalbums" />
+            <End Role="photo" EntitySet="photos" />
+          </AssociationSet>
+          <AssociationSet Name="userAlbums" Association="photoshareModel.userAlbums">
+            <End Role="user" EntitySet="users" />
+            <End Role="photoalbum" EntitySet="photoalbums" />
+          </AssociationSet>
+          <EntitySet Name="tags" EntityType="photoshareModel.tag" />
+          <AssociationSet Name="TagOwner" Association="photoshareModel.TagOwner">
+            <End Role="user" EntitySet="users" />
+            <End Role="tag" EntitySet="tags" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Owner" Type="Guid" Nullable="false" />
+          <Property Name="PhotoId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.CommentsOwner" FromRole="comments" ToRole="users" />
+          <NavigationProperty Name="photo" Relationship="photoshareModel.PhotoComment" FromRole="comment" ToRole="photo" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DbId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationDate" Type="DateTime" Nullable="false" />
+          <Property Name="DeactivationDate" Type="DateTime" />
+          <NavigationProperty Name="comments" Relationship="photoshareModel.CommentsOwner" FromRole="users" ToRole="comments" />
+          <NavigationProperty Name="photos" Relationship="photoshareModel.Owner" FromRole="user" ToRole="photo" />
+          <NavigationProperty Name="favoritealbums" Relationship="photoshareModel.FavoriatesOwner" FromRole="user" ToRole="favoritealbum" />
+          <NavigationProperty Name="favoritephotos" Relationship="photoshareModel.FavoritePhotoOwner" FromRole="user" ToRole="favoritephoto" />
+          <NavigationProperty Name="photoalbums" Relationship="photoshareModel.userAlbums" FromRole="user" ToRole="photoalbum" />
+          <NavigationProperty Name="tags" Relationship="photoshareModel.TagOwner" FromRole="user" ToRole="tag" />
+        </EntityType>
+        <Association Name="CommentsOwner">
+          <End Role="users" Type="photoshareModel.user" Multiplicity="1" />
+          <End Role="comments" Type="photoshareModel.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" />
+          <Property Type="Guid" Name="Owner" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="String" Name="Caption" />
+          <Property Type="String" Name="FileName" Nullable="false" />
+          <Property Type="Guid" Name="AlbumId" Nullable="false" />
+          <NavigationProperty Name="comments" Relationship="photoshareModel.PhotoComment" FromRole="photo" ToRole="comment" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.Owner" FromRole="photo" ToRole="user" />
+          <NavigationProperty Name="favoritephotos" Relationship="photoshareModel.FavoritePhoto1" FromRole="photo" ToRole="favoritephoto" />
+          <NavigationProperty Name="photoalbum" Relationship="photoshareModel.Album" FromRole="photo" ToRole="photoalbum" />
+        </EntityType>
+        <Association Name="PhotoComment">
+          <End Type="photoshareModel.photo" Role="photo" Multiplicity="1" />
+          <End Type="photoshareModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Owner">
+          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
+          <End Type="photoshareModel.photo" Role="photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photo">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="favoritealbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="AlbumId" Nullable="false" />
+          <Property Type="DateTime" Name="Date" />
+          <Property Type="Guid" Name="Owner" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.FavoriatesOwner" FromRole="favoritealbum" ToRole="user" />
+          <NavigationProperty Name="photoalbum" Relationship="photoshareModel.FavoritesAlbum" FromRole="favoritealbum" ToRole="photoalbum" />
+        </EntityType>
+        <EntityType Name="favoritephoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="PhotoId" Nullable="false" />
+          <Property Type="Guid" Name="Owner" Nullable="false" />
+          <Property Type="DateTime" Name="Date" />
+          <NavigationProperty Name="photo" Relationship="photoshareModel.FavoritePhoto1" FromRole="favoritephoto" ToRole="photo" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.FavoritePhotoOwner" FromRole="favoritephoto" ToRole="user" />
+        </EntityType>
+        <EntityType Name="photoalbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="Guid" Name="Owner" Nullable="false" />
+          <Property Type="DateTime" Name="Date" />
+          <Property Type="Boolean" Name="IsSlideshow" Nullable="false" />
+          <Property Type="String" Name="Description" />
+          <NavigationProperty Name="favoritealbums" Relationship="photoshareModel.FavoritesAlbum" FromRole="photoalbum" ToRole="favoritealbum" />
+          <NavigationProperty Name="photos" Relationship="photoshareModel.Album" FromRole="photoalbum" ToRole="photo" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.userAlbums" FromRole="photoalbum" ToRole="user" />
+        </EntityType>
+        <Association Name="FavoriatesOwner">
+          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
+          <End Type="photoshareModel.favoritealbum" Role="favoritealbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritealbum">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoritesAlbum">
+          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="1" />
+          <End Type="photoshareModel.favoritealbum" Role="favoritealbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photoalbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritealbum">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoritePhoto1">
+          <End Type="photoshareModel.photo" Role="photo" Multiplicity="1" />
+          <End Type="photoshareModel.favoritephoto" Role="favoritephoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritephoto">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoritePhotoOwner">
+          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
+          <End Type="photoshareModel.favoritephoto" Role="favoritephoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritephoto">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Album">
+          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="1" />
+          <End Type="photoshareModel.photo" Role="photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photoalbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photo">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userAlbums">
+          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
+          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photoalbum">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Guid" Name="Owner" Nullable="false" />
+          <Property Type="Guid" Name="ParentId" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" />
+          <Property Type="Boolean" Name="IsCategory" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.TagOwner" FromRole="tag" ToRole="user" />
+        </EntityType>
+        <Association Name="TagOwner">
+          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
+          <End Type="photoshareModel.tag" Role="tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tag">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="photoshareModelStoreContainer" CdmEntityContainer="photoshareEntities">
+          <EntitySetMapping Name="comments"><EntityTypeMapping TypeName="photoshareModel.comment"><MappingFragment StoreEntitySet="comments">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Text" ColumnName="Text" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="Owner" ColumnName="Owner" />
+            <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="users"><EntityTypeMapping TypeName="photoshareModel.user"><MappingFragment StoreEntitySet="users">
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Username" ColumnName="Username" />
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="DbId" ColumnName="DbId" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+            <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+            <ScalarProperty Name="DeactivationDate" ColumnName="DeactivationDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="photos">
+            <EntityTypeMapping TypeName="photoshareModel.photo">
+              <MappingFragment StoreEntitySet="photos">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="favoritealbums">
+            <EntityTypeMapping TypeName="photoshareModel.favoritealbum">
+              <MappingFragment StoreEntitySet="favoritealbums">
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="favoritephotos">
+            <EntityTypeMapping TypeName="photoshareModel.favoritephoto">
+              <MappingFragment StoreEntitySet="favoritephotos">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="photoalbums">
+            <EntityTypeMapping TypeName="photoshareModel.photoalbum">
+              <MappingFragment StoreEntitySet="photoalbums">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsSlideshow" ColumnName="IsSlideshow" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tags">
+            <EntityTypeMapping TypeName="photoshareModel.tag">
+              <MappingFragment StoreEntitySet="tags">
+                <ScalarProperty Name="IsCategory" ColumnName="IsCategory" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="photoShareEntities">
+        <EntityTypeShape EntityType="photoshareModel.comment" Width="1.5" PointX="5.25" PointY="10.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="photoshareModel.user" Width="1.5" PointX="0.75" PointY="5.375" Height="3.5186979166666674" IsExpanded="true" />
+        <AssociationConnector Association="photoshareModel.CommentsOwner" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="9.0859993489583335" />
+          <ConnectorPoint PointX="1.5" PointY="12.088440755208335" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="12.088440755208335" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="12.088440755208335" />
+          <ConnectorPoint PointX="5.25" PointY="12.088440755208335" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="photoshareModel.photo" Width="1.5" PointX="3" PointY="2" Height="3.3263964843749996" />
+        <AssociationConnector Association="photoshareModel.PhotoComment" >
+          <ConnectorPoint PointX="4.5" PointY="5.1340950520833317" />
+          <ConnectorPoint PointX="4.875" PointY="5.5090950520833317" />
+          <ConnectorPoint PointX="4.875" PointY="11.137968377604167" />
+          <ConnectorPoint PointX="5.25" PointY="11.137968377604167" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.Owner" >
+          <ConnectorPoint PointX="1.5" PointY="5.375" />
+          <ConnectorPoint PointX="1.5" PointY="3.5670475260416659" />
+          <ConnectorPoint PointX="3" PointY="3.5670475260416659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="photoshareModel.favoritealbum" Width="1.5" PointX="8.25" PointY="6.375" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="photoshareModel.favoritephoto" Width="1.5" PointX="5.25" PointY="4.5" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="photoshareModel.photoalbum" Width="1.5" PointX="3" PointY="8.75" Height="2.7494921875000031" />
+        <AssociationConnector Association="photoshareModel.FavoriatesOwner" >
+          <ConnectorPoint PointX="2.25" PointY="7.41311004638672" />
+          <ConnectorPoint PointX="3.2291666666666665" PointY="7.413110046386719" />
+          <ConnectorPoint PointX="3.3958333333333335" PointY="7.41311004638672" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="7.413110046386719" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="7.41311004638672" />
+          <ConnectorPoint PointX="8.25" PointY="7.41311004638672" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.FavoritesAlbum" >
+          <ConnectorPoint PointX="3.75" PointY="8.75" />
+          <ConnectorPoint PointX="3.75" PointY="8.12944091796875" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="8.12944091796875" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="8.12944091796875" />
+          <ConnectorPoint PointX="8.25" PointY="8.12944091796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.FavoritePhoto1" >
+          <ConnectorPoint PointX="4.5" PointY="4.881945742187499" />
+          <ConnectorPoint PointX="5.25" PointY="4.881945742187499" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.FavoritePhotoOwner" >
+          <ConnectorPoint PointX="2.25" PointY="6.0237939453125016" />
+          <ConnectorPoint PointX="3.2291666666666665" PointY="6.0237939453125007" />
+          <ConnectorPoint PointX="3.3958333333333335" PointY="6.0237939453125016" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="6.0237939453125007" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="6.0237939453125016" />
+          <ConnectorPoint PointX="5.25" PointY="6.0237939453125016" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.Album" >
+          <ConnectorPoint PointX="3.3125" PointY="8.75" />
+          <ConnectorPoint PointX="3.3125" PointY="5.1340950520833317" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.userAlbums" >
+          <ConnectorPoint PointX="2.25" PointY="8.9179996744791659" />
+          <ConnectorPoint PointX="3" PointY="8.9179996744791659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="photoshareModel.tag" Width="1.5" PointX="3" PointY="13" Height="2.5571907552083317" />
+        <AssociationConnector Association="photoshareModel.TagOwner" >
+          <ConnectorPoint PointX="1.9062525" PointY="9.0859993489583335" />
+          <ConnectorPoint PointX="1.9062525" PointY="14.278595377604166" />
+          <ConnectorPoint PointX="3" PointY="14.278595377604166" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

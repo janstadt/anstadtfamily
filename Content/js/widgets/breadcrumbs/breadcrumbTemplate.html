@@ -1,0 +1,5 @@
+﻿<% if(Class) { %>
+    <li class="<%- Class %>"><%- Text %></li>
+<%} else { %> 
+    <li><a href="<%- Url %>"><%- Text %></a><span class="divider"> /</span></li>
+<%}%>

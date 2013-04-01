@@ -1,0 +1,30 @@
+﻿<form class="user-info form-horizontal">
+    <ul>
+        <li class="section">
+            <a href="/" class="section-head">
+                <img src="" height="20" width="20" />
+                <%- model.Username %>
+            </a>
+            <% if(model.AccessLevel === 1 || model.AccessLevel === 2) { %>
+            <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
+            <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+            <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+            <% } %>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.Name %></label><span><%- model.Name %></span>
+            <div class="controls">
+                <input name="Name" type="text" value="<%- model.Name %>" />
+            </div>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.Email %></label><span><%- model.Email %></span>
+            <div class="controls">
+                <input name="Email" type="text" value="<%- model.Email %>" />
+            </div>
+        </li>
+        <li class="hide" id="saveError">
+            <div class="alert alert-error"><%- i18n.Error %></div>
+        </li>
+    </ul>
+</form>

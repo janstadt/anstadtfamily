@@ -1,0 +1,18 @@
+﻿
+<div id="favorite" <%if(!model.Favorite){%>class="hide"<%} %>>
+    <a class="favorite icon-heart" id="unfavoriteLink" title="<%- i18n.Unfavorite %>" href="javascript:void(0);"><%- i18n.Unfavorite %></a>
+</div>
+
+<div class="features">
+    <a class="favorite icon-heart" id="favoriteLink" title="<%- i18n.Favorite %>" href="javascript:void(0);"><%- i18n.Favorite %></a>
+    <a class="delete icon-remove" id="deleteLink" title="<%- i18n.Delete %>" href="javascript:void(0);"><%- i18n.Delete %></a>
+</div>
+<a href="#/user/<%- model.Owner %>/photo/<%- model.Id %>">
+    <img class="photo" src="Albums/<%- model.AlbumId %>/Small/<%- model.FileName %>" />
+    <%if(model.FileName){ %>
+    <span class="header">
+        <span class="title"><%- model.FileName %></span>
+    </span>
+    <%} %>
+</a>
+

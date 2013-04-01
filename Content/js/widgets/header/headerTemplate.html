@@ -1,0 +1,37 @@
+﻿<nav class="navbar" id="navigation">
+  <div class="navbar-inner" id="navigation-inner">
+    <div class="nav-collapse collapse">
+        <ul class="nav" id="nav-list">
+            <li id="header-home"><a href="#">Home</a></li>
+            <li id="header-portfolio"><a href="#/portfolio"><%- i18n.Portfolio %></a></li>
+            <li id="categorieslink" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%- i18n.Categories %><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/portfolio/babies/">babies</a></li>
+                    <li><a href="#/portfolio/weddings/">weddings</a></li>
+                    <li><a href="#/portfolio/crap/">crap</a></li>
+                    <li><a href="#/portfolio/boobs/">boobs</a></li>
+                </ul>
+            </li>
+            <li id="header-blog"><a href="#/blog"><%- i18n.Blog %></a></li>
+            <li id="header-rates"><a href="#/rates"><%- i18n.Rates %></a></li>
+            <li id="header-contact"><a href="#/contact"><%- i18n.Contact %></a></li>
+            <li style="float:right">
+                <ul class="nav pull-right">
+                    <li class="divider-vertical"></li>
+                    <li id="loginLi" class="hide"><a href="#loginModal" data-toggle="modal"><%- i18n.Login %></a></li>
+                    <li id="logoutLi" class="dropdown session hide">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="userInfo"></span><b class="caret"></b></a>
+                        <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+                            <li><a id="settings" href="#/user"><%- i18n.Settings %></a></li>
+                            <li class="hide" id="admin"><a href="#/admin"><%- i18n.Admin %></a></li>
+                            <li class="divider"></li>
+                            <li><a id="logout" href="#"><%- i18n.Logout %></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>

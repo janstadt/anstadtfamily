@@ -1,0 +1,21 @@
+﻿<div id="login">
+    <form>
+        <div class="control-group">
+            <label class="control-label" for="username"><%- i18n.username %></label>
+            <div class="controls">
+                <input type="text" id="username" name="Username" data-error-style="inline" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password"><%- i18n.password %></label>
+            <div class="controls">
+                <input type="password" id="password" name="Password" data-error-style="inline" />
+            </div>
+        </div>
+        <div class="alert alert-error hide" id="loginError"></div>
+        <div class="submit">
+            <button type="button" class="btn btn-primary" id="signIn"><%- i18n.login %></button>
+        </div>
+    </form>
+    <div id="alreadyLoggedIn"></div>
+</div>

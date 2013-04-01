@@ -1,0 +1,676 @@
+@import "elements.less";
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+	@backgroundColor:#da8e8d;
+	@commonColor:#4f5264;
+    body {
+      padding-bottom: 40px;
+      color: @commonColor;
+      background: url("../img/bg.jpg") repeat top left fixed;
+    }
+
+	.container{width:1170px;}
+
+	.floatLeft{float:left;}
+	.floatRight{float:right;}
+
+	#footer{clear:both;}
+
+    .masthead
+    {
+        height:200px;
+        background: url("../img/banner.png") no-repeat center transparent;
+        padding:10px 0;
+        }
+        
+    #header-slide
+    {
+        
+        border:1px solid #d8d8d8;
+        border-bottom:none;
+        border-radius:10px 10px 0 0;
+        padding:10px;
+        padding-bottom:0;
+        background:#fff;
+        }
+    #header,#page
+    {
+        background:#fff;
+        padding:0 10px;
+        border:1px solid #d8d8d8;
+		border-top:none;
+		border-bottom:none;
+		&.loginPage{
+			border:1px solid #d8d8d8;
+			.drop-shadow(0, 2px, 10px, .25);
+		}
+    }
+
+	#page{
+		border-bottom:1px solid #d8d8d8;
+	}
+
+	.loginPage{
+		.border-radius(10px, 10px, 10px, 10px);
+		width:400px;
+		#login{
+			margin:10px auto;
+		}
+	}
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      z-index: 10;
+    }
+
+    .navbar-inner.affix{top:0px;width:1170px;z-index:1000;padding:0;}
+        
+    .navbar .divider-vertical{height:49px;border-left:1px solid #fc9f9f;border-right:1px solid #c17c7c;margin:0;}
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+	  .drop-shadow(0, 2px, 10px, .25);
+      background-color:@backgroundColor;
+      background-image:none;
+      border-radius:0px;
+	  padding:0;
+          
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+    .navbar .nav {width:100%;}
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a, .navbar .nav > .active > a,
+    .navbar .nav > li > a:hover, .navbar .nav > li > a:focus,
+    .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus,
+    .navbar .nav li.dropdown.open > .dropdown-toggle {
+      padding: 15px 20px;
+      color:#fff;
+      text-shadow:none;
+      background:none;
+    }
+    .navbar .nav > li > a:hover,
+    .navbar .nav > li > a:focus
+    {
+		  .inner-shadow(0, 3px, 8px, .125);
+        }
+    
+    .navbar .nav li.dropdown > .dropdown-toggle .caret,
+    .navbar .nav li.dropdown.open > .dropdown-toggle .caret,
+    .navbar .nav li.dropdown.open > a:hover .caret,
+    .navbar .nav li.dropdown.open > a:focus .caret,
+    .navbar .nav li.dropdown > a:hover .caret,
+    .navbar .nav li.dropdown > a:focus .caret
+    {
+        border-top-color:#fff;
+        border-bottom-color:#fff;
+        }
+    
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+
+    /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 0;
+    }
+    
+    .carousel-indicators li.active
+    {
+        background-color: @backgroundColor;
+        }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+      color: #DA8E8D;
+    }
+    .carousel-control:hover{color: @backgroundColor;}
+
+    /*.carousel .item {
+      height: 500px;
+      position:static;
+    }*/
+    .carousel img {
+      position: relative;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-top: 100px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }
+    
+    .user-info, .photoalbum-info
+    {
+		ul{
+			list-style-type:none;
+			padding:0;
+			margin:0;
+			border:1px solid #d8d8d8;
+			border-bottom:none;
+			.section{
+				.bw-gradient(#EEE, 230, 255);
+				border-bottom:1px solid #d8d8d8;
+				border-top:none;
+				padding:0;
+				a.section-head {
+					padding:10px;
+					color:@commonColor;
+					text-decoration:none;
+					display:inline-block;
+					font-weight:bold;
+				}
+				a.options{float:right;text-indent:-10000px;margin:12px 10px 12px 0px;cursor:pointer;}
+				a.save{display:none;}
+				a.cancel{display:none;}
+			}
+			li {
+				border-bottom:1px solid #d8d8d8;
+				border-top:1px solid #fff;
+				padding:5px;
+				margin:0;
+				&.control-group {
+					span {
+						padding-top:5px;
+						display:inline-block;
+						margin-left:12px;
+
+					}
+					margin-bottom:0px;
+					label {
+						width: 55px;
+					}
+					.controls{
+						margin-left:60px;
+					}
+				}
+			}
+		}
+		float:left;
+		width:300px;
+		padding:3px;
+		background-color:#efefef;
+		.border-radius(5px, 5px, 5px, 5px);
+		label{display:inline-block;width:50px;}
+		input,textarea{display:none;}
+		&.editing {
+			.section{
+				a.edit{display:none;}
+				a.save{display:block;}
+				a.cancel{display:block;}
+			}
+			input,textarea{display:inline;}
+			ul {
+				li {
+					span{display:none;}
+					&.tagit-choice > span{
+						display:inline-block;
+					}
+				}
+			}
+		}
+    }
+	.photoalbum-info {
+		width: 350px;
+		ul{
+			li {
+					&.control-group {
+						span {
+							padding-top:5px;
+							display:inline-block;
+							margin-left:12px;
+
+						}
+						margin-bottom:0px;
+						label {
+							width: 90px;
+						}
+						.controls{
+							margin-left:95px;
+						}
+					}
+				}
+			}
+		&.editing {
+			.section{
+				a.edit{display:none;}
+				a.save{display:block;}
+				a.cancel{display:block;}
+			}
+			input,textarea{display:inline;}
+			ul {
+				li {
+					span{display:none;}
+				}
+			}
+		}
+	}
+	.user-albums, .user-photos {
+		float:right;
+		width:800px;
+		position:relative;
+		padding:3px;
+		background-color:#efefef;
+		.border-radius(5px, 5px, 5px, 5px);
+		ul{
+			list-style-type:none;
+			padding:0;
+			margin:0;
+			border:1px solid #d8d8d8;
+			border-bottom:none;
+			.section{
+				.bw-gradient(#EEE, 230, 255);
+				border-bottom:1px solid #d8d8d8;
+				border-top:none;
+				padding:0;
+				a.section-head {
+					padding:10px;
+					color:@commonColor;
+					text-decoration:none;
+					display:inline-block;
+					font-weight:bold;
+				}
+				a.options {
+					float:right;
+					text-indent:-10000px;
+					margin:12px 10px 12px 0px;
+					cursor:pointer;
+				}
+				a.cancel {
+					display:none;
+				}
+			}
+			li {
+				border-bottom:1px solid #d8d8d8;
+				border-top:1px solid #fff;
+				padding:4px;
+				div#user-photoalbums, div#user-photos {
+					div.item {
+						 margin:2px;
+						 width:193px;
+						 .drop-shadow(0, 1px, 2px, 0.3);
+						 background-color:#fff;
+						 #favorite {
+							position:absolute;
+							top:0;
+							left:0;
+							z-index:1000;
+							a {
+								cursor:pointer;
+								overflow:hidden;
+								width:14px;
+								height:14px;
+								margin:3px 5px;
+								text-indent:9000px;
+							}
+						 }
+						 .features{
+							position:absolute;
+							right:0;
+							top:0;
+							left:0;
+							//border-bottom:1px solid #ccc;
+							display:none;
+							a {
+								&.delete{
+									float:right;
+									margin-right:2px;
+								}
+								float:left;
+								cursor:pointer;
+								overflow:hidden;
+								width:14px;
+								height:14px;
+								margin:3px 5px;
+								text-indent:9000px;
+							}
+						}
+						&:hover{
+							.features{
+								display:block;
+							}
+						}
+						span.header {
+							position: absolute;
+							bottom:0;
+							left:0;
+							right:0;
+							padding:5px;
+							background-color:#000;
+							opacity:.7;
+							color:#fff;
+							cursor:pointer;
+						}
+						a {
+							display:block;
+							&.album{
+								background-image: url("../img/glyphicons_011_camera.png");
+								background-repeat: no-repeat;
+								background-position:center center;
+								min-height:128px;
+								width: 193px;
+							}
+							img.album { 
+								
+							}
+						}
+					}
+				}
+			}
+			li#create-album {
+				label {
+					width:auto;
+				}
+				div.controls {
+					margin-left:85px;
+					&.input-append {
+						display:block;
+					}
+				}
+				.submit {
+					clear:both;
+				}
+				.description {
+					width:400px;
+					.control-label {
+						float:none;
+						text-align:left;
+					}
+					.controls{
+						margin-left:0;
+					}
+					textarea {
+						width:350px;
+					}
+				}
+			}
+		}
+		&.editing {
+			a.options.addalbum, a.options.addphotos
+			{
+				display:none;
+			}
+			a.options.cancel{
+				display: block;
+			}
+		}
+		
+	}
+
+	form#fileupload{
+		position:relative;
+		input#add-files-input{
+			position:absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			width:110px
+		}
+	}
+
+	//TAGIT Styles
+	.tagList.tagit{
+		max-width:210px;
+		margin-left:0;
+		background-color:#fff;
+		.border-radius(4px, 4px, 4px, 4px);
+		border:1px solid #ccc;
+		.inner-shadow(0, 1px, 1px, .075);
+		li {
+			border:none;
+			margin:0;
+			color:#fff;
+			.border-radius(4px, 4px, 4px, 4px);
+			span.tagit-label{
+				padding-top:0;
+				margin-left:0;
+			}
+			&.tagit-choice{
+				background:none;
+				background-color:@backgroundColor;
+				border:1px solid #ccc;
+				.tagit-close{
+					&:hover > span {text-decoration:underline;}
+					right:.3em;
+					color:#fff;
+					span.text-icon{
+						display:inline-block;
+						padding-top:0;
+						margin-left:0;
+					}
+					span.ui-icon.ui-icon-close {
+						margin-left:0;
+					}
+				}		
+			}
+		}
+	}
+
+	.photo-info, .photoalbum-info {
+		ul.tagList.tagit {
+			background-color:transparent;
+			border:none;
+			.inner-shadow(0, 0, 0, 0);
+			a.tagit-close{
+				display:none;
+			}
+		}
+		&.editing{
+			ul.tagList.tagit{
+				background-color:#fff;
+				border:1px solid #ccc;
+				.inner-shadow(0, 1px, 1px, .075);
+				a.tagit-close{
+					display:inline-block;
+				}
+			}
+		}
+	}
+
+	.ui-menu.ui-autocomplete{
+		max-width:300px;
+		list-style-type: none;
+		.border-radius(4px, 4px, 4px, 4px);
+		margin-top:2px;
+		background-color:#fff;
+		padding:2px;
+		margin:2px 0 0;
+		min-width:220px;
+		.drop-shadow(0, 5px, 5px, .2);
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		background-clip:padding-box;
+		li {
+			a {display:block; padding:3px 20px; clear:both; font-weight:normal; line-height:20px; white-space: nowrap }
+			&.active a, &:hover a{
+				text-decoration:none;
+				color:#fff;
+				color: #ffffff;
+				  text-decoration: none;
+				  background-color: #da8e8d;
+				  background-image: -moz-linear-gradient(top, #da8e8d, #c17c7c);
+				  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#da8e8d), to(#c17c7c));
+				  background-image: -webkit-linear-gradient(top, #da8e8d, #c17c7c);
+				  background-image: -o-linear-gradient(top, #da8e8d, #c17c7c);
+				  background-image: linear-gradient(to bottom, #da8e8d, #c17c7c);
+				  background-repeat: repeat-x;
+				  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#da8e8d', endColorstr='#c17c7c', GradientType=0);
+			}
+		}
+	}
+

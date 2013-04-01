@@ -1,0 +1,34 @@
+﻿<form class="photoalbum-info form-horizontal">
+    <ul id="infoList">
+        <li class="section">
+            <a href="/" class="section-head">
+                <%- model.Title %> (<%- moment(model.Date).format("MM/DD/YYYY") %>)
+            </a>
+            <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
+            <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+            <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.Title %></label><span><%- model.Title %></span>
+            <div class="controls">
+                <input name="Title" type="text" value="<%- model.Title %>" />
+            </div>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.Favorite %></label><span><%- model.Favorite %></span>
+            <div class="controls">
+                <input type="checkbox" name="Favorite" <% if(model.Favorite) { %>checked="checked"<%} %> />
+            </div>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.Description %></label><span><%- model.Description %></span>
+            <div class="controls">
+                <textarea rows="3" name="Description"><%- model.Description %></textarea>
+            </div>
+        </li>
+        <li class="control-group" id="tags"></li>
+        <li class="hide" id="saveError">
+            <div class="alert alert-error"><%- i18n.Error %></div>
+        </li>
+    </ul>
+</form>

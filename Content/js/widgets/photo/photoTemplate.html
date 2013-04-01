@@ -1,0 +1,11 @@
+﻿<div id="<%- model.Id %>" class="modal hide fade <%- model.ClassName %>">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="modalHeader"><%- model.Title %></h3>
+    </div>
+    <div class="modal-body" id="modalBody">
+    </div>
+    <div class="modal-footer <% if(!model.ShowFooter){ %>hide<%} %>" id="modalFooter">
+    </div>
+</div>
+

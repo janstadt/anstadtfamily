@@ -1,0 +1,131 @@
+@import "elements.less";
+@import "site.less";
+
+html{
+	height:100%;
+}
+body
+{
+    font-size: 14em;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #666;
+    background-color: #fff;
+	height:100%;
+	background: url("../img/bg.jpg") repeat top left fixed;
+}
+
+a, a:hover, a:visited, a:active {
+	color:#666;
+}
+
+.hideState{display:none;}
+
+.container{
+	width:940px;
+	margin: 0 auto;
+	position:relative;
+	margin-bottom:-100px;
+	min-height:100%;
+	overflow:hidden;
+	&.loginPage{
+		margin-bottom:0px;
+		padding-bottom:100px;
+		width:500px;
+		#content{
+			.border-radius(0px, 10px, 10px, 0px);
+			background:#fff;
+		}
+		#pageElements{
+			margin:0 auto;
+			width:400px;
+		}
+	}
+}
+
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+
+#footer{
+	height:100px;
+	position:relative;
+	width:970px;
+	margin: 0 auto;
+}
+
+.clearfooter{
+	height:100px;
+	clear:both;
+}
+
+/*#list-container{float:left;width:230px;}
+#widget-placeholder{float:right;width:680px;padding:10px;}*/
+
+.list-sidenav {
+  width: 200px;
+  margin: 10px 0 0;
+  padding: 0;
+  background-color: #fff;
+  .border-radius(6px, 6px, 6px, 6px);
+  .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+  list-style:none;
+}
+
+.list-sidenav > li > a {
+  display: block;
+  width: 190px \9;
+  margin: 0 0 -1px;
+  padding: 9px 15px;
+  border: 1px solid #e5e5e5;
+  text-decoration:none;
+}
+.list-sidenav > li:first-child > a {
+	.border-radius(6px, 6px, 0, 0);
+  
+}
+.list-sidenav > li:last-child > a {
+  .border-radius(0, 0, 6px, 6px);
+}
+.list-sidenav > .active > a {
+  position: relative;
+  z-index: 2;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+}
+
+.list-sidenav.right{
+	.border-radius(0px, 0px, 6px, 6px);
+	li:first-child > a{
+		.border-radius(0px, 0px, 0px, 6px);
+	}
+	li:last-child > a {
+		.border-radius(0px, 0px, 6px, 0px);
+	}
+}
+
+.list-sidenav.left{
+	.border-radius(6px, 6px, 0px, 0px);
+	> li:first-child > a{
+		.border-radius(6px, 0px, 0px, 0px);
+	}
+	> li:last-child > a {
+		.border-radius(0px, 6px, 0px, 0px);
+	}
+}
+
+.list-sidenav .icon-chevron-right {
+float: right;
+margin-top: 2px;
+margin-right: -6px;
+opacity: .25;
+}
+
+
+/*Global Attributes*/
+@textColor: #666;
+@commonColor: #82b796;
+

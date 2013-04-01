@@ -1,0 +1,48 @@
+﻿<div class="user-photos">
+    <ul>
+        <li class="section">
+        <a href="javascript:void(0);" class="section-head"><%- i18n.Photos %></a>
+        <span class="action-buttons hide">
+            <a class="options addphotos icon-plus-sign" href="#photosModal" data-toggle="modal" title="<%- i18n.AddPhotos %>"><%- i18n.AddPhotos %></a>
+            <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+        </span>
+        </li>
+         <li id="create-album" class="hide form-horizontal">
+            <form id="new-album">
+                <div class="floatLeft">
+                     <div class="control-group">
+                        <label class="control-label"><%- i18n.Title %></label>
+                        <div class="controls">
+                            <input name="Title" type="text" value="" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><%- i18n.PhotoDate %></label>
+                        <div id="albumDatePicker" class="controls input-append">
+                            <input name="Date" date-format="MM/dd/yyyy" type="text" value="" />
+                            <span class="add-on">
+                                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="floatRight description">
+                    <div class="control-group">
+                        <label class="control-label"><%- i18n.Description %></label>
+                        <div class="controls">
+                            <textarea rows="3" name="Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="submit">
+                <button type="button" class="btn btn-primary" id="savePhoto"><%- i18n.Save %></button>
+            </div>                        
+        </li>
+        <li id="album-list">
+            <div id="no-photos"><%- i18n.NoPhotos %></div>
+            <div id="user-photos" >&nbsp</div>
+        </li>
+    </ul>
+    <div id="photos-modal"></div>
+</div>

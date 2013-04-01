@@ -1,0 +1,47 @@
+﻿<div class="user-albums">
+    <ul>
+        <li class="section">
+        <a href="javascript:void(0);" class="section-head"><%- i18n.PhotoAlbums %></a>
+        <span class="action-buttons hide">
+            <a class="options addalbum icon-plus-sign" title="<%- i18n.CreateAlbum %>"><%- i18n.CreateAlbum %></a>
+            <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+        </span>
+        </li>
+         <li id="create-album" class="hide form-horizontal">
+            <form id="new-album">
+                <div class="floatLeft">
+                     <div class="control-group">
+                        <label class="control-label"><%- i18n.Title %></label>
+                        <div class="controls">
+                            <input name="Title" type="text" value="" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><%- i18n.AlbumDate %></label>
+                        <div id="albumDatePicker" class="controls input-append">
+                            <input name="Date" date-format="MM/dd/yyyy" type="text" value="" />
+                            <span class="add-on">
+                                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="floatRight description">
+                    <div class="control-group">
+                        <label class="control-label"><%- i18n.Description %></label>
+                        <div class="controls">
+                            <textarea rows="5" name="Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="submit">
+                <button type="button" class="btn btn-primary" id="saveAlbum"><%- i18n.Save %></button>
+            </div>                        
+        </li>
+        <li id="album-list">
+            <div id="no-albums"><%- i18n.NoAlbums %></div>
+            <div id="user-photoalbums"/>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@model photoshare.Models.LoginModel
+       <header id="globalHeader">
+        <a href="/">
+            <div class="masthead"></div>
+        </a>
+       </header>
+       <div class="container loginPage" id="page">
+            <div id="login">
+                <form id="loginForm" method="post">
+                    <div class="control-group">
+                        <label class="control-label" for="username">Username:</label>
+                        <input type="text" class="required" id="username" value="@Model.Username" name="Username" data-error-style="inline" />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">Password:</label>
+                        <input type="password" class="required" id="password" name="Password" data-error-style="inline" />
+                    </div>
+                    <div class="submit">
+                        <button type="submit" class="btn btn-primary" id="signIn">Login</button>
+                    </div>
+                </form>
+                @if(this.Response.StatusCode == 403){
+                    <div class="alert alert-error" id="loginError">Invalid username password combination.</div>
+                        
+                }
+                else if (this.Response.StatusCode == 423)
+                {
+                    <div class="alert alert-error" id="loginError">User has been locked out.</div>
+                }
+            </div>
+        </div>
+    </div>
+  
