@@ -1,0 +1,29 @@
+﻿<table id="tag-list" class="table table-striped">
+    <thead>
+        <tr>
+            <th><%- i18n.TagName %></th>
+            <th><%- i18n.TagType %></th>
+            <th class="category"><%- i18n.IsCategory %></th>
+            <th class="create-th"><a class="options create icon-plus-sign" title="<%- i18n.Create %>"><%- i18n.Create %></a></th>
+        </tr>
+    </thead>
+    <tbody id="tag-list-body">
+        <tr class="create-tr hide">
+            <td><div><input name="Name" type="text" value="" /></div></td>
+            <td>
+                <select>
+                    <option value="<%- i18n.Album.Value %>"><%-i18n.Album.Key %></option>
+                    <option value="<%- i18n.Photo.Value %>"><%- i18n.Photo.Key %></option>
+                </select>
+            </td>
+            <td class="category">
+                <input name="Create-Category" type="checkbox" />
+            </td>
+            <td class="save-td">
+                <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+                <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

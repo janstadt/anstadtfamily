@@ -190,6 +190,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Enums\AccessLevel.cs" />
     <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\BreadcrumbModel.cs" />
     <Compile Include="Models\SlideshowModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\FavoriteModel.cs" />
@@ -387,6 +388,7 @@
     <Content Include="Content\js\templates\blogTemplate.html" />
     <Content Include="Content\js\templates\aboutTemplate.html" />
     <Content Include="Content\js\templates\babyRatesTemplate.html" />
+    <Content Include="Content\js\templates\adminTemplate.html" />
     <Content Include="Content\js\templates\photoAlbumTemplate.html" />
     <Content Include="Content\js\templates\userTemplate.html" />
     <Content Include="Content\js\templates\settingsTemplate.html" />
@@ -402,6 +404,13 @@
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsModel.js" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsTemplate.html" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsView.js" />
+    <Content Include="Content\js\widgets\secure\tags\tagItemView.js" />
+    <Content Include="Content\js\widgets\secure\tags\tagTemplate.html" />
+    <Content Include="Content\js\widgets\secure\tags\tagCollection.js" />
+    <Content Include="Content\js\widgets\secure\tags\nls\tags.js" />
+    <Content Include="Content\js\widgets\secure\tags\tagModel.js" />
+    <Content Include="Content\js\widgets\secure\tags\tagsTemplate.html" />
+    <Content Include="Content\js\widgets\secure\tags\tagsView.js" />
     <Content Include="Content\js\widgets\tag\tagModel.js" />
     <Content Include="Content\js\widgets\tag\tagTemplate.html" />
     <Content Include="Content\js\widgets\tag\tagView.js" />

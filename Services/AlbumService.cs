@@ -305,5 +305,35 @@ namespace photoshare.Services
 
             this.mAlbumRepository.Update(entity);
         }
+
+        public List<BreadcrumbModel> Breadcrumbs(Guid id)
+        {
+            var album = this.GetAlbum(id);
+
+            if (album.Owner == Guid.Empty)
+            {
+                throw new HttpException(404, string.Format("Album {0} does not have an owner!", id));
+            }
+            
+            var user = this.mUserRepository.Get(album.Owner);
+
+            List<BreadcrumbModel> crumbs = new List<BreadcrumbModel>();
+            
+            BreadcrumbModel parent = new BreadcrumbModel();
+            parent.Text = string.Format("{0}'s Albums", user.Username);
+            parent.Url = string.Format("/#/user/{0}", user.Id); //"/#/user/<%- Id %>";
+            parent.Id = user.Id;
+
+            crumbs.Add(parent);
+
+            BreadcrumbModel active = new BreadcrumbModel();
+            active.Active = true;
+            active.Text = album.Title;
+            active.Id = album.Id;
+
+            crumbs.Add(active);
+
+            return crumbs;
+        }
     }
 }

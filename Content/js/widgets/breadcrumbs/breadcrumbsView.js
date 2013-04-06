@@ -15,9 +15,8 @@ define([
         model: null,
         initialize: function (model, defaults) {
             this.render();
-            if (defaults && defaults.Crumbs) {
-                this.addCrumbs(defaults.Crumbs);
-            }
+            this.listenTo(this.model, "change", _.bind(this._addCrumbs, this));
+            this.model.fetch();
         },
 
         render: function () {
@@ -25,9 +24,10 @@ define([
             return this;
         },
 
-        addCrumbs: function (crumbs) {
+        _addCrumbs: function () {
             var ul = this.$(".breadcrumb"),
             self = this;
+            var crumbs = this.model.toJSON().Crumbs;
             _.each(crumbs, function (crumb) {
                 ul.append(self.crumbTemplate(crumb));
             });

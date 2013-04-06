@@ -5,18 +5,19 @@ define([
 ) {
     var listItemView = Backbone.View.extend({
         tagName: "li",
+        className: "control-group",
         events: {
-            "click .list-sidenav li a": "select"
+            "click .navigationList li a": "select"
         },
         template: _.template(template),
         initialize: function (defaults) {
-            
             this.render();
         },
 
         select: function (evt) {
             evt.preventDefault();
             this.model.collection.setSelected(this.model);
+            application.router.navigate(this.model.get("Url"));
         },
 
         render: function () {

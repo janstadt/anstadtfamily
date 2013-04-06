@@ -17,5 +17,6 @@ namespace photoshare.Interfaces
         PhotoModel AddPhoto(PhotoModel model, HttpRequestBase request);
         void Favorite(Guid id, Guid userId);
         void UnFavorite(Guid id, Guid userId);
+        List<BreadcrumbModel> Breadcrumbs(Guid id);
     }
 }

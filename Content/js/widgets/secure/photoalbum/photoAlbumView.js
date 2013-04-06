@@ -3,13 +3,15 @@ define([
     "./photoAlbumModel",
     "../photos/photosView",
     "../photos/photosCollection",
-    "../../breadcrumbs/breadcrumbsView"
+    "../../breadcrumbs/breadcrumbsView",
+    "../../breadcrumbs/breadcrumbsModel"
 ], function (
     PhotoAlbumInfoView,
     PhotoAlbumModel,
     PhotosView,
     PhotoCollection,
-    BreadcrumbView) {
+    BreadcrumbView,
+    asdf) {
     var PhotoAlbumView = Backbone.View.extend({
         photoAlbumInfoView: null,
         photosView: null,
@@ -27,20 +29,8 @@ define([
         },
 
         _setBreadcrumbs: function () {
-            var crumbs = [];
-            var breadCrumbs = new BreadcrumbView();
-            var links = [];
-            links[0] = {
-                Url: "/#/user/" + this.options.PageId,
-                Text: "Your Albums",
-                Class: ""
-            };
-            links[1] = {
-                Url : "#",
-                Class: "active",
-                Text: this.photoAlbumModel.get("Title")
-            };
-            breadCrumbs.addCrumbs(links);
+            var bcModel = new asdf({ "Id": this.options.SubId, "Type": "Albums" });
+            var breadCrumbs = new BreadcrumbView({ "model": bcModel });
             this.$el.prepend(breadCrumbs.el);
         },
 

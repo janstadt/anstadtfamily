@@ -1,8 +1,10 @@
 define([], function () {
     var TagModel = Backbone.Model.extend({
-        url: function () {
-            return "api/tags/" + this.get("Type") + "/";
+        urlRoot: "api/tags/tag/",
+        setTypeUrl: function () {
+            this.url = "api/" + this.get("Type") + "/tags";
         },
+
         idAttribute: "Id",
         exists: function (item) {
             var items = this.get("AddedTags");
@@ -11,9 +13,9 @@ define([], function () {
             });
         },
         add: function (item) {
-//            var items = this.get("Available");
-//            items.push(item);
-//            this.set("Available", items);
+            //            var items = this.get("Available");
+            //            items.push(item);
+            //            this.set("Available", items);
             var addedTags = this.get("AddedTags");
             addedTags.push(item);
             this.set("AddedTags", addedTags);

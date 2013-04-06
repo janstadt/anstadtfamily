@@ -1,7 +1,17 @@
-﻿<div class="span2">
-    <ul class="nav nav-list list-sidenav <% if(model.justification){%><%- model.justification %><%} %>"></ul>
+﻿<div class="list-navigation form-horizontal">
+    <ul class="navigationList">
+        <% if(model.ShowHeader) { %>
+        <li class="section">
+            <a href="/" class="section-head">
+                <%- model.Title %>
+            </a>
+        </li>
+        <%} %>
+    </ul>
 </div>
-<div id="widget-placeholder" class="span10">
-<div id="loading"></div>
+
+<div class="list-widget-placeholder">
+    <div id="loading"></div>
 </div>
+
 

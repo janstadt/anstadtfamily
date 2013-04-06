@@ -10,9 +10,12 @@ namespace photoshare.Interfaces
 {
     public interface ITagService
     {
+        List<TagModel> GetTags();
+        List<TagModel> GetUniqeTags();
         List<TagModel> GetTags(TagModel model);
         TagModel GetTag(Guid id);
         void DeleteTag(TagModel model);
         TagModel AddTag(TagModel model);
+        TagModel UpdateTag(TagModel model);
     }
 }

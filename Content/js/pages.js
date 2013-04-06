@@ -111,21 +111,26 @@ window.config = {
                     location: "#contactsContainer",
                     defaults: {
                         justification: "left",
+                        ShowHeader: true,
+                        Title: "Settings",
                         Items: [
                             {
                                 Id: "blaa",
+                                HasLabel: true,
                                 Label: "blaa",
                                 Widget: null,
                                 Selected: true
                             },
                             {
                                 Id: "bee",
+                                HasLabel: true,
                                 Label: "bee",
                                 Widget: null,
                                 Selected: false
                             },
                             {
                                 Id: "blaablaa",
+                                HasLabel: true,
                                 Label: "blaablaa",
                                 Widget: null,
                                 Selected: false
@@ -142,14 +147,46 @@ window.config = {
         },
     //BACKEND PAGES
         {
-            name: 'settings',
-            template: "settingsTemplate",
-            widgets: [
-
-                ]
-        },
+        name: 'admin',
+        template: "adminTemplate",
+        index: 10,
+        hideCarousel: true,
+        widgets: [
+                {
+                    name: "listNavigation",
+                    location: "#adminContainer",
+                    defaults: {
+                        ShowHeader: true,
+                        Title: "Settings",
+                        Items: [
+                            {
+                                Id: "users",
+                                Label: "Site Users",
+                                Widget: {
+                                    Path: "widgets/templateLoader/templateLoaderView",
+                                    Model: {
+                                        Template: "babyRatesTemplate"
+                                    }
+                                },
+                                Selected: true,
+                                Url: "/admin/users"
+                            },
+                            {
+                                Id: "tags",
+                                Label: "Album Tags",
+                                Widget: {
+                                    Path: "widgets/secure/tags/tagsView"
+                                },
+                                Selected: false,
+                                Url: "/admin/tags"
+                            }
+                        ]
+                    }
+                }
+            ]
+    },
         {
-            name: 'user',//User page where people can update their info and add albums.
+            name: 'user', //User page where people can update their info and add albums.
             template: "userTemplate",
             hideCarousel: true,
             widgets: [
@@ -161,7 +198,7 @@ window.config = {
                 ]
         },
         {
-            name: 'photoalbum',//Deceiving name, but its the backend version of the album.
+            name: 'photoalbum', //Deceiving name, but its the backend version of the album.
             template: "photoAlbumTemplate",
             hideCarousel: true,
             widgets: [

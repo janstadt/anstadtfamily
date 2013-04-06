@@ -18,6 +18,7 @@ define([
                 this.tagName = defaults.TagName || "div";
             }
             this.model = new TagModel(defaults);
+            this.model.setTypeUrl();
             this.listenTo(this.model, "change", _.bind(this.insertTags, this));
             this.render();
             this.addExistingTags(defaults.AddedTags);
@@ -72,7 +73,6 @@ define([
                     //call save on the model for this item. 
                     var tag = new TagModel();
                     var data = { "ParentId": this.model.get("Id"), "Owner": this.model.get("Owner"), "Name": ui.tagLabel, "Type": this.model.get("Type") };
-                    tag.url = "api/tags";
                     tag.save(data, { success: _.bind(this.success, this, ui), error: _.bind(this.error, this) });
 
                 }
@@ -83,11 +83,8 @@ define([
                 if (this.model.exists(ui.tagLabel)) {
                     //call save on the model for this item.
                     var id = $(ui.tag).attr("id");
-                    var tag = new TagModel();
-                    tag.idAttribute = "Id";
-                    var data = { "ParentId": this.model.get("Id"), "Id": id, "Owner": this.model.get("Owner"), "Name": ui.tagLabel, "Type": this.model.get("Type") };
-                    tag.url = "api/tags";
-                    tag.save(data, { success: _.bind(this.success, this, ui), error: _.bind(this.error, this) });
+                    var tag = new TagModel({ "ParentId": this.model.get("Id"), "Id": id, "Owner": this.model.get("Owner"), "Name": ui.tagLabel, "Type": this.model.get("Type") });
+                    tag.destroy({ success: _.bind(this.success, this, ui), error: _.bind(this.error, this) });
                 }
                 //call destroy on the model for this item.
             }

@@ -63,10 +63,19 @@ namespace photoshare.Repositories
         {
             using (this.mEntities = new photoshareEntities())
             {
-                tag current = this.mEntities.tags.FirstOrDefault(x => x.Id == t.Id);
-                if (current != null)
+                var item = this.mEntities.tags.FirstOrDefault(x => x.Id == t.Id);
+                if (item != null)
                 {
-                    this.mEntities.tags.DeleteObject(current);
+                    //Delete ALL of the specific tag references.
+                    if (t.IsCategory)
+                    {
+                        var tags = this.mEntities.tags.Where(x => x.Name == item.Name && x.Type == item.Type);
+                        tags.ToList().ForEach(this.mEntities.tags.DeleteObject);
+                    }
+                    else
+                    {
+                        this.mEntities.tags.DeleteObject(item);
+                    }
                     this.mEntities.SaveChanges();
                 }
             }
@@ -74,29 +83,14 @@ namespace photoshare.Repositories
 
         public void Update(TagEntity t)
         {
-            throw new NotImplementedException();
-            //using (this.mEntities = new photoshareEntities())
-            //{
-            //    photo current = this.mEntities.photos.FirstOrDefault(x => x.Id == t.Id);
-            //    this.mEntities.photos.Attach(current);
-            //    photo photo = Mapper.Map<photo>(t);
-            //    this.mEntities.photos.ApplyCurrentValues(photo);
-
-            //    if (t.Favorite)
-            //    {
-            //        favoritephoto favorite = new favoritephoto();
-            //        favorite.Date = DateTime.UtcNow;
-            //        Mapper.Map(photo, favorite);
-            //        this.mEntities.favoritephotos.AddObject(favorite);
-            //    }
-            //    else
-            //    {
-            //        var favorite = this.mEntities.favoritephotos.FirstOrDefault(x => x.PhotoId == t.Id && x.Owner == t.Owner);
-            //        this.mEntities.favoritephotos.DeleteObject(favorite);
-            //    }
-
-            //    this.mEntities.SaveChanges();
-            //}
+            using (this.mEntities = new photoshareEntities())
+            {
+                tag current = this.mEntities.tags.FirstOrDefault(x => x.Id == t.Id);
+                this.mEntities.tags.Attach(current);
+                tag tag = Mapper.Map<tag>(t);
+                this.mEntities.tags.ApplyCurrentValues(tag);
+                this.mEntities.SaveChanges();
+            }
         }
     }
 }

@@ -1,2 +1,10 @@
-﻿<a href="#"><i class="icon-chevron-right"></i><%-model.Label %></a>
+﻿<% if(model.HasLabel){ %>
+    <label class="control-label"><%- i18n.Name %></label><span><%- model.Label %></span>
+<%} %>
+<div class="controls <% if(!model.HasLabel){ %>no-label<%} %>">
+    <a href="<%- model.Url %>"><%- model.Label %></a><i class="icon-chevron-right"></i>
+</div>
+
+
+
 

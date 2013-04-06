@@ -22,23 +22,7 @@ namespace photoshare.Controllers
        
         [HttpGet]
         [AjaxAuthorize]
-        public ActionResult Index(TagModel model)
-        {
-            //var user = this.mSessionService.GetSession();
-            //if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
-            //{
-            //    this.HttpContext.Response.StatusCode = 401;
-            //    return Json(new { }, JsonRequestBehavior.AllowGet);
-            //}
-
-            //this.mPhotoService.DeletePhoto(model.Id, user.Id.Value);
-
-            return Json(new { }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [AjaxAuthorize]
-        public ActionResult Photos(TagModel model)
+        public ActionResult Index()
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -47,30 +31,14 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            model.Type = TagType.Photos;
-            var tags = this.mTagService.GetTags(model);
-            return Json(new { Available = tags }, JsonRequestBehavior.AllowGet);
-        }
+            var tags = this.mTagService.GetUniqeTags();
 
-        [HttpGet]
-        [AjaxAuthorize]
-        public ActionResult Albums(TagModel model)
-        {
-            var user = this.mSessionService.GetSession();
-            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
-            {
-                this.HttpContext.Response.StatusCode = 401;
-                return Json(new { }, JsonRequestBehavior.AllowGet);
-            }
-
-            model.Type = TagType.Albums;
-            var tags = this.mTagService.GetTags(model);
-            return Json(new { Available = tags }, JsonRequestBehavior.AllowGet);
+            return Json(tags, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [AjaxAuthorize]
-        [ActionName("Index")]
+        [ActionName("tag")]
         public ActionResult AddTag(TagModel model)
         {
             var user = this.mSessionService.GetSession();
@@ -80,14 +48,38 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            model = this.mTagService.AddTag(model);
+            //if (model.Id == Guid.Empty)
+            //{
+                model = this.mTagService.AddTag(model);
+            //}
+            //else
+            //{
+            //    model = this.mTagService.UpdateTag(model);
+            //}
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPut]
+        [AjaxAuthorize]
+        [ActionName("tag")]
+        public ActionResult UpdateTag(TagModel model)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+
+            model = this.mTagService.UpdateTag(model);
+           
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
 
-        [HttpPut]
+        [HttpDelete]
         [AjaxAuthorize]
-        [ActionName("Index")]
+        [ActionName("tag")]
         public ActionResult DeleteTag(TagModel model)
         {
             var user = this.mSessionService.GetSession();

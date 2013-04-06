@@ -27,6 +27,16 @@ namespace photoshare.Services
             this.mTagRepository = tagRepository;
         }
 
+        public List<TagModel> GetTags()
+        {
+            return Mapper.Map<List<TagModel>>(this.mTagRepository.All().ToList());
+        }
+
+        public List<TagModel> GetUniqeTags()
+        {
+            return Mapper.Map<List<TagModel>>(this.mTagRepository.All().GroupBy(x => new {x.Name, x.IsCategory}).Select(x => x.First()).ToList());
+        }
+
         public List<TagModel> GetTags(TagModel model)
         {
             TagEntity entity = new TagEntity()
@@ -46,6 +56,13 @@ namespace photoshare.Services
         {
             TagEntity entity = Mapper.Map<TagEntity>(tag);
             this.mTagRepository.Add(entity);
+            return Mapper.Map<TagModel>(entity);
+        }
+
+        public TagModel UpdateTag(TagModel tag)
+        {
+            TagEntity entity = Mapper.Map<TagEntity>(tag);
+            this.mTagRepository.Update(entity);
             return Mapper.Map<TagModel>(entity);
         }
 

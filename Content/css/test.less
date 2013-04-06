@@ -316,7 +316,7 @@
 
     }
     
-    .user-info, .photoalbum-info
+    .list-navigation, .user-info, .photoalbum-info
     {
 		ul{
 			list-style-type:none;
@@ -346,6 +346,23 @@
 				padding:5px;
 				margin:0;
 				&.control-group {
+
+					&.active {
+						a {
+							text-decoration:none;
+							color:@commonColor;
+							font-weight:bold;
+						}
+						i {
+							display:inline-block;
+							margin-right:10px;
+							float:right;
+						}
+					}
+					i { display:none; }
+					div.controls.no-label {
+						margin-left: 5px;
+					}
 					span {
 						padding-top:5px;
 						display:inline-block;
@@ -421,13 +438,86 @@
 			}
 		}
 	}
-	.user-albums, .user-photos {
+	.list-widget-placeholder, .user-albums, .user-photos {
 		float:right;
 		width:800px;
 		position:relative;
 		padding:3px;
 		background-color:#efefef;
 		.border-radius(5px, 5px, 5px, 5px);
+		.tag-collection {
+			border:1px solid #d8d8d8;
+			table{
+				th.category, td.category{
+					text-align:center;
+				}
+				th.create-th {
+					text-align:right;
+					a {
+						overflow:hidden;
+						text-indent: 9000px;
+					}
+				}
+				margin-bottom:0px;
+				#tag-list-body{
+					tr {
+						td.save-td{
+							text-align:right;
+							width:40px;
+							a {
+								vertical-align: middle;
+							}
+						}
+						div{
+							cursor:pointer;
+						}
+						a {
+							display:none;
+							text-indent:9000px;
+							overflow:hidden;
+							cursor:pointer;
+							&.category{
+								display:inline-block;
+							}
+						}
+						input {
+							display:none;
+							margin-bottom:0;
+						}
+						select {
+							display:none;
+							width:auto;
+							margin-bottom:0;
+						}
+						span {
+							display:inline;
+						}
+						&:hover {
+							a.delete {
+								display:inline-block;
+							}
+						}
+						&.editing{
+							select, input {
+								display:inline;
+							}
+							div, span {
+								display:none;
+							}
+							a {
+								display:inline-block;
+								&.delete, &.category{
+									display:none;
+								}
+							}
+						}
+						&.create-tr{
+							input, select, a {display:inline-block;}
+						}
+					}
+				}
+			}
+		}
 		ul{
 			list-style-type:none;
 			padding:0;

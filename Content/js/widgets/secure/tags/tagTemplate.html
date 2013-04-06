@@ -1,0 +1,20 @@
+﻿<td><div><%- model.Name %></div><input class="tagInput" type="text" value="<%- model.Name %>" /></td>
+<td>
+    <span><%- model.Type === 0 ? i18n.Photo.Key : i18n.Album.Key %></span>
+    <select>
+        <option value="<%- i18n.Album.Value %>" <%if(model.Type === 1){ %>selected="true"<%} %>><%-i18n.Album.Key %></option>
+        <option value="<%- i18n.Photo.Value %>" <%if(model.Type === 0){ %>selected="true"<%} %>><%- i18n.Photo.Key %></option>
+    </select>
+</td>
+<td class="category">
+    <% if(model.IsCategory) { %>
+        <a class="options category icon-ok" title="<%- i18n.Category %>"><%- i18n.Category %></a>
+    <%} %>
+    <input class="tagCategory" type="checkbox" <% if(model.IsCategory){ %>checked=true<%} %>/>
+</td>
+<td class="save-td">
+    <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+    <a class="options delete icon-remove-circle" title="<%- i18n.Delete %>"><%- i18n.Delete %></a>
+    <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+</td>
+

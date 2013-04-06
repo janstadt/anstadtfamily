@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using photoshare.Models;
 using photoshare.Interfaces;
 using photoshare.Helpers;
+using photoshare.Models.Enums;
 
 namespace photoshare.Controllers
 {
@@ -14,11 +15,13 @@ namespace photoshare.Controllers
         private ISessionService mSessionService;
         private IAlbumService mAlbumService;
         private IPhotoService mPhotoService;
-        public PhotosController(ISessionService sessionService, IAlbumService albumService, IPhotoService photoService)
+        private ITagService mTagService;
+        public PhotosController(ISessionService sessionService, IAlbumService albumService, IPhotoService photoService, ITagService tagService)
         {
             this.mSessionService = sessionService;
             this.mAlbumService = albumService;
             this.mPhotoService = photoService;
+            this.mTagService = tagService;
         }
 
         [HttpPost]
@@ -86,6 +89,22 @@ namespace photoshare.Controllers
             this.mPhotoService.UnFavorite(id, user.Id.Value);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AjaxAuthorize]
+        public ActionResult Tags(TagModel model)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+
+            model.Type = TagType.Photos;
+            var tags = this.mTagService.GetTags(model);
+            return Json(new { Available = tags }, JsonRequestBehavior.AllowGet);
         }
     }
 }

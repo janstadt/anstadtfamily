@@ -7,6 +7,7 @@ using photoshare.Models;
 using photoshare.Interfaces;
 using photoshare.Helpers;
 using Newtonsoft.Json;
+using photoshare.Models.Enums;
 
 namespace photoshare.Controllers
 {
@@ -14,10 +15,12 @@ namespace photoshare.Controllers
     {
         private ISessionService mSessionService;
         private IAlbumService mAlbumService;
-        public AlbumsController(ISessionService sessionService, IAlbumService albumService)
+        private ITagService mTagService;
+        public AlbumsController(ISessionService sessionService, IAlbumService albumService, ITagService tagService)
         {
             this.mSessionService = sessionService;
             this.mAlbumService = albumService;
+            this.mTagService = tagService;
         }
 
         [HttpGet]
@@ -168,6 +171,30 @@ namespace photoshare.Controllers
             this.mAlbumService.UnFavorite(id, user.Id.Value);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AjaxAuthorize]
+        public ActionResult Breadcrumb(Guid id)
+        {
+            var crumbs = this.mAlbumService.Breadcrumbs(id);
+            return Json(new { Id = id, Crumbs = crumbs }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AjaxAuthorize]
+        public ActionResult Tags(TagModel model)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+
+            model.Type = TagType.Albums;
+            var tags = this.mTagService.GetTags(model);
+            return Json(new { Available = tags }, JsonRequestBehavior.AllowGet);
         }
     }
 }
