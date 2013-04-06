@@ -47,6 +47,15 @@ namespace photoshare.Controllers
                 this.HttpContext.Response.StatusCode = 401;
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
+            if (model.Owner == Guid.Empty)
+            {
+                model.Owner = user.Id;
+            }
+            if (model.ParentId == Guid.Empty)
+            {
+                model.ParentId = user.Id;
+            }
+
 
             //if (model.Id == Guid.Empty)
             //{

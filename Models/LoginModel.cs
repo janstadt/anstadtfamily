@@ -7,7 +7,7 @@ namespace photoshare.Models
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public LoginStatus LoginStatus { get; set; }
         public AccessLevel AccessLevel { get; set; }
         public string ReturnUrl { get; set; }
