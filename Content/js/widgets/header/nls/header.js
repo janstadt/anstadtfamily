@@ -9,7 +9,7 @@
         "Portfolio": "Portfolio",
         "Login": "Login",
         "Logout": "Logout",
-        "Settings": "Settings",
-        "Admin": "Admin"
+        "Settings": "User Information",
+        "Admin": "Site Settings"
     }
 });

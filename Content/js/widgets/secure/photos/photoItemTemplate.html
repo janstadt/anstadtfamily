@@ -12,6 +12,7 @@
     <%if(model.FileName){ %>
     <span class="header">
         <span class="title"><%- model.FileName %></span>
+        <span class="comments icon-comment icon-white" title="<%- model.FileName + " " + i18n.Comments %>" id="commentLink"><%- i18n.Comments %></span>
     </span>
     <%} %>
 </a>

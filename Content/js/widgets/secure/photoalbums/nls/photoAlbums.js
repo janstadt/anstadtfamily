@@ -13,6 +13,7 @@
         "Unfavorite": "Untag as Favorite",
         "ConfirmDelete": "Are you sure you want to delete <strong><%- Title %></strong> and all of its photos?",
         "Error": "An error occurred.",
-        "Tags": "Tags: "
+        "Tags": "Tags: ",
+        "Comments": "Comment's"
     }
 });

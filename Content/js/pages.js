@@ -165,7 +165,7 @@ window.config = {
                                 Widget: {
                                     Path: "widgets/templateLoader/templateLoaderView",
                                     Model: {
-                                        Template: "babyRatesTemplate"
+                                        Template: "usersTemplate"
                                     }
                                 },
                                 Selected: true,

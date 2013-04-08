@@ -14,11 +14,12 @@ namespace photoshare.Services
     {
         private ISessionRepository mSessionRepository;
         private IUserService mUserService;
-
-        public SessionService(ISessionRepository sessionRepository, IUserService userService)
+        private ITagRepository mTagRepository;
+        public SessionService(ISessionRepository sessionRepository, IUserService userService, ITagRepository tagRepository)
         {
             this.mSessionRepository = sessionRepository;
             this.mUserService = userService;
+            this.mTagRepository = tagRepository;
         }
         public void Logout()
         {
@@ -36,6 +37,17 @@ namespace photoshare.Services
                 model.LoginStatus = LoginStatus.LoggedIn;
             }
             return model;
+        }
+
+        public LoginHeaderModel GetHeaderSession()
+        {
+            var session = this.GetSession();
+            var categories = this.Categories();
+
+            var lhmodel = Mapper.Map<LoginHeaderModel>(session);
+            lhmodel.Categories = categories;
+
+            return lhmodel;
         }
 
         private UserModel GetUser(string username)
@@ -69,6 +81,12 @@ namespace photoshare.Services
                 }
             }
             return model;
+        }
+
+        public List<TagModel> Categories()
+        {
+            var all = this.mTagRepository.All().Where(x => x.IsCategory && x.Type == TagType.Albums.ToString()).ToList();
+            return Mapper.Map<List<TagModel>>(all);
         }
     }
 }

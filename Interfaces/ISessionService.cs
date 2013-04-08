@@ -11,6 +11,7 @@ namespace photoshare.Interfaces
     {
         LoginModel Login(LoginModel model);
         LoginModel GetSession();
+        LoginHeaderModel GetHeaderSession();
         void Logout();
     }
 }

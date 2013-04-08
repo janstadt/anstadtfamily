@@ -1,6 +1,7 @@
 define([
     "./headerModel",
     "text!./headerTemplate.html",
+    "text!./categoriesTemplate.html",
     "i18n!./nls/header",
     "../modal/modalView",
     "../modal/modalModel",
@@ -11,6 +12,7 @@ define([
 ], function (
     headerModel,
     template,
+    categoriesTemplate,
     i18n,
     modalView,
     modalModel,
@@ -20,6 +22,7 @@ define([
     carouselModel) {
     var HeaderView = Backbone.View.extend({
         template: _.template(template),
+        categoriesTemplate: _.template(categoriesTemplate),
         i18n: i18n,
         model: null,
         modal: null,
@@ -58,7 +61,6 @@ define([
             }
             });
         },
-
 
         _setupSession: function () {
             this.loginModel.on("change", this._updateLinks, this);
@@ -103,6 +105,18 @@ define([
             } else {
                 this.loggedIn();
             }
+
+            this._addCategories();
+        },
+
+        _addCategories: function () {
+            var ul = this.$(".categories-dropdown");
+            ul.empty();
+            var categories = this.loginModel.toJSON().Categories;
+
+            _.forEach(categories, _.bind(function (category) {
+                ul.append(this.categoriesTemplate(category));
+            }, this));
         },
 
         select: function (page) {

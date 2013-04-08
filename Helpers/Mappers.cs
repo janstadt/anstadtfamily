@@ -9,6 +9,7 @@ namespace vdz.ca.Mappers
     {
         public static void Register()
         {
+            Mapper.CreateMap<LoginModel, LoginHeaderModel>();
             Mapper.CreateMap<photo, PhotoModel>().ReverseMap();
             Mapper.CreateMap<photo, PhotoEntity>().ForMember(
                 dest => dest.Favorite,

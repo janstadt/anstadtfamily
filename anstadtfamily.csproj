@@ -389,6 +389,7 @@
     <Content Include="Content\js\templates\aboutTemplate.html" />
     <Content Include="Content\js\templates\babyRatesTemplate.html" />
     <Content Include="Content\js\templates\adminTemplate.html" />
+    <Content Include="Content\js\templates\usersTemplate.html" />
     <Content Include="Content\js\templates\photoAlbumTemplate.html" />
     <Content Include="Content\js\templates\userTemplate.html" />
     <Content Include="Content\js\templates\settingsTemplate.html" />
@@ -404,6 +405,7 @@
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsModel.js" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsTemplate.html" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsView.js" />
+    <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
     <Content Include="Content\js\widgets\secure\tags\tagItemView.js" />
     <Content Include="Content\js\widgets\secure\tags\tagTemplate.html" />
     <Content Include="Content\js\widgets\secure\tags\tagCollection.js" />

@@ -10,6 +10,7 @@
     <% if(model.Photos.length > 0){%> <img src="Albums/<%- model.Id %>/Small/<%- model.Photos[0].FileName %>" /> <%} %>
     <span class="header">
         <span class="title"><%- model.Title %></span>
+        <span class="comments icon-comment icon-white" title="<%- model.Title + " " + i18n.Comments %>" id="commentLink"><%- i18n.Comments %></span>
     </span>
 </a>
 

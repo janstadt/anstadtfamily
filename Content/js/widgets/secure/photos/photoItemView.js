@@ -21,12 +21,18 @@ define([
         events: {
             "click a#unfavoriteLink": "unFavoriteClick",
             "click a#favoriteLink": "favoriteClick",
-            "click a#deleteLink": "deleteClick"
+            "click a#deleteLink": "deleteClick",
+            "click span.comments": "commentClick"
         },
 
         render: function () {
             $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n }));
             return this;
+        },
+
+        commentClick: function (evt) {
+            evt.preventDefault();
+            alert('add comment.');
         },
 
         unFavoriteClick: function (evt) {

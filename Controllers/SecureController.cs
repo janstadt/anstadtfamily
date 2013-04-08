@@ -41,7 +41,7 @@ namespace photoshare.Controllers
         [ActionName("Login")]
         public ActionResult GetSession()
         {
-            var model = this.mSessionService.GetSession();
+            var model = this.mSessionService.GetHeaderSession();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

@@ -218,24 +218,24 @@ namespace photoshare.Services
                 bool vert = img.Height > img.Width;
                 
                 settings.Add("maxwidth", vert ? "680" : "1024");
-                settings.Add("maxheight", vert ? "1024" : "680");
+                //settings.Add("maxheight", vert ? "1024" : "680");
 
                 Bitmap copy = ImageResizer.ImageBuilder.Current.Build(img, settings, false);
                 copy.Save(Path.Combine(path, "Large\\" + filename));
 
                 settings.Remove("maxwidth");
-                settings.Remove("maxheight");
+                //settings.Remove("maxheight");
                 settings.Remove("watermark");
                 settings.Add("maxwidth", vert ? "332" : "500");
-                settings.Add("maxheight", vert ? "500" : "332");
+                //settings.Add("maxheight", vert ? "500" : "332");
                 copy = ImageResizer.ImageBuilder.Current.Build(img, settings, false);
                 copy.Save(Path.Combine(path, "Medium\\" + filename));
 
                 settings.Remove("maxwidth");
-                settings.Remove("maxheight");
+                //settings.Remove("maxheight");
                 settings.Remove("watermark");
                 settings.Add("maxwidth", vert ? "200" : "301");
-                settings.Add("maxheight", vert ? "301" : "200");
+                //settings.Add("maxheight", vert ? "301" : "200");
                 copy = ImageResizer.ImageBuilder.Current.Build(img, settings, false);
                 copy.Save(Path.Combine(path, "Small\\" + filename));
 

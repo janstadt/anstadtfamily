@@ -53,7 +53,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mPhotoService.DeletePhoto(model.Id, user.Id);
+            this.mPhotoService.DeletePhoto(model.Id, user.Id.Value);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
@@ -69,7 +69,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mPhotoService.Favorite(id, user.Id);
+            this.mPhotoService.Favorite(id, user.Id.Value);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
@@ -86,7 +86,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mPhotoService.UnFavorite(id, user.Id);
+            this.mPhotoService.UnFavorite(id, user.Id.Value);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
