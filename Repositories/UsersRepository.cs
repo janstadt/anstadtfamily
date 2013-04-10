@@ -42,7 +42,12 @@ namespace photoshare.Repositories
 
         public IEnumerable<UserEntity> All()
         {
-            throw new NotImplementedException();
+            using (this.mEntities = new photoshareEntities())
+            {
+                var users = this.mEntities.users.Where(x => x.IsActive);
+                return Mapper.Map<IEnumerable<UserEntity>>(users);
+            }
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -63,7 +68,12 @@ namespace photoshare.Repositories
 
         public UserEntity Add(UserEntity t)
         {
-            throw new NotImplementedException();
+            using (this.mEntities = new photoshareEntities())
+            {
+                user user = Mapper.Map<user>(t);
+                this.mEntities.users.AddObject(user);
+            }
+            return t;
         }
 
         public void Delete(UserEntity t)

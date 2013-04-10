@@ -1,6 +1,6 @@
 define([], function () {
     var UserModel = Backbone.Model.extend({
-        urlRoot: "api/user/info",
+        urlRoot: "api/users/user",
         idAttribute: "Id",
         validation: {
             Name: {

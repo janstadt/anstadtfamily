@@ -12,7 +12,9 @@ namespace photoshare.Interfaces
         UserModel GetUser(string username);
         UserModel GetUser(Guid id);
         UserModelBase Update(UserModelBase model);
+        UserModelBase Add(UserModelBase model);
         UserPhotoAlbumsModel GetAlbums(UserModelBase model);
         void SetAccessLevel(UserModelBase model);
+        List<UserModel> GetUsers();
     }
 }

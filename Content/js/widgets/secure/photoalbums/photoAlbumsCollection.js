@@ -4,7 +4,7 @@ define(["../photoAlbum/photoAlbumModel"], function (PhotoAlbumModel) {
             this.Id = options.PageId;
         },
         url: function () {
-            return "api/user/albums/" + this.Id
+            return "api/users/albums/" + this.Id
         },
         model: PhotoAlbumModel
     });

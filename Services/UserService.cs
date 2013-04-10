@@ -7,6 +7,7 @@ using photoshare.Repositories;
 using photoshare.Interfaces;
 using photoshare.Models.Enums;
 using AutoMapper;
+using System.Web.Security;
 
 namespace photoshare.Services
 {
@@ -19,13 +20,30 @@ namespace photoshare.Services
             this.mUserRepository = usersRepository;
             this.mSessionRepository = sessionRepository;
         }
-        
+
+        public List<UserModel> GetUsers()
+        {
+            var user = this.mUserRepository.All();
+            return Mapper.Map<List<UserModel>>(user);
+        }
+
         public UserModel GetUser(Guid id)
         {
             var user = this.mUserRepository.Get(id);
             var userModel = Mapper.Map<UserModel>(user);
             this.SetAccessLevel(userModel);
+            userModel.Password = this.GetUserPassword(userModel.Username);
             return userModel;
+        }
+
+        private string GetUserPassword(string username)
+        {
+            var dbUser = Membership.GetUser(username);
+            if (dbUser == null)
+            {
+                throw new HttpException(404, "User not found");
+            }
+            return dbUser.GetPassword();
         }
 
         public UserModel GetUser(string username)
@@ -33,6 +51,7 @@ namespace photoshare.Services
             var user = this.mUserRepository.Get(username);
             var userModel = Mapper.Map<UserModel>(user);
             this.SetAccessLevel(userModel);
+            userModel.Password = this.GetUserPassword(username);
             return userModel;
         }
 
@@ -61,6 +80,71 @@ namespace photoshare.Services
             }
         }
 
+        private bool UserExists(UserModelBase model)
+        {
+            bool exists = false;
+
+            if (Membership.FindUsersByName(model.Username) != null ||
+                Membership.FindUsersByEmail(model.Email) != null)
+            {
+                exists = true;
+            }
+
+            return exists;
+        }
+
+        public UserModelBase Add(UserModelBase model)
+        {
+            if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Email))
+            {
+                throw new HttpException(400, "Invalid user information");
+            }
+
+            if (this.UserExists(model))
+            {
+                throw new HttpException(409, "User exists");
+            }
+            //Create user
+            var user = Membership.CreateUser(model.Username, model.Password, model.Email);
+            
+            //Set Roles
+            string[] roles = this.GetRoles(model);
+            Roles.AddUserToRoles(model.Username, roles);
+
+            var entity = Mapper.Map<UserEntity>(model);
+            entity.DbId = ((int)user.ProviderUserKey);
+            entity.ActivationDate = DateTime.UtcNow;
+            entity.IsActive = true;
+
+            this.mUserRepository.Add(entity);
+
+            return model;
+        }
+
+        private string[] GetRoles(UserModelBase model)
+        {
+            List<string> roles = new List<string>();
+
+            switch (model.AccessLevel)
+            {
+                case AccessLevel.Admin:
+                    roles.Add("Administrator");
+                    break;
+                case AccessLevel.AdminAndOwner:
+                    roles.Add("Administrator");
+                    roles.Add("Owner");
+                    break;
+                case AccessLevel.Contributor:
+                    roles.Add("Contributor");
+                    break;
+                default:
+                    roles.Add("Contributor");
+                    break;
+            }
+
+            return roles.ToArray();
+        }
+
         public UserModelBase Update(UserModelBase model)
         {
             //Only allowed to update name and email so only pay attention to those fields.
@@ -69,7 +153,19 @@ namespace photoshare.Services
             currentUser.Name = model.Name;
             var entity = Mapper.Map<UserEntity>(currentUser);
             this.SetAccessLevel(model);
+            
             this.mUserRepository.Update(entity);
+
+            var dbUser = Membership.GetUser(model.Username);
+            dbUser.Email = model.Email;
+
+            string oldPwd = dbUser.GetPassword();
+            if (oldPwd != model.Password)
+            {
+                dbUser.ChangePassword(oldPwd, model.Password);
+            }
+
+            Membership.UpdateUser(dbUser);
             return model;
         }
 

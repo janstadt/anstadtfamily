@@ -11,18 +11,44 @@ using AutoMapper;
 namespace photoshare.Controllers
 {
     [AjaxAuthorize]
-    public class UserController : BaseController
+    public class UsersController : BaseController
     {
         private ISessionService mSessionService;
         private IUserService mUserService;
-        public UserController(ISessionService sessionService, IUserService userService)
+        public UsersController(ISessionService sessionService, IUserService userService)
         {
             this.mSessionService = sessionService;
             this.mUserService = userService;
         }
 
         [HttpGet]
-        public ActionResult Info(Guid id)
+        public ActionResult Index()
+        {
+            var users = this.mUserService.GetUsers();
+            return Json(users, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ActionName("User")]
+        public ActionResult Create(UserModelBase model)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model = this.mUserService.Add(model);
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [ActionName("User")]
+        public ActionResult GetUser(Guid id)
         {
             var user = this.mSessionService.GetSession();
             UserModelBase model = new UserModelBase();
@@ -39,7 +65,7 @@ namespace photoshare.Controllers
         }
 
         [HttpPut]
-        [ActionName("Info")]
+        [ActionName("User")]
         public ActionResult Update(UserModelBase model)
         {
             var user = this.mSessionService.GetSession();
