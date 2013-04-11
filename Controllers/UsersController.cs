@@ -7,7 +7,7 @@ using photoshare.Models;
 using photoshare.Interfaces;
 using photoshare.Helpers;
 using AutoMapper;
-
+using photoshare.Models.Enums;
 namespace photoshare.Controllers
 {
     [AjaxAuthorize]
@@ -30,6 +30,7 @@ namespace photoshare.Controllers
 
         [HttpPost]
         [ActionName("User")]
+        [AjaxAuthorize(Roles = "Administrator")]
         public ActionResult Create(UserModelBase model)
         {
             var user = this.mSessionService.GetSession();
@@ -66,6 +67,7 @@ namespace photoshare.Controllers
 
         [HttpPut]
         [ActionName("User")]
+        [AjaxAuthorize(Roles = "Administrator,Owner")]
         public ActionResult Update(UserModelBase model)
         {
             var user = this.mSessionService.GetSession();

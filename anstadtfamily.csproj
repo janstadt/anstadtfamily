@@ -406,6 +406,14 @@
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsTemplate.html" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsView.js" />
     <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
+    <Content Include="Content\js\widgets\secure\users\userTemplate.html" />
+    <Content Include="Content\js\widgets\secure\users\userListTemplate.html" />
+    <Content Include="Content\js\widgets\secure\users\nls\users.js" />
+    <Content Include="Content\js\widgets\secure\users\userCollection.js" />
+    <Content Include="Content\js\widgets\secure\users\userView.js" />
+    <Content Include="Content\js\widgets\secure\users\userModel.js" />
+    <Content Include="Content\js\widgets\secure\users\usersTemplate.html" />
+    <Content Include="Content\js\widgets\secure\users\usersView.js" />
     <Content Include="Content\js\widgets\secure\tags\tagItemView.js" />
     <Content Include="Content\js\widgets\secure\tags\tagTemplate.html" />
     <Content Include="Content\js\widgets\secure\tags\tagCollection.js" />

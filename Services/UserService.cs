@@ -24,7 +24,9 @@ namespace photoshare.Services
         public List<UserModel> GetUsers()
         {
             var user = this.mUserRepository.All();
-            return Mapper.Map<List<UserModel>>(user);
+            var userModels = Mapper.Map<List<UserModel>>(user);
+            userModels.ForEach(x => this.SetAccessLevel(x));
+            return userModels;
         }
 
         public UserModel GetUser(Guid id)
@@ -159,10 +161,14 @@ namespace photoshare.Services
             var dbUser = Membership.GetUser(model.Username);
             dbUser.Email = model.Email;
 
-            string oldPwd = dbUser.GetPassword();
-            if (oldPwd != model.Password)
+            //Only update pwd if the user is an owner of some type.
+            if (model.AccessLevel == AccessLevel.AdminAndOwner || model.AccessLevel == AccessLevel.Owner)
             {
-                dbUser.ChangePassword(oldPwd, model.Password);
+                string oldPwd = dbUser.GetPassword();
+                if (oldPwd != model.Password)
+                {
+                    dbUser.ChangePassword(oldPwd, model.Password);
+                }
             }
 
             Membership.UpdateUser(dbUser);

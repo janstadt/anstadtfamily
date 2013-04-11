@@ -1,0 +1,29 @@
+﻿<table id="users-list" class="table table-striped">
+    <thead>
+        <tr>
+            <th><%- i18n.Username %></th>
+            <th><%- i18n.Name %></th>
+            <th><%- i18n.Email %></th>
+            <th><%- i18n.AccessLevelLabel %></th>
+            <th class="create-th"><a class="options create icon-plus-sign" title="<%- i18n.Create %>"><%- i18n.Create %></a></th>
+        </tr>
+    </thead>
+    <tbody id="users-list-body">
+        <tr class="create-tr hide">
+            <td class="control-group"><div class="controls"><input name="Username" type="text" value="" /></div></td>
+            <td class="control-group"><div class="controls"><input name="Name" type="text" value="" /></div></td>
+            <td class="control-group"><div class="controls"><input name="Email" type="text" value="" /></div></td>
+            <td>
+                <select name="AccessLevel">
+                    <option value="<%- i18n.AccessLevel[0] %>"><%-i18n.AccessLevel.Administrator %></option>
+                    <option value="<%- i18n.AccessLevel[1] %>"><%- i18n.AccessLevel.Contributor %></option>
+                </select>
+            </td>
+            <td class="save-td">
+                <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+                <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div id="userModalContainer"></div>

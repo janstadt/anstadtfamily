@@ -163,10 +163,7 @@ window.config = {
                                 Id: "users",
                                 Label: "Site Users",
                                 Widget: {
-                                    Path: "widgets/templateLoader/templateLoaderView",
-                                    Model: {
-                                        Template: "usersTemplate"
-                                    }
+                                    Path: "widgets/secure/users/usersView"
                                 },
                                 Selected: true,
                                 Url: "/admin/users"
