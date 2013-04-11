@@ -5,7 +5,7 @@ define([], function () {
         SetAccessor: function (model) {
             this._parent = model;
         },
-        GetAccessor: function (model) {
+        GetAccessor: function () {
             return this._parent;
         },
         validation: {

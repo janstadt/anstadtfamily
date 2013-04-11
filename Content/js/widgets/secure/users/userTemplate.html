@@ -1,7 +1,7 @@
 ﻿<form class="user-info full form-horizontal <% if(model.IsNew) { %>editing<%} %>">
     <ul>
         <li class="section">
-            <% if(model.AccessLevel === 2 || model.AccessLevel === 3) { %>
+            <% if(model.Id === accessor.Id || model.IsNew) { %>
             <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
             <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
                 <% if(!model.IsNew) { %>
@@ -46,13 +46,13 @@
                 </select>
             </div>
         </li>
-        <li class="control-group access-level <% if(model.AccessLevel !== 2 && model.AccessLevel !== 3){%> hide <%} %>">
+        <li class="control-group access-level <% if(model.Id !== accessor.Id && !model.IsNew){%> hide <%} %>">
             <label class="control-label"><%- i18n.PasswordForm %></label><span>********</span>
             <div class="controls">
                 <input name="Password" type="password" value="<%- model.Password %>" />
             </div>
         </li>
-        <li class="control-group access-level <% if(model.AccessLevel !== 2 && model.AccessLevel !== 3){%> hide <%} %>">
+        <li class="control-group access-level <% if(model.Id !== accessor.Id && !model.IsNew){%> hide <%} %>">
             <label class="control-label"><%- i18n.PasswordConfirmForm %></label><span>********</span>
             <div class="controls">
                 <input name="PasswordConfirm" type="password" value="<%- model.Password %>" />

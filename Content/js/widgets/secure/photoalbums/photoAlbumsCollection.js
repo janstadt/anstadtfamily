@@ -10,7 +10,7 @@ define(["../photoAlbum/photoAlbumModel"], function (PhotoAlbumModel) {
         SetAccessor: function (model) {
             this._parent = model;
         },
-        GetAccessor: function (model) {
+        GetAccessor: function () {
             return this._parent;
         },
     });

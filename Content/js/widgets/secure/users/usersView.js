@@ -6,7 +6,8 @@ define([
     "./userCollection",
     "i18n!./nls/users",
     "../../modal/modalView",
-    "../../modal/modalModel"
+    "../../modal/modalModel",
+    "../../login/sessionModel"
 ], function (
     UserView,
     UserModel,
@@ -15,10 +16,12 @@ define([
     UserCollection,
     i18n,
     ModalView,
-    ModalModel) {
+    ModalModel,
+    SessionModel) {
     var UsersView = Backbone.View.extend({
         model: null,
         modal: null,
+        sessionModel: null,
         userView: null,
         i18n: i18n,
         className: "user-collection",
@@ -26,12 +29,19 @@ define([
         userListTemplate: _.template(userListTemplate),
         initialize: function (options) {
             this.options = options;
+
             this.render();
+            this.sessionModel = new SessionModel();
+            this.listenTo(this.sessionModel, "change", this.setAccessor);
+            this.sessionModel.fetch();
+            return this;
+        },
+
+        setAccessor: function () {
             this.userList = this.$el.find("#users-list-body");
             this.collection = new UserCollection();
             this.listenTo(this.collection, "reset", _.bind(this.addAll, this));
             this.collection.fetch();
-            return this;
         },
 
         events: {
@@ -47,6 +57,7 @@ define([
         createUser: function (evt) {
             evt.preventDefault();
             var model = new UserModel({ "AccessLevel": 2, "IsNew": true });
+            model.SetAccessor(this.sessionModel.toJSON());
             var uView = new UserView({ "model": model });
             this.listenTo(uView, "finished", this.userAdded);
 
@@ -73,6 +84,7 @@ define([
                 evt.preventDefault();
                 var id = evt.currentTarget.id;
                 var model = this.collection.find(function (item) { return id === item.get("Id"); });
+                model.SetAccessor(this.sessionModel.toJSON());
                 var uView = new UserView({ "model": model });
                 this.listenTo(uView, "finished", this.userUpdated);
 
