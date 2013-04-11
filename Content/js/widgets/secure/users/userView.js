@@ -1,5 +1,5 @@
 define([
-    "./userModel",
+    "../user/userModel",
     "text!./userTemplate.html",
     "i18n!./nls/users"
 ], function (
@@ -49,7 +49,7 @@ define([
 
         saveSuccess: function (model, response, options) {
             this.$(".user-info").removeClass("editing");
-            this.trigger("finished");
+            this.trigger("finished", model);
         },
 
         saveError: function (model, response, options) {

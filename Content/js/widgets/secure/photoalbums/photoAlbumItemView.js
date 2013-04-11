@@ -19,7 +19,7 @@ define([
                 id: this.model.get("Id")
             };
         },
-        //className: "item", //for masonry.js
+
         initialize: function (options) {
             this.render();
             this.favoritesModel = new FavoritesModel({ "id": this.model.toJSON().Id, "type": "albums" });
@@ -32,8 +32,7 @@ define([
         },
 
         render: function () {
-            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n }));
-            //this.el.id = this.model.toJSON().Id;
+            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n, "accessor": this.model.GetAccessor() }));
             return this;
         },
 

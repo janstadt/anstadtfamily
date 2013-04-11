@@ -1,6 +1,6 @@
 define([
     "./userView",
-    "./userModel",
+    "../user/userModel",
     "text!./usersTemplate.html",
     "text!./userListTemplate.html",
     "./userCollection",
@@ -18,6 +18,7 @@ define([
     ModalModel) {
     var UsersView = Backbone.View.extend({
         model: null,
+        modal: null,
         userView: null,
         i18n: i18n,
         className: "user-collection",
@@ -34,7 +35,7 @@ define([
         },
 
         events: {
-            "click tr": "editUser",
+            "click tbody > tr": "editUser",
             "click a.create": "createUser"
         },
 
@@ -45,31 +46,49 @@ define([
 
         createUser: function (evt) {
             evt.preventDefault();
-            
-        },
-
-        updateUser: function (model) {
-
-        },
-
-        editUser: function (evt) {
-            evt.preventDefault();
-            var id = evt.currentTarget.id;
-            var model = this.collection.find(function (item) { return id === item.get("Id"); });
+            var model = new UserModel({ "AccessLevel": 2, "IsNew": true });
             var uView = new UserView({ "model": model });
-            this.listenTo(uView, "updated", this.updateUser);
+            this.listenTo(uView, "finished", this.userAdded);
 
-            var mModel = new ModalModel({ "Id": "userModal", "Content": uView.el, "Title": model.toJSON().Name });
+            var mModel = new ModalModel({ "Id": "userModal", "Content": uView.el, "Title": i18n.Create });
             this.modal = new ModalView({ "model": mModel });
             this.$("#userModalContainer").html(this.modal.el);
             this.modal.show();
         },
 
+        userAdded: function (model) {
+            this.modal.hide();
+            this.collection.add(model);
+            this.addAll();
+        },
+
+        userUpdated: function (model) {
+            this.modal.hide();
+            this.addAll();
+            //update item in row.
+        },
+
+        editUser: function (evt) {
+            if (evt.target.nodeName !== "A") {
+                evt.preventDefault();
+                var id = evt.currentTarget.id;
+                var model = this.collection.find(function (item) { return id === item.get("Id"); });
+                var uView = new UserView({ "model": model });
+                this.listenTo(uView, "finished", this.userUpdated);
+
+                var mModel = new ModalModel({ "Id": "userModal", "Content": uView.el, "Title": model.toJSON().Username });
+                this.modal = new ModalView({ "model": mModel });
+                this.$("#userModalContainer").html(this.modal.el);
+                this.modal.show();
+            }
+        },
+
         addOne: function (model) {
-            this.userList.append(this.userListTemplate({ "model": model.toJSON() }));
+            this.userList.append(this.userListTemplate({ "model": model.toJSON(), "i18n": this.i18n }));
         },
 
         addAll: function () {
+            this.userList.html("");
             this.collection.each(_.bind(this.addOne, this));
         }
     });

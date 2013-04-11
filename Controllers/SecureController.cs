@@ -23,6 +23,14 @@ namespace photoshare.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize]
+        public ActionResult Current()
+        {
+            var model = this.mSessionService.GetSession();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {

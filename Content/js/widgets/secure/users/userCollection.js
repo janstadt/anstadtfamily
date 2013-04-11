@@ -1,4 +1,4 @@
-define(["./userModel"], function (userModel) {
+define(["../user/userModel"], function (userModel) {
     var UserCollection = Backbone.Collection.extend({
         url: "api/users",
         model: userModel,

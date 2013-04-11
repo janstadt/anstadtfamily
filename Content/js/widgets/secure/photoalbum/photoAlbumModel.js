@@ -6,6 +6,12 @@ define([], function () {
             Title: {
                 required: true
             }
+        },
+        SetAccessor: function (model) {
+            this._parent = model;
+        },
+        GetAccessor: function (model) {
+            return this._parent;
         }
     });
     return PhotoAlbumModel;

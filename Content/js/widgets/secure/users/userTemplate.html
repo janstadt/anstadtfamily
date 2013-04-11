@@ -1,1 +1,65 @@
-﻿<div><%- model.Name %></div>
+﻿<form class="user-info full form-horizontal <% if(model.IsNew) { %>editing<%} %>">
+    <ul>
+        <li class="section">
+            <% if(model.AccessLevel === 2 || model.AccessLevel === 3) { %>
+            <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
+            <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+                <% if(!model.IsNew) { %>
+                    <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+                <%} %>
+            <% } %>
+        </li>
+        <% if(model.IsNew) { %>
+            <li class="control-group">
+            <label class="control-label"><%- i18n.UsernameForm %></label><span><%- model.Username %></span>
+            <div class="controls">
+                <input name="Username" type="text" value="<%- model.Username %>" />
+            </div>
+        </li>
+        <%} %>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.NameForm %></label><span><%- model.Name %></span>
+            <div class="controls">
+                <input name="Name" type="text" value="<%- model.Name %>" />
+            </div>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.EmailForm %></label><span><%- model.Email %></span>
+            <div class="controls">
+                <input name="Email" type="text" value="<%- model.Email %>" />
+            </div>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.PhoneForm %></label><span><%- model.Phone %></span>
+            <div class="controls">
+                <input name="Phone" type="text" value="<%- model.Phone %>" />
+            </div>
+        </li>
+        <li class="control-group access-level <% if(model.AccessLevel !== 1 && model.AccessLevel !== 2){%> hide <%} %>">
+            <label class="control-label"><%- i18n.AccessLevelForm %></label><span id="access-level-span"><%if(model.IsNew){ %> <%- i18n.AccessLevel[3] %> <%} else { %> <%- i18n.AccessLevel[model.AccessLevel]  %><%} %></span>
+            <div class="controls">
+                <select name="AccessLevel">
+                    <option value="1" <%if(model.AccessLevel === 1){ %>selected="true"<%} %>><%-i18n.AccessLevel[1] %></option>
+                    <option value="2" <%if(model.AccessLevel === 2){ %>selected="true"<%} %>><%-i18n.AccessLevel[2] %></option>
+                    <option value="3" <%if(model.AccessLevel === 3 || model.IsNew){ %>selected="true"<%} %>><%-i18n.AccessLevel[3] %></option>
+                    <option value="4" <%if(model.AccessLevel === 4){ %>selected="true"<%} %>><%-i18n.AccessLevel[4] %></option>
+                </select>
+            </div>
+        </li>
+        <li class="control-group access-level <% if(model.AccessLevel !== 2 && model.AccessLevel !== 3){%> hide <%} %>">
+            <label class="control-label"><%- i18n.PasswordForm %></label><span>********</span>
+            <div class="controls">
+                <input name="Password" type="password" value="<%- model.Password %>" />
+            </div>
+        </li>
+        <li class="control-group access-level <% if(model.AccessLevel !== 2 && model.AccessLevel !== 3){%> hide <%} %>">
+            <label class="control-label"><%- i18n.PasswordConfirmForm %></label><span>********</span>
+            <div class="controls">
+                <input name="PasswordConfirm" type="password" value="<%- model.Password %>" />
+            </div>
+        </li>
+        <li class="hide" id="saveError">
+            <div class="alert alert-error"><%- i18n.Error %></div>
+        </li>
+    </ul>
+</form>

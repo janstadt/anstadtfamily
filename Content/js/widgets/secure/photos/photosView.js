@@ -49,7 +49,7 @@ define([
         },
 
         render: function () {
-            $(this.el).html(this.template({ "i18n": this.i18n }));
+            $(this.el).html(this.template({ "i18n": this.i18n, "accessor" : this.collection.GetAccessor() }));
             this.$("#albumDatePicker").datetimepicker({
                 "pickTime": false
             });
@@ -67,10 +67,6 @@ define([
             }, this));
         },
 
-        showControls: function () {
-            this.$(".action-buttons").removeClass("hide");
-        },
-
         addAll: function () {
             this.collection.each(this.addOne, this);
         },
@@ -78,6 +74,7 @@ define([
         addOne: function (photo) {
             this.$("#no-photos").hide();
             this.setupMasonry();
+            photo.SetAccessor(this.collection.GetAccessor());
             this.listenTo(photo, "masonRemove", this.removeOne);
             var photoView = new PhotoItemView({"model": photo});
             var item = $(photoView.el);

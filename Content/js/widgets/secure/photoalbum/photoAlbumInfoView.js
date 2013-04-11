@@ -24,7 +24,7 @@ define([
         },
 
         render: function () {
-            $(this.el).html(this.template({ "i18n": this.i18n, "model": this.model.toJSON() }));
+            $(this.el).html(this.template({ "i18n": this.i18n, "model": this.model.toJSON(), "accessor": this.model.GetAccessor() }));
             this.addTags();
             return this;
         },

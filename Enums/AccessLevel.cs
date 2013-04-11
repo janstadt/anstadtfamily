@@ -6,6 +6,7 @@
         Admin,
         AdminAndOwner,
         Owner,
-        Contributor
+        Contributor,
+        CreateRights
     }
 }

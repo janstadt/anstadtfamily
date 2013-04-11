@@ -7,7 +7,13 @@ define(["../../photo/photoModel"], function (PhotosModel) {
         url: function () {
             return "api/albums/photos/" + this.SubId
         },
-        model: PhotosModel
+        model: PhotosModel,
+        SetAccessor: function (model) {
+            this._parent = model;
+        },
+        GetAccessor: function (model) {
+            return this._parent;
+        }
     });
     return PhotosCollection;
 });

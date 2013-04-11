@@ -129,6 +129,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="ActivationDate" Type="datetime" Nullable="false" />
           <Property Name="DeactivationDate" Type="datetime" />
+          <Property Name="Phone" Type="text" />
         </EntityType>
         <Association Name="Album">
           <End Role="photoalbums" Type="photoshareModel.Store.photoalbums" Multiplicity="1">
@@ -353,6 +354,7 @@
           <NavigationProperty Name="favoritephotos" Relationship="photoshareModel.FavoritePhotoOwner" FromRole="user" ToRole="favoritephoto" />
           <NavigationProperty Name="photoalbums" Relationship="photoshareModel.userAlbums" FromRole="user" ToRole="photoalbum" />
           <NavigationProperty Name="tags" Relationship="photoshareModel.TagOwner" FromRole="user" ToRole="tag" />
+          <Property Type="String" Name="Phone" />
         </EntityType>
         <Association Name="CommentsOwner">
           <End Role="users" Type="photoshareModel.user" Multiplicity="1" />
@@ -553,7 +555,8 @@
             <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="users"><EntityTypeMapping TypeName="photoshareModel.user"><MappingFragment StoreEntitySet="users">
-            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="Username" ColumnName="Username" />
             <ScalarProperty Name="Id" ColumnName="Id" />

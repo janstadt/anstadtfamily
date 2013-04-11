@@ -1,16 +1,19 @@
-﻿<div id="favorite" <%if(!model.Favorite){%>class="hide"<%} %>>
-    <a class="favorite icon-heart" id="unfavoriteLink" title="<%- i18n.Unfavorite %>"><%- i18n.Unfavorite %></a>
-</div>
+﻿<%if (accessor.AccessLevel === 1 || accessor.AccessLevel === 2) { %>
+    <div id="favorite" <%if(!model.Favorite){%>class="hide"<%} %>>
+        <a class="favorite icon-heart" id="unfavoriteLink" title="<%- i18n.Unfavorite %>"><%- i18n.Unfavorite %></a>
+    </div>
 
-<div class="features">
-    <a class="favorite icon-heart" id="favoriteLink" title="<%- i18n.Favorite %>"><%- i18n.Favorite %></a>
-    <a class="delete icon-remove" id="deleteLink" title="<%- i18n.Delete %>"><%- i18n.Delete %></a>
-</div>
+    <div class="features">
+        <a class="favorite icon-heart" id="favoriteLink" title="<%- i18n.Favorite %>"><%- i18n.Favorite %></a>
+        <a class="delete icon-remove" id="deleteLink" title="<%- i18n.Delete %>"><%- i18n.Delete %></a>
+    </div>
+<%} %>
+
 <a class="album" href="#/user/<%- model.Owner %>/photoalbum/<%- model.Id %>">
     <% if(model.Photos.length > 0){%> <img src="Albums/<%- model.Id %>/Small/<%- model.Photos[0].FileName %>" /> <%} %>
     <span class="header">
         <span class="title"><%- model.Title %></span>
-        <span class="comments icon-comment icon-white" title="<%- model.Title + " " + i18n.Comments %>" id="commentLink"><%- i18n.Comments %></span>
+            <span class="comments icon-comment icon-white" title="<%- model.Title + " " + i18n.Comments %>" id="commentLink"><%- i18n.Comments %></span>
     </span>
 </a>
 

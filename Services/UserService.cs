@@ -26,6 +26,8 @@ namespace photoshare.Services
             var user = this.mUserRepository.All();
             var userModels = Mapper.Map<List<UserModel>>(user);
             userModels.ForEach(x => this.SetAccessLevel(x));
+            var owner = userModels.FirstOrDefault(x => x.AccessLevel == AccessLevel.Owner || x.AccessLevel == AccessLevel.AdminAndOwner);
+            owner.Password = this.GetUserPassword(owner.Username);
             return userModels;
         }
 
@@ -86,8 +88,8 @@ namespace photoshare.Services
         {
             bool exists = false;
 
-            if (Membership.FindUsersByName(model.Username) != null ||
-                Membership.FindUsersByEmail(model.Email) != null)
+            if (Membership.FindUsersByName(model.Username).Count > 0 ||
+                Membership.FindUsersByEmail(model.Email).Count > 0)
             {
                 exists = true;
             }
@@ -120,6 +122,8 @@ namespace photoshare.Services
 
             this.mUserRepository.Add(entity);
 
+            Mapper.Map(entity, model);
+
             return model;
         }
 
@@ -136,8 +140,8 @@ namespace photoshare.Services
                     roles.Add("Administrator");
                     roles.Add("Owner");
                     break;
-                case AccessLevel.Contributor:
-                    roles.Add("Contributor");
+                case AccessLevel.Owner:
+                    roles.Add("Owner");
                     break;
                 default:
                     roles.Add("Contributor");
@@ -153,6 +157,7 @@ namespace photoshare.Services
             var currentUser = this.GetUser(model.Id);
             currentUser.Email = model.Email;
             currentUser.Name = model.Name;
+            currentUser.Phone = model.Phone;
             var entity = Mapper.Map<UserEntity>(currentUser);
             this.SetAccessLevel(model);
             
@@ -169,6 +174,14 @@ namespace photoshare.Services
                 {
                     dbUser.ChangePassword(oldPwd, model.Password);
                 }
+            }
+
+            if (model.AccessLevel == AccessLevel.Admin || model.AccessLevel == AccessLevel.AdminAndOwner)
+            {
+                var newRoles = this.GetRoles(model);
+                var oldRoles = Roles.GetRolesForUser(model.Username);
+                Roles.RemoveUserFromRoles(model.Username, oldRoles);
+                Roles.AddUserToRoles(model.Username, newRoles);
             }
 
             Membership.UpdateUser(dbUser);

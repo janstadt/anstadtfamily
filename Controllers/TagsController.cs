@@ -21,7 +21,7 @@ namespace photoshare.Controllers
         }
        
         [HttpGet]
-        [AjaxAuthorize]
+        [AjaxAuthorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var user = this.mSessionService.GetSession();
@@ -69,7 +69,7 @@ namespace photoshare.Controllers
         }
 
         [HttpPut]
-        [AjaxAuthorize]
+        [AjaxAuthorize(Roles = "Administrator")]
         [ActionName("tag")]
         public ActionResult UpdateTag(TagModel model)
         {

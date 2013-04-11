@@ -46,6 +46,10 @@ namespace vdz.ca.Mappers
             Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
             Mapper.CreateMap<UserEntity, UserPhotoAlbumsModel>().ReverseMap();
             Mapper.CreateMap<UserModelBase, UserModel>().ReverseMap();
+            Mapper.CreateMap<UserModelBase, UserEntity>().ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => src.Id == Guid.Empty ? Guid.NewGuid() : src.Id)
+            ).ReverseMap();
             Mapper.CreateMap<user, UserEntity>().ForMember(
                 dest => dest.FavoritePhotos,
                 opt => opt.MapFrom(src => src.favoritephotos.ToList())

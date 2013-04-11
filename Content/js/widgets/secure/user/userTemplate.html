@@ -5,7 +5,7 @@
                 <img src="" height="20" width="20" />
                 <%- model.Username %>
             </a>
-            <% if(model.AccessLevel === 1 || model.AccessLevel === 2) { %>
+            <% if(accessor.Id === model.Id) { %>
             <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
             <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
             <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
@@ -21,6 +21,24 @@
             <label class="control-label"><%- i18n.Email %></label><span><%- model.Email %></span>
             <div class="controls">
                 <input name="Email" type="text" value="<%- model.Email %>" />
+            </div>
+        </li>
+        <li class="control-group">
+            <label class="control-label"><%- i18n.Phone %></label><span><%- model.Phone %></span>
+            <div class="controls">
+                <input name="Phone" type="text" value="<%- model.Phone %>" />
+            </div>
+        </li>
+        <li class="control-group access-level <% if(accessor.AccessLevel !== 2 && accessor.AccessLevel !== 3){%> hide <%} %>">
+            <label class="control-label"><%- i18n.Password %></label><span>********</span>
+            <div class="controls">
+                <input name="Password" type="password" value="<%- model.Password %>" />
+            </div>
+        </li>
+        <li class="control-group access-level <% if(accessor.AccessLevel !== 2 && accessor.AccessLevel !== 3){%> hide <%} %>">
+            <label class="control-label"><%- i18n.PasswordConfirm %></label><span>********</span>
+            <div class="controls">
+                <input name="PasswordConfirm" type="password" value="<%- model.Password %>" />
             </div>
         </li>
         <li class="hide" id="saveError">

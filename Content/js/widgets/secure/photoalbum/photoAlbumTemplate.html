@@ -4,9 +4,13 @@
             <a href="/" class="section-head">
                 <%- model.Title %> (<%- moment(model.Date).format("MM/DD/YYYY") %>)
             </a>
-            <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
-            <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
-            <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+            <% if(accessor.AccessLevel === 1 || accessor.AccessLevel === 2){ %>
+            <i class="features">
+                <a class="options edit icon-wrench" title="<%- i18n.Edit %>"><%- i18n.Edit %></a>
+                <a class="options save icon-ok-circle" title="<%- i18n.Save %>"><%- i18n.Save %></a>
+                <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
+            </i>
+            <%} %>
         </li>
         <li class="control-group">
             <label class="control-label"><%- i18n.Title %></label><span><%- model.Title %></span>

@@ -371,7 +371,7 @@
 					}
 					margin-bottom:0px;
 					label {
-						width: 55px;
+						width: 65px;
 					}
 					.controls{
 						margin-left:60px;
@@ -381,18 +381,28 @@
 		}
 		float:left;
 		width:300px;
+		&.full{
+			width:99%;
+			.border-radius(0,0,0,0);
+			ul{
+				border-top:none;
+				li > label {
+					width:90px;
+				}
+			}
+		}
 		padding:3px;
 		background-color:#efefef;
 		.border-radius(5px, 5px, 5px, 5px);
 		label{display:inline-block;width:50px;}
-		input,textarea{display:none;}
+		input,select,textarea{display:none;}
 		&.editing {
 			.section{
 				a.edit{display:none;}
 				a.save{display:block;}
 				a.cancel{display:block;}
 			}
-			input,textarea{display:inline;}
+			input,select,textarea{display:inline;}
 			ul {
 				li {
 					span{display:none;}
@@ -448,6 +458,10 @@
 		.user-collection, .tag-collection {
 			border:1px solid #d8d8d8;
 			table{
+				th{
+					.bw-gradient(#EEE, 230, 255);
+					padding:10px;
+				}
 				th.category, td.category{
 					text-align:center;
 				}
@@ -460,8 +474,9 @@
 					}
 				}
 				margin-bottom:0px;
-				#tag-list-body{
+				#user-list-body, #tag-list-body{
 					tr {
+						border-top:1px solid #fff;
 						td.save-td{
 							text-align:right;
 							width:40px;

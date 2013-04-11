@@ -38,7 +38,7 @@ define([
         },
 
         render: function () {
-            $(this.el).html(this.template({ "i18n": this.i18n }));
+            $(this.el).html(this.template({ "i18n": this.i18n, "accessor": this.collection.GetAccessor() }));
             this.$("#albumDatePicker").datetimepicker({
                 "pickTime": false
             });
@@ -63,16 +63,21 @@ define([
         },
 
         showControls: function () {
-            this.$(".action-buttons").removeClass("hide");
+            var accessor = this.collection.GetAccessor();
+            if (accessor.AccessLevel === 1 || accessor.AccessLevel === 2) {
+                this.$(".action-buttons").removeClass("hide");
+            }
         },
 
         addAll: function () {
             this.collection.each(this.initAddOne, this);
             this.setupMasonry();
+            this.showControls();
         },
 
         initAddOne: function (album) {
             this.$("#no-albums").hide();
+            album.SetAccessor(this.collection.GetAccessor());
             var albumView = new PhotoAlbumView({ "model": album });
             var item = $(albumView.el);
             this.masonryContainer.append(item);
@@ -80,6 +85,7 @@ define([
 
         addOne: function (album) {
             this.$("#no-albums").hide();
+            album.SetAccessor(this.collection.GetAccessor());
             this.listenTo(album, "masonRemove", this.removeOne);
             var albumView = new PhotoAlbumView({ "model": album });
             var item = $(albumView.el);

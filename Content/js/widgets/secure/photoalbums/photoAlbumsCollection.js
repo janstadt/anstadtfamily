@@ -6,7 +6,13 @@ define(["../photoAlbum/photoAlbumModel"], function (PhotoAlbumModel) {
         url: function () {
             return "api/users/albums/" + this.Id
         },
-        model: PhotoAlbumModel
+        model: PhotoAlbumModel,
+        SetAccessor: function (model) {
+            this._parent = model;
+        },
+        GetAccessor: function (model) {
+            return this._parent;
+        },
     });
     return PhotoAlbumsCollection;
 });

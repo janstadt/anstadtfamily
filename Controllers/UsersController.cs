@@ -22,6 +22,7 @@ namespace photoshare.Controllers
         }
 
         [HttpGet]
+        [AjaxAuthorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var users = this.mUserService.GetUsers();
@@ -61,6 +62,10 @@ namespace photoshare.Controllers
             else
             {
                 Mapper.Map(this.mUserService.GetUser(id), model);
+                if ((user.AccessLevel == AccessLevel.Admin || user.AccessLevel == AccessLevel.AdminAndOwner) && user.Username != model.Username)
+                {
+                    model.AccessLevel = AccessLevel.CreateRights;
+                }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }

@@ -1,7 +1,7 @@
 define([], function () {
 
     var SessionModel = Backbone.Model.extend({
-        url: "/api/secure/session"
+        url: "/api/secure/current"
     });
     return SessionModel;
 });

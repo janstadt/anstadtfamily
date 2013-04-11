@@ -72,6 +72,7 @@ namespace photoshare.Repositories
             {
                 user user = Mapper.Map<user>(t);
                 this.mEntities.users.AddObject(user);
+                this.mEntities.SaveChanges();
             }
             return t;
         }

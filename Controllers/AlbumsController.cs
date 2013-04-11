@@ -182,7 +182,6 @@ namespace photoshare.Controllers
         }
 
         [HttpGet]
-        [AjaxAuthorize]
         public ActionResult Tags(TagModel model)
         {
             var user = this.mSessionService.GetSession();

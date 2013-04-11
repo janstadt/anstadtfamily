@@ -2,7 +2,7 @@
     <ul>
         <li class="section">
         <a href="javascript:void(0);" class="section-head"><%- i18n.Photos %></a>
-        <span class="action-buttons hide">
+        <span class="action-buttons <% if (accessor.AccessLevel !== 1 && accessor.AccessLevel !== 2) {%> hide<% } %>">
             <a class="options addphotos icon-plus-sign" href="#photosModal" data-toggle="modal" title="<%- i18n.AddPhotos %>"><%- i18n.AddPhotos %></a>
             <a class="options cancel icon-remove-circle" title="<%- i18n.Cancel %>"><%- i18n.Cancel %></a>
         </span>

@@ -99,6 +99,7 @@ define([
 
         _updateLinks: function () {
             var json = this.loginModel.toJSON();
+            json.Password = "";
             window.application.user = json;
             if (json.LoginStatus !== 1) {
                 this.loggedOut();
