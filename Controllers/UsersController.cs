@@ -61,7 +61,7 @@ namespace photoshare.Controllers
             }
             else
             {
-                Mapper.Map(this.mUserService.GetUser(id), model);
+                Mapper.Map(this.mUserService.GetUser(id, id), model);
                 if ((user.AccessLevel == AccessLevel.Admin || user.AccessLevel == AccessLevel.AdminAndOwner) && user.Username != model.Username)
                 {
                     model.AccessLevel = AccessLevel.CreateRights;
@@ -98,7 +98,7 @@ namespace photoshare.Controllers
                 this.HttpContext.Response.StatusCode = 401;
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
-            var albums = this.mUserService.GetAlbums(model);
+            var albums = this.mUserService.GetAlbums(model, user.Id.Value);
             return Json(albums.PhotoAlbums, JsonRequestBehavior.AllowGet);
         }
 

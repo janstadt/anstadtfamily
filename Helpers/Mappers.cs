@@ -82,6 +82,19 @@ namespace vdz.ca.Mappers
                     dest => dest.favoritealbums,
                     opt => opt.Ignore()
             ).ReverseMap();
+            Mapper.CreateMap<PhotoAlbumEntity, favoritealbum>().ForMember(
+                    dest => dest.photoalbum,
+                    opt => opt.Ignore()
+            ).ForMember(
+                    dest => dest.user,
+                    opt => opt.Ignore()
+            ).ForMember(
+                    dest => dest.Id,
+                    opt => opt.MapFrom(src => Guid.NewGuid())
+            ).ForMember(
+                    dest => dest.AlbumId,
+                    opt => opt.MapFrom(src => src.Id)
+            );
             Mapper.CreateMap<photoalbum, favoritealbum>().ForAllMembers(dest => dest.Ignore());
             Mapper.CreateMap<photoalbum, favoritealbum>().ForMember(
                 dest => dest.AlbumId,

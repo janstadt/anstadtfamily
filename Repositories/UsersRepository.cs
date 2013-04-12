@@ -50,6 +50,15 @@ namespace photoshare.Repositories
             //throw new NotImplementedException();
         }
 
+        public List<FavoriteAlbumModel> GetFavorites(Guid id)
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                var entities = this.mEntities.favoritealbums.Where(x => x.Owner == id).ToList();
+                return Mapper.Map<List<FavoriteAlbumModel>>(entities);
+            }
+        }
+
         /// <summary>
         /// Get user by Id
         /// </summary>
@@ -61,7 +70,7 @@ namespace photoshare.Repositories
             {
                 user user = this.mEntities.users.FirstOrDefault(x => x.Id == id);
                 UserEntity entity = Mapper.Map<UserEntity>(user);
-                entity.PhotoAlbums.ForEach(x => x.Favorite = user.favoritealbums.Any(y => y.AlbumId == x.Id));
+                //entity.PhotoAlbums.ForEach(x => x.Favorite = user.favoritealbums.Any(y => y.AlbumId == x.Id));
                 return entity;
             }
         }

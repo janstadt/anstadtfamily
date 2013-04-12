@@ -280,30 +280,20 @@ namespace photoshare.Services
         {
             var album = this.GetAlbum(id);
 
-            //if (album.Owner != userId)
-            //{
-            //    throw new HttpException(403, string.Format("User {0} is not owner of album {1}", userId, album.Id));
-            //}
-
             var entity = Mapper.Map<PhotoAlbumEntity>(album);
-            entity.Favorite = true;
+            entity.Owner = userId;
 
-            this.mAlbumRepository.Update(entity);
+            this.mAlbumRepository.Favorite(entity);
         }
 
         public void UnFavorite(Guid id, Guid userId)
         {
             var album = this.GetAlbum(id);
 
-            //if (album.Owner != userId)
-            //{
-            //    throw new HttpException(403, string.Format("User {0} is not owner of album {1}", userId, album.Id));
-            //}
-
             var entity = Mapper.Map<PhotoAlbumEntity>(album);
-            entity.Favorite = false;
+            entity.Owner = userId;
 
-            this.mAlbumRepository.Update(entity);
+            this.mAlbumRepository.UnFavorite(entity);
         }
 
         public List<BreadcrumbModel> Breadcrumbs(Guid id)

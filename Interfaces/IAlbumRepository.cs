@@ -8,6 +8,7 @@ namespace photoshare.Interfaces
 {
     public interface IAlbumRepository : IDalRepository<PhotoAlbumEntity>
     {
-        
+        void Favorite(PhotoAlbumEntity t);
+        void UnFavorite(PhotoAlbumEntity t);
     }
 }

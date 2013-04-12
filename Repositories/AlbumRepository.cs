@@ -93,5 +93,35 @@ namespace photoshare.Repositories
                 this.mEntities.SaveChanges();
             }
         }
+
+        public void Favorite(PhotoAlbumEntity t)
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                photoalbum current = this.mEntities.photoalbums.FirstOrDefault(x => x.Id == t.Id);
+
+                if (current != null)
+                {
+                    favoritealbum favoriteEntity = new favoritealbum();
+                    Mapper.Map(t, favoriteEntity);
+                    this.mEntities.favoritealbums.AddObject(favoriteEntity);
+                    this.mEntities.SaveChanges();
+                }
+            }
+        }
+
+        public void UnFavorite(PhotoAlbumEntity t)
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                favoritealbum current = this.mEntities.favoritealbums.FirstOrDefault(x => x.Owner == t.Owner && x.AlbumId == t.Id);
+
+                if (current != null)
+                {
+                    this.mEntities.favoritealbums.DeleteObject(current);
+                    this.mEntities.SaveChanges();
+                }
+            }
+        }
     }
 }

@@ -31,10 +31,12 @@ namespace photoshare.Services
             return userModels;
         }
 
-        public UserModel GetUser(Guid id)
+        public UserModel GetUser(Guid id, Guid loggedInUser)
         {
             var user = this.mUserRepository.Get(id);
             var userModel = Mapper.Map<UserModel>(user);
+            var favorites = this.mUserRepository.GetFavorites(loggedInUser);
+            userModel.PhotoAlbums.ForEach(x => x.Favorite = favorites.Any(y => y.AlbumId == x.Id));
             this.SetAccessLevel(userModel);
             userModel.Password = this.GetUserPassword(userModel.Username);
             return userModel;
@@ -154,7 +156,7 @@ namespace photoshare.Services
         public UserModelBase Update(UserModelBase model)
         {
             //Only allowed to update name and email so only pay attention to those fields.
-            var currentUser = this.GetUser(model.Id);
+            var currentUser = this.GetUser(model.Id, model.Id);
             currentUser.Email = model.Email;
             currentUser.Name = model.Name;
             currentUser.Phone = model.Phone;
@@ -188,9 +190,9 @@ namespace photoshare.Services
             return model;
         }
 
-        public UserPhotoAlbumsModel GetAlbums(UserModelBase model)
+        public UserPhotoAlbumsModel GetAlbums(UserModelBase model, Guid loggedInUser)
         {
-            var currentUser = this.GetUser(model.Id);
+            var currentUser = this.GetUser(model.Id, loggedInUser);
             var photoModel = Mapper.Map<UserPhotoAlbumsModel>(currentUser);
             this.SetAccessLevel(photoModel);
             return photoModel;
