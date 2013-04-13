@@ -35,12 +35,14 @@
                 <input name="Phone" type="text" value="<%- model.Phone %>" />
             </div>
         </li>
-        <li class="control-group access-level <% if(model.AccessLevel !== 1 && model.AccessLevel !== 2){%> hide <%} %>">
+        <li class="control-group access-level <% if(accessor.AccessLevel !== 1 && accessor.AccessLevel !== 2){%> hide <%} %>">
             <label class="control-label"><%- i18n.AccessLevelForm %></label><span id="access-level-span"><%if(model.IsNew){ %> <%- i18n.AccessLevel[3] %> <%} else { %> <%- i18n.AccessLevel[model.AccessLevel]  %><%} %></span>
             <div class="controls">
                 <select name="AccessLevel">
                     <option value="1" <%if(model.AccessLevel === 1){ %>selected="true"<%} %>><%-i18n.AccessLevel[1] %></option>
-                    <option value="2" <%if(model.AccessLevel === 2){ %>selected="true"<%} %>><%-i18n.AccessLevel[2] %></option>
+                    <% if(model.AccessLevel === 2 && !model.IsNew) {%>
+                        <option value="2" <%if(model.AccessLevel === 2){ %>selected="true"<%} %>><%-i18n.AccessLevel[2] %></option>
+                    <%} %>
                     <option value="3" <%if(model.AccessLevel === 3 || model.IsNew){ %>selected="true"<%} %>><%-i18n.AccessLevel[3] %></option>
                     <option value="4" <%if(model.AccessLevel === 4){ %>selected="true"<%} %>><%-i18n.AccessLevel[4] %></option>
                 </select>

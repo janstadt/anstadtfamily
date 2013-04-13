@@ -92,6 +92,15 @@ namespace photoshare.Services
         //    return photoModel;
         //}
 
+        public PhotoAlbumModel GetAlbumPhotos(Guid id, Guid userId)
+        {
+            PhotoAlbumEntity entity = this.mAlbumRepository.Get(id);
+            var favorites = this.mPhotoRepository.GetFavorites(id, userId);
+            entity.Photos.ForEach(x => x.Favorite = favorites.Any(y => y.PhotoId == x.Id));
+            PhotoAlbumModel model = Mapper.Map<PhotoAlbumModel>(entity);
+            return model;
+        }
+
         public PhotoAlbumModel GetAlbum(Guid id)
         {
             PhotoAlbumEntity entity = this.mAlbumRepository.Get(id);

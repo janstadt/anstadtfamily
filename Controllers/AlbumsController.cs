@@ -135,7 +135,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            var album = this.mAlbumService.GetAlbum(id);
+            var album = this.mAlbumService.GetAlbumPhotos(id, user.Id.Value);
 
             return Json(album.Photos, JsonRequestBehavior.AllowGet);
         }

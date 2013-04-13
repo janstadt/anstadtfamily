@@ -11,10 +11,11 @@ namespace vdz.ca.Mappers
         {
             Mapper.CreateMap<LoginModel, LoginHeaderModel>();
             Mapper.CreateMap<photo, PhotoModel>().ReverseMap();
-            Mapper.CreateMap<photo, PhotoEntity>().ForMember(
-                dest => dest.Favorite,
-                opt => opt.MapFrom(src => src.favoritephotos.Any(x => x.PhotoId == src.Id && x.Owner == src.Owner))
-            ).ForMember(
+            Mapper.CreateMap<photo, PhotoEntity>()//.ForMember(
+            //    dest => dest.Favorite,
+            //    opt => opt.MapFrom(src => src.favoritephotos.Any(x => x.PhotoId == src.Id && x.Owner == src.Owner))
+            //)
+            .ForMember(
                 dest => dest.Comments,
                 opt => opt.MapFrom(src => src.comments.Where(x => x.PhotoId == src.Id).ToList())
             ).ReverseMap().ForMember(
@@ -41,6 +42,19 @@ namespace vdz.ca.Mappers
                 opt => opt.MapFrom(src => src.Id == Guid.Empty ? Guid.NewGuid() : src.Id)
             );
             Mapper.CreateMap<comment, CommentModel>().ReverseMap();
+            Mapper.CreateMap<PhotoEntity, favoritephoto>().ForMember(
+                dest => dest.PhotoId,
+                opt => opt.MapFrom(src => src.Id)
+            ).ForMember(
+                dest => dest.user,
+                opt => opt.Ignore()
+            ).ForMember(
+                dest => dest.photo,
+                opt => opt.Ignore()
+            ).ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => Guid.NewGuid())
+            );
             Mapper.CreateMap<favoritealbum, FavoriteAlbumModel>().ReverseMap();
             Mapper.CreateMap<favoritephoto, FavoritePhotoModel>().ReverseMap();
             Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
@@ -108,6 +122,11 @@ namespace vdz.ca.Mappers
             ).AfterMap((src, dest) => {
                 dest.Id = dest.Id == Guid.Empty ? Guid.NewGuid() : dest.Id;
             });
+            Mapper.CreateMap<photo, FavoritePhotoEntity>().ForAllMembers(dest => dest.Ignore());
+            Mapper.CreateMap<photo, FavoritePhotoEntity>().ForMember(
+                dest => dest.PhotoId,
+                opt => opt.MapFrom(src => src.Id)
+            );
             Mapper.CreateMap<photo, favoritephoto>().ForAllMembers(dest => dest.Ignore());
             Mapper.CreateMap<photo, favoritephoto>().ForMember(
                 dest => dest.PhotoId,

@@ -20,6 +20,7 @@
         "Error": "Error updating info!",
         "AccessLevelLabel": "Access Level",
         "AccessLevel": {
+                0: "User/Owner",
                 1: "Administrator",
                 2: "Admin & Owner",
                 3: "Owner",

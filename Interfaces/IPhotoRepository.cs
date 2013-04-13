@@ -8,6 +8,9 @@ namespace photoshare.Interfaces
 {
     public interface IPhotoRepository : IDalRepository<PhotoEntity>
     {
+        List<FavoritePhotoEntity> GetFavorites(Guid albumId, Guid userId);
         bool FileNameExists(PhotoEntity entity);
+        void Favorite(PhotoEntity entity);
+        void UnFavorite(PhotoEntity entity);
     }
 }

@@ -73,30 +73,20 @@ namespace photoshare.Services
         {
             var photo = this.GetPhoto(id);
 
-            //if (photo.Owner != userId)
-            //{
-            //    throw new HttpException(403, string.Format("User {0} is not owner of photo {1}", userId, photo.Id));
-            //}
-
             var entity = Mapper.Map<PhotoEntity>(photo);
-            entity.Favorite = true;
+            entity.Owner = userId;
 
-            this.mPhotoRepository.Update(entity);
+            this.mPhotoRepository.Favorite(entity);
         }
 
         public void UnFavorite(Guid id, Guid userId)
         {
             var photo = this.GetPhoto(id);
 
-            //if (photo.Owner != userId)
-            //{
-            //    throw new HttpException(403, string.Format("User {0} is not owner of photo {1}", userId, photo.Id));
-            //}
-
             var entity = Mapper.Map<PhotoEntity>(photo);
-            entity.Favorite = false;
+            entity.Owner = userId;
 
-            this.mPhotoRepository.Update(entity);
+            this.mPhotoRepository.UnFavorite(entity);
         }
     }
 }

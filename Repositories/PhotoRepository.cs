@@ -85,6 +85,46 @@ namespace photoshare.Repositories
             }
         }
 
+        public List<FavoritePhotoEntity> GetFavorites(Guid albumId, Guid userId)
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                var favorites = this.mEntities.photos.Where(x => x.photoalbum.Id == albumId && x.favoritephotos.Any(y => y.Owner == userId));
+
+                return Mapper.Map<List<FavoritePhotoEntity>>(favorites);
+            }
+        }
+
+        public void Favorite(PhotoEntity t)
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                photo current = this.mEntities.photos.FirstOrDefault(x => x.Id == t.Id);
+
+                if (current != null)
+                {
+                    favoritephoto favoriteEntity = new favoritephoto();
+                    Mapper.Map(t, favoriteEntity);
+                    this.mEntities.favoritephotos.AddObject(favoriteEntity);
+                    this.mEntities.SaveChanges();
+                }
+            }
+        }
+
+        public void UnFavorite(PhotoEntity t)
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                favoritephoto current = this.mEntities.favoritephotos.FirstOrDefault(x => x.Owner == t.Owner && x.PhotoId == t.Id);
+
+                if (current != null)
+                {
+                    this.mEntities.favoritephotos.DeleteObject(current);
+                    this.mEntities.SaveChanges();
+                }
+            }
+        }
+
         public bool FileNameExists(PhotoEntity entity)
         {
             using (this.mEntities = new photoshareEntities())

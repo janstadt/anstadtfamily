@@ -9,6 +9,13 @@ namespace photoshare.Models
         public DateTime Date { get; set; }
     }
 
+    public class FavoritePhotoEntity
+    {
+        public Guid Id { get; set; }
+        public Guid PhotoId { get; set; }
+        public DateTime Date { get; set; }
+    }
+
     public class FavoriteAlbumModel
     {
         public Guid Id { get; set; }
