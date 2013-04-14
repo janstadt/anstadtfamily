@@ -191,6 +191,7 @@
     <Compile Include="Enums\AccessLevel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\BreadcrumbModel.cs" />
+    <Compile Include="Models\PortfolioModel.cs" />
     <Compile Include="Models\SlideshowModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\FavoriteModel.cs" />
@@ -406,6 +407,12 @@
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsTemplate.html" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsView.js" />
     <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
+    <Content Include="Content\js\widgets\portfolio\nls\portfolio.js" />
+    <Content Include="Content\js\widgets\portfolio\photoCollection.js" />
+    <Content Include="Content\js\widgets\portfolio\portfolioModel.js" />
+    <Content Include="Content\js\widgets\portfolio\photoTemplate.html" />
+    <Content Include="Content\js\widgets\portfolio\portfolioView.js" />
+    <Content Include="Content\js\widgets\portfolio\portfolioLandingTemplate.html" />
     <Content Include="Content\js\widgets\secure\users\userTemplate.html" />
     <Content Include="Content\js\widgets\secure\users\userListTemplate.html" />
     <Content Include="Content\js\widgets\secure\users\nls\users.js" />

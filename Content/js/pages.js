@@ -59,7 +59,12 @@ window.config = {
             name: 'portfolio',
             index: 1,
             template: "portfolioTemplate",
-            widgets: [],
+            widgets: [
+                {
+                    name: "portfolio",
+                    location: "#portfolioContainer"
+                }
+            ],
             hideCarousel: true
         },
         {

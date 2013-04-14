@@ -33,7 +33,34 @@ namespace photoshare.Repositories
                 return entity;
             }
         }
-        
+
+        public PortfolioModel GetPortfolio(PortfolioModel model)
+        {
+            var adminOwner = this.GetAdminOwner();
+            using (this.mEntities = new photoshareEntities())
+            {
+                string tagName = model.Id.ToLower();
+                string tagType = TagType.Albums.ToString();
+                var tagsForSearch = this.mEntities.tags.Where(x => x.Name == tagName && x.Type == tagType);
+                var favoriteAlbums = this.mEntities.photoalbums.Where(x => x.favoritealbums.Any(y => y.Owner == adminOwner.Id) && tagsForSearch.Any(z => z.ParentId == x.Id)).ToList();
+                var entities = Mapper.Map<List<PhotoAlbumEntity>>(favoriteAlbums);
+                entities.ForEach(x => x.Photos = Mapper.Map<List<PhotoEntity>>(this.mEntities.photos.Where(y => y.AlbumId == x.Id && y.favoritephotos.Any(z => z.Owner == adminOwner.Id)).ToList()));
+                model.Albums = Mapper.Map<List<PhotoAlbumModel>>(entities);
+            }
+
+            return model;
+        }
+
+        private UserEntity GetAdminOwner()
+        {
+            string[] admins = Roles.GetUsersInRole("Administrator");
+            string[] owners = Roles.GetUsersInRole("Owner");
+
+            var adminOwner = admins.Intersect(owners);
+            
+            return this.Get(adminOwner.ToList()[0]);
+        }
+
         public string[] GetRights(string userName)
         {
             string[] rights = Roles.GetRolesForUser(userName);

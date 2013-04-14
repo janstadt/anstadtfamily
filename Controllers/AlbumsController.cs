@@ -195,5 +195,12 @@ namespace photoshare.Controllers
             var tags = this.mTagService.GetTags(model);
             return Json(new { Available = tags }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult Portfolio(PortfolioModel model)
+        {
+            this.mAlbumService.GetPortfolio(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

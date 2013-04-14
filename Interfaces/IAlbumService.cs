@@ -19,5 +19,6 @@ namespace photoshare.Interfaces
         void Favorite(Guid id, Guid userId);
         void UnFavorite(Guid id, Guid userId);
         List<BreadcrumbModel> Breadcrumbs(Guid id);
+        PortfolioModel GetPortfolio(PortfolioModel model);
     }
 }

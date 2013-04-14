@@ -334,5 +334,13 @@ namespace photoshare.Services
 
             return crumbs;
         }
+        public PortfolioModel GetPortfolio(PortfolioModel model)
+        {
+            //Get owner and admin.
+            var adminOwner = this.mUserRepository.GetPortfolio(model);
+            //Get that their favorite albums and photos.
+            //model.Albums = adminOwner.PhotoAlbums.Where(x => x.Favorite && x.Tags.Any(y => y.Name.ToLowerInvariant() == model.Id.ToLowerInvariant())).ToList();
+            return adminOwner;
+        }
     }
 }
