@@ -104,6 +104,7 @@
           <Property Name="Caption" Type="text" />
           <Property Name="FileName" Type="text" Nullable="false" />
           <Property Name="AlbumId" Type="guid" Nullable="false" />
+          <Property Name="MainImage" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tags">
           <Key>
@@ -383,6 +384,7 @@
           <NavigationProperty Name="user" Relationship="photoshareModel.Owner" FromRole="photo" ToRole="user" />
           <NavigationProperty Name="favoritephotos" Relationship="photoshareModel.FavoritePhoto1" FromRole="photo" ToRole="favoritephoto" />
           <NavigationProperty Name="photoalbum" Relationship="photoshareModel.Album" FromRole="photo" ToRole="photoalbum" />
+          <Property Type="Boolean" Name="MainImage" Nullable="false" />
         </EntityType>
         <Association Name="PhotoComment">
           <End Type="photoshareModel.photo" Role="photo" Multiplicity="1" />
@@ -568,6 +570,7 @@
           <EntitySetMapping Name="photos">
             <EntityTypeMapping TypeName="photoshareModel.photo">
               <MappingFragment StoreEntitySet="photos">
+                <ScalarProperty Name="MainImage" ColumnName="MainImage" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="Caption" ColumnName="Caption" />

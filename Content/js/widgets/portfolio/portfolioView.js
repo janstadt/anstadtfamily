@@ -1,11 +1,13 @@
 define([
     "./portfolioModel",
     "text!./portfolioLandingTemplate.html",
-    "i18n!./nls/portfolio"
+    "i18n!./nls/portfolio",
+    "./portfolioItemView"
 ], function (
     portfolioModel,
     landingTemplate,
-    i18n) {
+    i18n,
+    portfolioItemView) {
     var PortfolioView = Backbone.View.extend({
         landingTemplate: _.template(landingTemplate),
         i18n: i18n,
@@ -15,7 +17,7 @@ define([
             this.model = new portfolioModel({ "Id": defaults.PageId });
             this.render();
             if (!this.model.isNew()) {
-                this.model.fetch({ success: _.bind(this.success, this), error: _.bind(this.error, this) });    
+                this.model.fetch({ success: _.bind(this.success, this), error: _.bind(this.error, this) });
             }
         },
         render: function () {
@@ -23,7 +25,12 @@ define([
             return this;
         },
         success: function (model, response) {
-            var asdf = "asdf";
+            var albums = model.get("Albums");
+            $(this.el).html("");
+            _.each(albums, _.bind(function (item) {
+                var view = new portfolioItemView({ "model": item });
+                $(this.el).append(view.el);
+            }, this));
         },
         error: function (model, response) {
             var asdf = "asdf";

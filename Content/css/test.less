@@ -603,13 +603,29 @@
 								overflow:hidden;
 								width:14px;
 								height:14px;
-								margin:3px 5px;
+								margin:5px 5px;
 								text-indent:9000px;
 							}
 						}
 						&:hover{
 							.features{
-								display:block;
+								display:inline-block;
+								//a.select-main.hide{
+								//	display:none;
+								//}
+							}
+							#favorite{
+								//icon-star.hide{
+								//	display:inline-block;
+								//}
+								//&.hide{
+								//	icon-star {
+								//		&.hide{
+								//			display:none;
+								//		}
+								//		display:inline-block;
+								//	}
+								//}
 							}
 						}
 						span.header {
@@ -633,7 +649,7 @@
 							}
 						}
 						a {
-							display:block;
+							display:inline-block;
 							&.album{
 								background-image: url("../img/glyphicons_011_camera.png");
 								background-repeat: no-repeat;
@@ -643,6 +659,9 @@
 							}
 							img.album { 
 								
+							}
+							&.hide{
+								display:none;
 							}
 						}
 					}

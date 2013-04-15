@@ -66,6 +66,13 @@ namespace photoshare.Repositories
                 photo current = this.mEntities.photos.FirstOrDefault(x => x.Id == t.Id);
                 this.mEntities.photos.Attach(current);
                 photo photo = Mapper.Map<photo>(t);
+
+                //Unselect all Main Images
+                if (t.MainImage)
+                {
+                    this.mEntities.photos.Where(x => x.AlbumId == t.AlbumId).Each(x => x.MainImage = false);
+                }
+
                 this.mEntities.photos.ApplyCurrentValues(photo);
 
                 if (t.Favorite)

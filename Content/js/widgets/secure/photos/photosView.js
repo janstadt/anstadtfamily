@@ -76,9 +76,14 @@ define([
             this.setupMasonry();
             photo.SetAccessor(this.collection.GetAccessor());
             this.listenTo(photo, "masonRemove", this.removeOne);
+            this.listenTo(photo, "mainUpdate", this.updateMain);
             var photoView = new PhotoItemView({"model": photo});
             var item = $(photoView.el);
             this.masonryContainer.append(item).masonry("appended", item);
+        },
+
+        updateMain: function (model) {
+            this.collection.UpdateMain(model);
         },
 
         removeOne: function (photo) {

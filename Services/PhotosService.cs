@@ -88,5 +88,11 @@ namespace photoshare.Services
 
             this.mPhotoRepository.UnFavorite(entity);
         }
+
+        public void UpdatePhoto(PhotoModel photo)
+        {
+            var entity = Mapper.Map<PhotoEntity>(photo);
+            this.mPhotoRepository.Update(entity);
+        }
     }
 }

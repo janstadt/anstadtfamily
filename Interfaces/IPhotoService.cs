@@ -14,5 +14,6 @@ namespace photoshare.Interfaces
         void DeletePhoto(Guid id, Guid userId);
         void Favorite(Guid id, Guid userId);
         void UnFavorite(Guid id, Guid userId);
+        void UpdatePhoto(PhotoModel photo);
     }
 }

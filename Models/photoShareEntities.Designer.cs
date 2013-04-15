@@ -934,7 +934,8 @@ namespace photoshare.Models
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="fileName">Initial value of the FileName property.</param>
         /// <param name="albumId">Initial value of the AlbumId property.</param>
-        public static photo Createphoto(global::System.Guid id, global::System.Guid owner, global::System.DateTime date, global::System.String fileName, global::System.Guid albumId)
+        /// <param name="mainImage">Initial value of the MainImage property.</param>
+        public static photo Createphoto(global::System.Guid id, global::System.Guid owner, global::System.DateTime date, global::System.String fileName, global::System.Guid albumId, global::System.Boolean mainImage)
         {
             photo photo = new photo();
             photo.Id = id;
@@ -942,6 +943,7 @@ namespace photoshare.Models
             photo.Date = date;
             photo.FileName = fileName;
             photo.AlbumId = albumId;
+            photo.MainImage = mainImage;
             return photo;
         }
 
@@ -1118,6 +1120,30 @@ namespace photoshare.Models
         private global::System.Guid _AlbumId;
         partial void OnAlbumIdChanging(global::System.Guid value);
         partial void OnAlbumIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean MainImage
+        {
+            get
+            {
+                return _MainImage;
+            }
+            set
+            {
+                OnMainImageChanging(value);
+                ReportPropertyChanging("MainImage");
+                _MainImage = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MainImage");
+                OnMainImageChanged();
+            }
+        }
+        private global::System.Boolean _MainImage;
+        partial void OnMainImageChanging(global::System.Boolean value);
+        partial void OnMainImageChanged();
 
         #endregion
     

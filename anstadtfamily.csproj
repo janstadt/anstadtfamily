@@ -407,10 +407,11 @@
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsTemplate.html" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsView.js" />
     <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
+    <Content Include="Content\js\widgets\portfolio\portfolioItemView.js" />
     <Content Include="Content\js\widgets\portfolio\nls\portfolio.js" />
     <Content Include="Content\js\widgets\portfolio\photoCollection.js" />
     <Content Include="Content\js\widgets\portfolio\portfolioModel.js" />
-    <Content Include="Content\js\widgets\portfolio\photoTemplate.html" />
+    <Content Include="Content\js\widgets\portfolio\portfolioItemTemplate.html" />
     <Content Include="Content\js\widgets\portfolio\portfolioView.js" />
     <Content Include="Content\js\widgets\portfolio\portfolioLandingTemplate.html" />
     <Content Include="Content\js\widgets\secure\users\userTemplate.html" />

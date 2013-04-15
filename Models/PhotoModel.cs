@@ -10,6 +10,7 @@ namespace photoshare.Models
         public string Title { get; set; }
         public string Caption { get; set; }
         public Guid Owner { get; set; }
+        public bool MainImage { get; set; }
         public string FileName { get; set; }
         public DateTime Date { get; set; }
         public List<CommentModel> Comments { get; set; }
@@ -26,6 +27,7 @@ namespace photoshare.Models
         public string Title { get; set; }
         public string Caption { get; set; }
         public Guid Owner { get; set; }
+        public bool MainImage { get; set; }
         public string FileName { get; set; }
         public DateTime Date { get; set; }
         public List<CommentModel> Comments { get; set; }

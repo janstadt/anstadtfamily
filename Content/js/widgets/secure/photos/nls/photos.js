@@ -13,6 +13,8 @@
         "Unfavorite": "Untag as Favorite",
         "ConfirmDelete": "Are you sure you want to delete <strong><%- FileName %></strong>?",
         "Error": "An error occurred.",
-        "Comments": "Comment's"
+        "Comments": "Comment's",
+        "MainImage": "Select as Main Image in Portfolio",
+        "UnMainImage": "Deselect as Main Image in Portfolio"
     }
 });

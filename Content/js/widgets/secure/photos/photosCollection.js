@@ -13,6 +13,13 @@ define(["../../photo/photoModel"], function (PhotosModel) {
         },
         GetAccessor: function () {
             return this._parent;
+        },
+        UpdateMain: function (model) {
+            this.forEach(function (item) {
+                if (item.get("Id") !== model.get("Id")) {
+                    item.set({ "MainImage": false });
+                }
+            });
         }
     });
     return PhotosCollection;

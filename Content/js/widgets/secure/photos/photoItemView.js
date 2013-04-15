@@ -16,18 +16,51 @@ define([
         initialize: function (options) {
             this.render();
             this.favoritesModel = new FavoritesModel({ "id": this.model.toJSON().Id, "type": "photos" });
+            this.listenTo(this.model, "change:MainImage", this.toggleMain);
         },
 
         events: {
             "click a#unfavoriteLink": "unFavoriteClick",
             "click a#favoriteLink": "favoriteClick",
             "click a#deleteLink": "deleteClick",
-            "click span.comments": "commentClick"
+            "click span.comments": "commentClick",
+            "click a#deselectMainImage": "deselectMainClick",
+            "click a#selectMainImage": "selectMainClick"
         },
 
         render: function () {
             $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n, "accessor": this.model.GetAccessor() }));
             return this;
+        },
+
+        selectMainClick: function (evt) {
+            evt.preventDefault();
+            this.model.save({ "MainImage": true }, { "success": _.bind(this.mainSuccess, this), "error": _.bind(this.mainError, this), "silent": true });
+        },
+
+        deselectMainClick: function (evt) {
+            evt.preventDefault();
+            this.model.save({ "MainImage": false }, { "success": _.bind(this.mainSuccess, this), "error": _.bind(this.mainError, this), "silent": true });
+        },
+
+        toggleMain: function () {
+            //            if (this.model.get("MainImage")) {
+            //                this.$("#deselectMainImage").removeClass("hide");
+            //                this.$("#selectMainImage").addClass("hide");
+            //            } else {
+            //                this.$("#deselectMainImage").addClass("hide");
+            //                this.$("#selectMainImage").removeClass("hide");
+            //            }
+            this.$el.html("");
+            this.render();
+        },
+
+        mainSuccess: function (model) {
+            this.toggleMain();
+            this.model.trigger("mainUpdate", model);
+        },
+
+        mainError: function (model) {
         },
 
         commentClick: function (evt) {
@@ -62,7 +95,9 @@ define([
         },
 
         favoritesSuccess: function () {
-            this.$("#favorite").toggleClass("hide");
+            var favorite = this.model.get("Favorite");
+            this.model.set({ "Favorite": !favorite });
+            this.toggleMain();
         }
     });
     return PhotoAblumView;

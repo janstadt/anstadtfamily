@@ -74,6 +74,23 @@ namespace photoshare.Controllers
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPut]
+        [AjaxAuthorize]
+        [ActionName("Photo")]
+        public ActionResult UpdatePhoto(PhotoModel photo)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+
+            this.mPhotoService.UpdatePhoto(photo);
+
+            return Json(photo, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpDelete]
         [AjaxAuthorize]
         [ActionName("Favorite")]
