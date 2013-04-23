@@ -10,10 +10,10 @@ namespace photoshare.Interfaces
     public interface IUserService
     {
         UserModel GetUser(string username);
-        UserModel GetUser(Guid id, Guid loggedInUser);
+        UserModel GetUser(string id, string loggedInUser);
         UserModelBase Update(UserModelBase model);
         UserModelBase Add(UserModelBase model);
-        UserPhotoAlbumsModel GetAlbums(UserModelBase model, Guid id);
+        UserPhotoAlbumsModel GetAlbums(UserModelBase model, string id);
         void SetAccessLevel(UserModelBase model);
         List<UserModel> GetUsers();
     }

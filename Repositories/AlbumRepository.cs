@@ -13,12 +13,12 @@ namespace photoshare.Repositories
     {
         private photoshareEntities mEntities;
         
-        public PhotoAlbumEntity Get(Guid id)
+        public PhotoAlbumEntity Get(string id)
         {
             PhotoAlbumEntity album = new PhotoAlbumEntity();
             using (this.mEntities = new photoshareEntities())
             {
-                var entity = this.mEntities.photoalbums.FirstOrDefault(x => x.Id == id);
+                var entity = this.mEntities.photoalbums.FirstOrDefault(x => x.Id == new Guid(id));
                 Mapper.Map(entity, album);
                 album.Favorite = entity.favoritealbums.Count > 0;
             }

@@ -1,6 +1,6 @@
 define([], function () {
     var PhotoAlbumModel = Backbone.Model.extend({
-        urlRoot: "api/albums/album",
+        urlRoot: "api/albums/photoalbum",
         idAttribute: "Id",
         validation: {
             Title: {

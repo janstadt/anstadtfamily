@@ -85,7 +85,7 @@ namespace photoshare.Services
 
         public List<TagModel> Categories()
         {
-            var all = this.mTagRepository.All().Where(x => x.IsCategory && x.Type == TagType.Albums.ToString()).ToList();
+            var all = this.mTagRepository.Categories();
             return Mapper.Map<List<TagModel>>(all);
         }
     }

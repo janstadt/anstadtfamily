@@ -31,7 +31,7 @@ namespace photoshare.Controllers
             model.Id = "1269aea1-2771-41e6-ac7d-f8e74a0418be";
             PhotoModel p = new PhotoModel()
             { 
-                Id = new Guid("1269aea1-2771-41e6-ac7d-f8e74a0418be"),
+                Id = "1269aea1-2771-41e6-ac7d-f8e74a0418be",
                 FileName = "slide-03.jpg",
                 Caption = "Suck it Trebeck"
             };
@@ -39,7 +39,7 @@ namespace photoshare.Controllers
 
             PhotoModel p1 = new PhotoModel()
             {
-                Id = new Guid("1269aea1-2771-41e6-ac7d-f8e74a0418be"),
+                Id = "1269aea1-2771-41e6-ac7d-f8e74a0418be",
                 FileName = "slide-02.jpg",
                 Caption = "Suck it Trebeck"
             };
@@ -48,7 +48,7 @@ namespace photoshare.Controllers
 
             PhotoModel p2 = new PhotoModel()
             {
-                Id = new Guid("1269aea1-2771-41e6-ac7d-f8e74a0418be"),
+                Id = "1269aea1-2771-41e6-ac7d-f8e74a0418be",
                 FileName = "slide-01.jpg",
                 Caption = "Suck it Trebeck"
             };
@@ -58,8 +58,17 @@ namespace photoshare.Controllers
         }
 
         [HttpGet]
-        [AjaxAuthorize]
         public ActionResult Album(PhotoAlbumBaseModel model)
+        {
+            var album = this.mAlbumService.GetPortoflioAlbum(model);
+            return Json(album, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //BACKEND ALBUM ENDPOINTS
+        [HttpGet]
+        [AjaxAuthorize]
+        public ActionResult PhotoAlbum(PhotoAlbumBaseModel model)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -75,8 +84,8 @@ namespace photoshare.Controllers
 
         [HttpDelete]
         [AjaxAuthorize]
-        [ActionName("Album")]
-        public ActionResult DeleteAlbum(PhotoAlbumBaseModel model)
+        [ActionName("PhotoAlbum")]
+        public ActionResult DeletePhotoAlbum(PhotoAlbumBaseModel model)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -85,14 +94,14 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mAlbumService.DeleteAlbum(model.Id, user.Id.Value);
+            this.mAlbumService.DeleteAlbum(model.Id, user.Id);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPut]
         [AjaxAuthorize]
-        [ActionName("Album")]
+        [ActionName("PhotoAlbum")]
         public ActionResult UpdateAlbum(PhotoAlbumBaseModel model)
         {
             var user = this.mSessionService.GetSession();
@@ -108,7 +117,7 @@ namespace photoshare.Controllers
         }
 
         [HttpPost]
-        [ActionName("Album")]
+        [ActionName("PhotoAlbum")]
         [AjaxAuthorize]
         public ActionResult CreateAlbum(PhotoAlbumModel model)
         {
@@ -123,10 +132,11 @@ namespace photoshare.Controllers
             
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        //BACKEND ALBUM ENDPOINTS
 
         [HttpGet]
         [AjaxAuthorize]
-        public ActionResult Photos(Guid id, int start = 0)
+        public ActionResult Photos(string id, int start = 0)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -135,14 +145,14 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            var album = this.mAlbumService.GetAlbumPhotos(id, user.Id.Value);
+            var album = this.mAlbumService.GetAlbumPhotos(id, user.Id);
 
             return Json(album.Photos, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPut]
         [AjaxAuthorize]
-        public ActionResult Favorite(Guid id)
+        public ActionResult Favorite(string id)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -151,7 +161,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mAlbumService.Favorite(id, user.Id.Value);
+            this.mAlbumService.Favorite(id, user.Id);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
@@ -159,7 +169,7 @@ namespace photoshare.Controllers
         [HttpDelete]
         [AjaxAuthorize]
         [ActionName("Favorite")]
-        public ActionResult UnFavorite(Guid id)
+        public ActionResult UnFavorite(string id)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -168,14 +178,14 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mAlbumService.UnFavorite(id, user.Id.Value);
+            this.mAlbumService.UnFavorite(id, user.Id);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         [AjaxAuthorize]
-        public ActionResult Breadcrumb(Guid id)
+        public ActionResult Breadcrumb(string id)
         {
             var crumbs = this.mAlbumService.Breadcrumbs(id);
             return Json(new { Id = id, Crumbs = crumbs }, JsonRequestBehavior.AllowGet);
@@ -199,8 +209,16 @@ namespace photoshare.Controllers
         [HttpGet]
         public ActionResult Portfolio(PortfolioModel model)
         {
-            this.mAlbumService.GetPortfolio(model);
-            return Json(model, JsonRequestBehavior.AllowGet);
+            if (!string.IsNullOrWhiteSpace(model.Id))
+            {
+                this.mAlbumService.GetPortfolio(model);
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var full = this.mAlbumService.GetFullPortfolio();
+                return Json(full, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

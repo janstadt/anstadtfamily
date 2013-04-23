@@ -5,6 +5,7 @@ using System.Web;
 using photoshare.Interfaces;
 using photoshare.Models;
 using AutoMapper;
+using photoshare.Models.Enums;
 
 namespace photoshare.Repositories
 {
@@ -20,6 +21,17 @@ namespace photoshare.Repositories
             }
         }
 
+        public List<TagEntity> Categories()
+        {
+            TagEntity entity = new TagEntity()
+            {
+                Type = TagType.Albums.ToString()
+            };
+
+            var all = this.All();
+            return all.Where(x => x.IsCategory && x.Type == TagType.Albums.ToString()).GroupBy(x => x.Name).Select(x => x.First()).OrderBy(x => x.Name).ToList();
+        }
+
         public IEnumerable<TagEntity> All(TagEntity entity)
         {
             IEnumerable<TagEntity> all = this.All();
@@ -32,12 +44,12 @@ namespace photoshare.Repositories
             return all;
         }
 
-        public TagEntity Get(Guid id)
+        public TagEntity Get(string id)
         {
             TagEntity tag = new TagEntity();
             using (this.mEntities = new photoshareEntities())
             {
-                var entity = this.mEntities.tags.FirstOrDefault(x => x.Id == id);
+                var entity = this.mEntities.tags.FirstOrDefault(x => x.Id == new Guid(id));
                 Mapper.Map(entity, tag);
             }
             return tag;

@@ -13,9 +13,10 @@ namespace photoshare.Repositories
     public class UsersRepository : IUsersRepository
     {
         private photoshareEntities mEntities;
-        public UsersRepository()
+        private ITagRepository mTagRepository;
+        public UsersRepository(ITagRepository tagRepository)
         {
-
+            this.mTagRepository = tagRepository;
         }
 
         /// <summary>
@@ -29,11 +30,11 @@ namespace photoshare.Repositories
             {
                 user user = this.mEntities.users.FirstOrDefault(x => x.Username == Username);
                 UserEntity entity = Mapper.Map<UserEntity>(user);
-                entity.PhotoAlbums.ForEach(x => x.Favorite = user.favoritealbums.Any(y => y.Id == x.Id));
+                entity.PhotoAlbums.ForEach(x => x.Favorite = user.favoritealbums.Any(y => y.Id == new Guid(x.Id)));
                 return entity;
             }
         }
-
+        
         public PortfolioModel GetPortfolio(PortfolioModel model)
         {
             var adminOwner = this.GetAdminOwner();
@@ -41,7 +42,7 @@ namespace photoshare.Repositories
             {
                 string tagName = model.Id.ToLower();
                 string tagType = TagType.Albums.ToString();
-                var tagsForSearch = this.mEntities.tags.Where(x => x.Name == tagName && x.Type == tagType);
+                var tagsForSearch = this.mEntities.tags.Where(x => x.Type == tagType && x.Name == tagName);
                 var favoriteAlbums = this.mEntities.photoalbums.Where(x => x.favoritealbums.Any(y => y.Owner == adminOwner.Id) && tagsForSearch.Any(z => z.ParentId == x.Id)).ToList();
                 var entities = Mapper.Map<List<PhotoAlbumEntity>>(favoriteAlbums);
                 entities.ForEach(x => x.Photos = Mapper.Map<List<PhotoEntity>>(this.mEntities.photos.Where(y => y.AlbumId == x.Id && y.favoritephotos.Any(z => z.Owner == adminOwner.Id)).ToList()));
@@ -77,12 +78,12 @@ namespace photoshare.Repositories
             //throw new NotImplementedException();
         }
 
-        public List<FavoriteAlbumModel> GetFavorites(Guid id)
+        public List<FavoriteAlbumEntity> GetFavorites(string id)
         {
             using (this.mEntities = new photoshareEntities())
             {
-                var entities = this.mEntities.favoritealbums.Where(x => x.Owner == id).ToList();
-                return Mapper.Map<List<FavoriteAlbumModel>>(entities);
+                var entities = this.mEntities.favoritealbums.Where(x => x.Owner == new Guid(id)).ToList();
+                return Mapper.Map<List<FavoriteAlbumEntity>>(entities);
             }
         }
 

@@ -49,11 +49,11 @@ namespace photoshare.Controllers
             }
             if (model.Owner == Guid.Empty)
             {
-                model.Owner = user.Id.Value;
+                model.Owner = new Guid(user.Id);
             }
             if (model.ParentId == Guid.Empty)
             {
-                model.ParentId = user.Id.Value;
+                model.ParentId = new Guid(user.Id);
             }
 
 

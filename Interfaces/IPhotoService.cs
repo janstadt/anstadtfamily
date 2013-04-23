@@ -10,10 +10,10 @@ namespace photoshare.Interfaces
 {
     public interface IPhotoService
     {
-        PhotoModel GetPhoto(Guid id);
-        void DeletePhoto(Guid id, Guid userId);
-        void Favorite(Guid id, Guid userId);
-        void UnFavorite(Guid id, Guid userId);
+        PhotoModel GetPhoto(string id);
+        void DeletePhoto(string id, string userId);
+        void Favorite(string id, string userId);
+        void UnFavorite(string id, string userId);
         void UpdatePhoto(PhotoModel photo);
     }
 }

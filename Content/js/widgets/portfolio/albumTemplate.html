@@ -1,0 +1,7 @@
+﻿<a class="item" href="#/portfolio/<%- albumId.toLowerCase() %>/album/<%- model.Clean %>">
+    <img class="img-polaroid" src="Albums/<%- model.Id %>/Small/<%- _.find(model.Photos, function (photo) { return photo.MainImage }).FileName %>" />
+    <span class="header">
+        <span class="title"><%- model.Title %></span>
+    </span>
+</a>
+

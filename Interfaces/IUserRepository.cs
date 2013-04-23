@@ -9,8 +9,8 @@ namespace photoshare.Interfaces
     public interface IUsersRepository : IDalRepository<UserEntity>
     {
         PortfolioModel GetPortfolio(PortfolioModel model);
-        List<FavoriteAlbumModel> GetFavorites(Guid id);
-        UserEntity Get(string Username);
+        List<FavoriteAlbumEntity> GetFavorites(string id);
+        UserEntity Get(Guid id);
         string[] GetRights(string userName);
     }
 }

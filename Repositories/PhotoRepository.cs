@@ -16,12 +16,12 @@ namespace photoshare.Repositories
             throw new NotImplementedException();
         }
 
-        public PhotoEntity Get(Guid id)
+        public PhotoEntity Get(string id)
         {
             PhotoEntity photo = new PhotoEntity();
             using (this.mEntities = new photoshareEntities())
             {
-                var entity = this.mEntities.photos.FirstOrDefault(x => x.Id == id);
+                var entity = this.mEntities.photos.FirstOrDefault(x => x.Id == new Guid(id));
                 Mapper.Map(entity, photo);
                 photo.Favorite = entity.favoritephotos.Count > 0;
             }
@@ -92,11 +92,11 @@ namespace photoshare.Repositories
             }
         }
 
-        public List<FavoritePhotoEntity> GetFavorites(Guid albumId, Guid userId)
+        public List<FavoritePhotoEntity> GetFavorites(string albumId, string userId)
         {
             using (this.mEntities = new photoshareEntities())
             {
-                var favorites = this.mEntities.photos.Where(x => x.photoalbum.Id == albumId && x.favoritephotos.Any(y => y.Owner == userId));
+                var favorites = this.mEntities.photos.Where(x => x.photoalbum.Id == new Guid(albumId) && x.favoritephotos.Any(y => y.Owner == new Guid(userId)));
 
                 return Mapper.Map<List<FavoritePhotoEntity>>(favorites);
             }
@@ -123,9 +123,13 @@ namespace photoshare.Repositories
             using (this.mEntities = new photoshareEntities())
             {
                 favoritephoto current = this.mEntities.favoritephotos.FirstOrDefault(x => x.Owner == t.Owner && x.PhotoId == t.Id);
-
+                photo p = this.mEntities.photos.FirstOrDefault(x => x.Id == current.PhotoId);
                 if (current != null)
                 {
+                    if (p.MainImage)
+                    {
+                        p.MainImage = false;
+                    }
                     this.mEntities.favoritephotos.DeleteObject(current);
                     this.mEntities.SaveChanges();
                 }

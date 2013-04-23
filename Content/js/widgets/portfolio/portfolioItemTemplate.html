@@ -1,12 +1,7 @@
-﻿<div class="featurette">
-    <div style="width:800px"><!--class="featurette-image pull-left"-->
-        <img class="featurette-image pull-right" src="/Albums/<%- model.Id %>/Large/<%- model.Photos[0].FileName %>" />
-    </div>
+﻿<div>
     <h2 class="featurette-heading">
-        <%- model.Title %><span class="muted">Muted text.</span>
+        <%- model.Id %>
     </h2>
-    <p class="lead">
-        <%- model.Description %>
-    </p>
+    <div class="photo-albums <%-model.Id %>"></div>
 </div>
 <hr class="featurette-divider" />

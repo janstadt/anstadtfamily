@@ -68,7 +68,7 @@ window.config = {
             hideCarousel: true
         },
         {
-            name: 'rates',
+            name: 'investment',
             index: 4,
             template: "ratesTemplate",
             widgets: [
@@ -149,6 +149,16 @@ window.config = {
             name: 'blog',
             template: "blogTemplate",
             widgets: []
+        },
+        {
+            name: 'album',
+            template: "albumTemplate",
+            widgets: [
+                {
+                    name: "album",
+                    location: "#albumContainer"
+                }
+            ]
         },
     //BACKEND PAGES
         {

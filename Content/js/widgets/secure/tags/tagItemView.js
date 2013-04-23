@@ -19,7 +19,7 @@ define([
         events: {
             "dblclick div": "edit",
             "click a.delete": "deleteItem",
-            "click a.save": "saveItem",
+            "click a.save-item": "saveItem",
             "click a.cancel": "cancel"
         },
 

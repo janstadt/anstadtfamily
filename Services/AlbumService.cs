@@ -92,7 +92,7 @@ namespace photoshare.Services
         //    return photoModel;
         //}
 
-        public PhotoAlbumModel GetAlbumPhotos(Guid id, Guid userId)
+        public PhotoAlbumModel GetAlbumPhotos(string id, string userId)
         {
             PhotoAlbumEntity entity = this.mAlbumRepository.Get(id);
             var favorites = this.mPhotoRepository.GetFavorites(id, userId);
@@ -101,7 +101,7 @@ namespace photoshare.Services
             return model;
         }
 
-        public PhotoAlbumModel GetAlbum(Guid id)
+        public PhotoAlbumModel GetAlbum(string id)
         {
             PhotoAlbumEntity entity = this.mAlbumRepository.Get(id);
             PhotoAlbumModel model = Mapper.Map<PhotoAlbumModel>(entity);
@@ -116,7 +116,7 @@ namespace photoshare.Services
             entity.Date = DateTime.UtcNow;
             this.mAlbumRepository.Add(entity);
             this.CreateDirectory(entity);
-            model.Id = entity.Id;
+            model.Id = entity.Id.ToString();
             this.AddTags(model);
             
             return Mapper.Map(entity, model);
@@ -128,7 +128,7 @@ namespace photoshare.Services
             for(int i = 0; i < tagEntities.Count; i++)
             {
                 tagEntities[i].Owner = model.Owner;
-                tagEntities[i].ParentId = model.Id;
+                tagEntities[i].ParentId = new Guid(model.Id);
                 tagEntities[i].Id = Guid.NewGuid();
                 tagEntities[i].Type = TagType.Albums.ToString();
                 tagEntities[i].Date = DateTime.UtcNow;
@@ -150,7 +150,7 @@ namespace photoshare.Services
             }
         }
 
-        private void RemoveDirectory(Guid id)
+        private void RemoveDirectory(string id)
         {
              var path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Albums/{0}", id)));
              if (Directory.Exists(path))
@@ -159,12 +159,12 @@ namespace photoshare.Services
              }
         }
 
-        public void DeleteAlbum(Guid id, Guid userId)
+        public void DeleteAlbum(string id, string userId)
         {
 
             var album = this.GetAlbum(id);
 
-            if (album.Owner != userId)
+            if (album.Owner != new Guid(userId))
             {
                 throw new HttpException(403, string.Format("User {0} is not owner of album {1}", userId, album.Id));
             }
@@ -198,7 +198,7 @@ namespace photoshare.Services
             //Copied Image and add watermark.
             ResizeSettings settings = new ResizeSettings();
             settings.Add("format", "jpg");
-            settings.Add("quality", "90");
+            settings.Add("quality", "95");
             settings.Add("carve", "true");
             settings.Add("scale", "down");
             settings.Add("mode", "carve");
@@ -285,27 +285,27 @@ namespace photoshare.Services
             return model;
         }
 
-        public void Favorite(Guid id, Guid userId)
+        public void Favorite(string id, string userId)
         {
             var album = this.GetAlbum(id);
 
             var entity = Mapper.Map<PhotoAlbumEntity>(album);
-            entity.Owner = userId;
+            entity.Owner = new Guid(userId);
 
             this.mAlbumRepository.Favorite(entity);
         }
 
-        public void UnFavorite(Guid id, Guid userId)
+        public void UnFavorite(string id, string userId)
         {
             var album = this.GetAlbum(id);
 
             var entity = Mapper.Map<PhotoAlbumEntity>(album);
-            entity.Owner = userId;
+            entity.Owner = new Guid(userId);
 
             this.mAlbumRepository.UnFavorite(entity);
         }
 
-        public List<BreadcrumbModel> Breadcrumbs(Guid id)
+        public List<BreadcrumbModel> Breadcrumbs(string id)
         {
             var album = this.GetAlbum(id);
 
@@ -328,12 +328,31 @@ namespace photoshare.Services
             BreadcrumbModel active = new BreadcrumbModel();
             active.Active = true;
             active.Text = album.Title;
-            active.Id = album.Id;
+            active.Id = new Guid(album.Id);
 
             crumbs.Add(active);
 
             return crumbs;
         }
+
+        public List<PortfolioModel> GetFullPortfolio()
+        {
+            var categories = this.mTagRepository.Categories();
+            List<PortfolioModel> model = new List<PortfolioModel>();
+            
+            for (int i = 0; i < categories.Count; i++)
+            {
+                var port = this.GetPortfolio((new PortfolioModel() { Id = categories[i].Name }));
+                if (port.Albums.Count > 0)
+                {
+                    port.Albums.ForEach(x => x.Photos = x.Photos.Where(y => y.MainImage).ToList());
+                    model.Add(port);
+                }
+            }
+
+            return model;
+        }
+
         public PortfolioModel GetPortfolio(PortfolioModel model)
         {
             //Get owner and admin.
@@ -341,6 +360,15 @@ namespace photoshare.Services
             //Get that their favorite albums and photos.
             //model.Albums = adminOwner.PhotoAlbums.Where(x => x.Favorite && x.Tags.Any(y => y.Name.ToLowerInvariant() == model.Id.ToLowerInvariant())).ToList();
             return adminOwner;
+        }
+
+        public PhotoAlbumModel GetPortoflioAlbum(PhotoAlbumBaseModel model)
+        {
+            var portfolio = this.GetPortfolio(new PortfolioModel() { Id = model.Type });
+            string cleanUrl = model.Id.Replace("-", " ").ToLowerInvariant();
+            var album = portfolio.Albums.FirstOrDefault(x => x.Title.ToLowerInvariant() == cleanUrl);
+            album.Description = album.Description.Replace("\r\n", "<br/>");
+            return album;
         }
     }
 }

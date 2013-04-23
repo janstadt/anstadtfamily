@@ -34,7 +34,7 @@ namespace photoshare.Services
 
         public List<TagModel> GetUniqeTags()
         {
-            return Mapper.Map<List<TagModel>>(this.mTagRepository.All().GroupBy(x => new {x.Name, x.IsCategory}).Select(x => x.First()).ToList());
+            return Mapper.Map<List<TagModel>>(this.mTagRepository.All().Where(x => x.IsCategory).GroupBy(x => new {x.Name, x.IsCategory}).Select(x => x.First()).OrderBy(x => x.Name).ToList());
         }
 
         public List<TagModel> GetTags(TagModel model)

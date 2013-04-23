@@ -10,5 +10,6 @@ namespace photoshare.Interfaces
     public interface ITagRepository : IDalRepository<TagEntity>
     {
         IEnumerable<TagEntity> All(TagEntity entity);
+        List<TagEntity> Categories();
     }
 }

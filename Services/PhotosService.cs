@@ -27,18 +27,18 @@ namespace photoshare.Services
             this.mPhotoRepository = photoRepository;
         }
 
-        public PhotoModel GetPhoto(Guid id)
+        public PhotoModel GetPhoto(string id)
         {
             PhotoEntity entity = this.mPhotoRepository.Get(id);
             return Mapper.Map<PhotoModel>(entity);
         }
 
-        public void DeletePhoto(Guid id, Guid userId)
+        public void DeletePhoto(string id, string userId)
         {
 
             var photo = this.GetPhoto(id);
 
-            if (photo.Owner != userId)
+            if (photo.Owner.ToString() != userId)
             {
                 throw new HttpException(403, string.Format("User {0} is not owner of photo {1}", userId, photo.Id));
             }
@@ -69,22 +69,22 @@ namespace photoshare.Services
             }
         }
 
-        public void Favorite(Guid id, Guid userId)
+        public void Favorite(string id, string userId)
         {
             var photo = this.GetPhoto(id);
 
             var entity = Mapper.Map<PhotoEntity>(photo);
-            entity.Owner = userId;
+            entity.Owner = new Guid(userId);
 
             this.mPhotoRepository.Favorite(entity);
         }
 
-        public void UnFavorite(Guid id, Guid userId)
+        public void UnFavorite(string id, string userId)
         {
             var photo = this.GetPhoto(id);
 
             var entity = Mapper.Map<PhotoEntity>(photo);
-            entity.Owner = userId;
+            entity.Owner = new Guid(userId);
 
             this.mPhotoRepository.UnFavorite(entity);
         }

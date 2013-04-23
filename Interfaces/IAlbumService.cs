@@ -10,15 +10,17 @@ namespace photoshare.Interfaces
 {
     public interface IAlbumService
     {
-        PhotoAlbumModel GetAlbum(Guid id);
-        PhotoAlbumModel GetAlbumPhotos(Guid id, Guid userId);
+        PhotoAlbumModel GetPortoflioAlbum(PhotoAlbumBaseModel model);
+        PhotoAlbumModel GetAlbum(string id);
+        PhotoAlbumModel GetAlbumPhotos(string id, string userId);
         PhotoAlbumModel CreateAlbum(PhotoAlbumModel model);
-        void DeleteAlbum(Guid id, Guid userId);
+        void DeleteAlbum(string id, string userId);
         PhotoAlbumBaseModel UpdateAlbum(PhotoAlbumBaseModel model);
         PhotoModel AddPhoto(PhotoModel model, HttpRequestBase request);
-        void Favorite(Guid id, Guid userId);
-        void UnFavorite(Guid id, Guid userId);
-        List<BreadcrumbModel> Breadcrumbs(Guid id);
+        void Favorite(string id, string userId);
+        void UnFavorite(string id, string userId);
+        List<BreadcrumbModel> Breadcrumbs(string id);
         PortfolioModel GetPortfolio(PortfolioModel model);
+        List<PortfolioModel> GetFullPortfolio();
     }
 }

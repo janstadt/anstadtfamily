@@ -50,7 +50,7 @@ namespace photoshare.Controllers
 
         [HttpGet]
         [ActionName("User")]
-        public ActionResult GetUser(Guid id)
+        public ActionResult GetUser(string id)
         {
             var user = this.mSessionService.GetSession();
             UserModelBase model = new UserModelBase();
@@ -98,7 +98,7 @@ namespace photoshare.Controllers
                 this.HttpContext.Response.StatusCode = 401;
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
-            var albums = this.mUserService.GetAlbums(model, user.Id.Value);
+            var albums = this.mUserService.GetAlbums(model, user.Id);
             return Json(albums.PhotoAlbums, JsonRequestBehavior.AllowGet);
         }
 

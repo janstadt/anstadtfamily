@@ -55,7 +55,7 @@ define([
             } else {
                 data.Unique = true;
             }
-            this.model.set(data);
+            this.model = new TagModel(data);
             this.model.save(data, { validate: true, success: _.bind(this.saveSuccess, this), error: _.bind(this.saveError, this) });
         },
 

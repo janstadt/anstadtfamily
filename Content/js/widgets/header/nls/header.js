@@ -1,7 +1,7 @@
 ﻿define({
     "root": {
         "About": "About",
-        "Rates": "Rates",
+        "Rates": "Investment",
         "Contact": "Contact",
         "Categories": "Categories",
         "Blog": "Blog",

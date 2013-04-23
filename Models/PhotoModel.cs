@@ -5,7 +5,7 @@ namespace photoshare.Models
 {
     public class PhotoModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public Guid AlbumId { get; set; }
         public string Title { get; set; }
         public string Caption { get; set; }

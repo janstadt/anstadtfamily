@@ -53,14 +53,14 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mPhotoService.DeletePhoto(model.Id, user.Id.Value);
+            this.mPhotoService.DeletePhoto(model.Id, user.Id);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPut]
         [AjaxAuthorize]
-        public ActionResult Favorite(Guid id)
+        public ActionResult Favorite(string id)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -69,7 +69,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mPhotoService.Favorite(id, user.Id.Value);
+            this.mPhotoService.Favorite(id, user.Id);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
@@ -94,7 +94,7 @@ namespace photoshare.Controllers
         [HttpDelete]
         [AjaxAuthorize]
         [ActionName("Favorite")]
-        public ActionResult UnFavorite(Guid id)
+        public ActionResult UnFavorite(string id)
         {
             var user = this.mSessionService.GetSession();
             if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
@@ -103,7 +103,7 @@ namespace photoshare.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
 
-            this.mPhotoService.UnFavorite(id, user.Id.Value);
+            this.mPhotoService.UnFavorite(id, user.Id);
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
