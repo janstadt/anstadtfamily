@@ -152,6 +152,7 @@ window.config = {
         },
         {
             name: 'album',
+            hideCarousel: true,
             template: "albumTemplate",
             widgets: [
                 {
