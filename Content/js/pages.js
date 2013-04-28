@@ -192,6 +192,15 @@ window.config = {
                                 },
                                 Selected: false,
                                 Url: "/admin/tags"
+                            },
+                            {
+                                Id: "slideshow",
+                                Label: "Slideshow",
+                                Widget: {
+                                    Path: "widgets/secure/slideshow/slideshowView"
+                                },
+                                Selected: false,
+                                Url: "/admin/slideshow"
                             }
                         ]
                     }

@@ -144,5 +144,12 @@ namespace photoshare.Repositories
             }
         }
 
+        public List<PhotoEntity> Slideshow()
+        {
+            using (this.mEntities = new photoshareEntities())
+            {
+                return Mapper.Map<List<PhotoEntity>>(this.mEntities.photos.Where(x => x.Slideshow).ToList());
+            }
+        }
     }
 }

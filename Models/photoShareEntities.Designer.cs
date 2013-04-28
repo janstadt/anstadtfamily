@@ -22,12 +22,12 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("photoshareModel", "PhotoComment", "photo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.photo), "comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.comment), true)]
 [assembly: EdmRelationshipAttribute("photoshareModel", "Owner", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.user), "photo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.photo), true)]
 [assembly: EdmRelationshipAttribute("photoshareModel", "FavoriatesOwner", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.user), "favoritealbum", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.favoritealbum), true)]
-[assembly: EdmRelationshipAttribute("photoshareModel", "FavoritesAlbum", "photoalbum", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.photoalbum), "favoritealbum", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.favoritealbum), true)]
 [assembly: EdmRelationshipAttribute("photoshareModel", "FavoritePhoto1", "photo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.photo), "favoritephoto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.favoritephoto), true)]
 [assembly: EdmRelationshipAttribute("photoshareModel", "FavoritePhotoOwner", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.user), "favoritephoto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.favoritephoto), true)]
+[assembly: EdmRelationshipAttribute("photoshareModel", "TagOwner", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.user), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.tag), true)]
+[assembly: EdmRelationshipAttribute("photoshareModel", "FavoritesAlbum", "photoalbum", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.photoalbum), "favoritealbum", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.favoritealbum), true)]
 [assembly: EdmRelationshipAttribute("photoshareModel", "Album", "photoalbum", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.photoalbum), "photo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.photo), true)]
 [assembly: EdmRelationshipAttribute("photoshareModel", "userAlbums", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.user), "photoalbum", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.photoalbum), true)]
-[assembly: EdmRelationshipAttribute("photoshareModel", "TagOwner", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(photoshare.Models.user), "tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(photoshare.Models.tag), true)]
 
 #endregion
 
@@ -162,22 +162,6 @@ namespace photoshare.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<photoalbum> photoalbums
-        {
-            get
-            {
-                if ((_photoalbums == null))
-                {
-                    _photoalbums = base.CreateObjectSet<photoalbum>("photoalbums");
-                }
-                return _photoalbums;
-            }
-        }
-        private ObjectSet<photoalbum> _photoalbums;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<tag> tags
         {
             get
@@ -190,6 +174,22 @@ namespace photoshare.Models
             }
         }
         private ObjectSet<tag> _tags;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<photoalbum> photoalbums
+        {
+            get
+            {
+                if ((_photoalbums == null))
+                {
+                    _photoalbums = base.CreateObjectSet<photoalbum>("photoalbums");
+                }
+                return _photoalbums;
+            }
+        }
+        private ObjectSet<photoalbum> _photoalbums;
 
         #endregion
         #region AddTo Methods
@@ -235,19 +235,19 @@ namespace photoshare.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the photoalbums EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTophotoalbums(photoalbum photoalbum)
-        {
-            base.AddObject("photoalbums", photoalbum);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the tags EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotags(tag tag)
         {
             base.AddObject("tags", tag);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the photoalbums EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTophotoalbums(photoalbum photoalbum)
+        {
+            base.AddObject("photoalbums", photoalbum);
         }
 
         #endregion
@@ -935,7 +935,8 @@ namespace photoshare.Models
         /// <param name="fileName">Initial value of the FileName property.</param>
         /// <param name="albumId">Initial value of the AlbumId property.</param>
         /// <param name="mainImage">Initial value of the MainImage property.</param>
-        public static photo Createphoto(global::System.Guid id, global::System.Guid owner, global::System.DateTime date, global::System.String fileName, global::System.Guid albumId, global::System.Boolean mainImage)
+        /// <param name="slideshow">Initial value of the Slideshow property.</param>
+        public static photo Createphoto(global::System.Guid id, global::System.Guid owner, global::System.DateTime date, global::System.String fileName, global::System.Guid albumId, global::System.Boolean mainImage, global::System.Boolean slideshow)
         {
             photo photo = new photo();
             photo.Id = id;
@@ -944,6 +945,7 @@ namespace photoshare.Models
             photo.FileName = fileName;
             photo.AlbumId = albumId;
             photo.MainImage = mainImage;
+            photo.Slideshow = slideshow;
             return photo;
         }
 
@@ -1144,6 +1146,30 @@ namespace photoshare.Models
         private global::System.Boolean _MainImage;
         partial void OnMainImageChanging(global::System.Boolean value);
         partial void OnMainImageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Slideshow
+        {
+            get
+            {
+                return _Slideshow;
+            }
+            set
+            {
+                OnSlideshowChanging(value);
+                ReportPropertyChanging("Slideshow");
+                _Slideshow = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Slideshow");
+                OnSlideshowChanged();
+            }
+        }
+        private global::System.Boolean _Slideshow;
+        partial void OnSlideshowChanging(global::System.Boolean value);
+        partial void OnSlideshowChanged();
 
         #endregion
     
@@ -1288,14 +1314,12 @@ namespace photoshare.Models
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="owner">Initial value of the Owner property.</param>
-        /// <param name="isSlideshow">Initial value of the IsSlideshow property.</param>
-        public static photoalbum Createphotoalbum(global::System.Guid id, global::System.String title, global::System.Guid owner, global::System.Boolean isSlideshow)
+        public static photoalbum Createphotoalbum(global::System.Guid id, global::System.String title, global::System.Guid owner)
         {
             photoalbum photoalbum = new photoalbum();
             photoalbum.Id = id;
             photoalbum.Title = title;
             photoalbum.Owner = owner;
-            photoalbum.IsSlideshow = isSlideshow;
             return photoalbum;
         }
 
@@ -1400,30 +1424,6 @@ namespace photoshare.Models
         private Nullable<global::System.DateTime> _Date;
         partial void OnDateChanging(Nullable<global::System.DateTime> value);
         partial void OnDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsSlideshow
-        {
-            get
-            {
-                return _IsSlideshow;
-            }
-            set
-            {
-                OnIsSlideshowChanging(value);
-                ReportPropertyChanging("IsSlideshow");
-                _IsSlideshow = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsSlideshow");
-                OnIsSlideshowChanged();
-            }
-        }
-        private global::System.Boolean _IsSlideshow;
-        partial void OnIsSlideshowChanging(global::System.Boolean value);
-        partial void OnIsSlideshowChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2141,28 +2141,6 @@ namespace photoshare.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("photoshareModel", "userAlbums", "photoalbum")]
-        public EntityCollection<photoalbum> photoalbums
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<photoalbum>("photoshareModel.userAlbums", "photoalbum");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<photoalbum>("photoshareModel.userAlbums", "photoalbum", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("photoshareModel", "TagOwner", "tag")]
         public EntityCollection<tag> tags
         {
@@ -2175,6 +2153,28 @@ namespace photoshare.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tag>("photoshareModel.TagOwner", "tag", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("photoshareModel", "userAlbums", "photoalbum")]
+        public EntityCollection<photoalbum> photoalbums
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<photoalbum>("photoshareModel.userAlbums", "photoalbum");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<photoalbum>("photoshareModel.userAlbums", "photoalbum", value);
                 }
             }
         }

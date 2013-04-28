@@ -12,5 +12,6 @@ namespace photoshare.Interfaces
         bool FileNameExists(PhotoEntity entity);
         void Favorite(PhotoEntity entity);
         void UnFavorite(PhotoEntity entity);
+        List<PhotoEntity> Slideshow();
     }
 }

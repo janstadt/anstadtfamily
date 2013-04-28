@@ -90,7 +90,6 @@
           <Property Name="Title" Type="text" Nullable="false" />
           <Property Name="Owner" Type="guid" Nullable="false" />
           <Property Name="Date" Type="datetime" />
-          <Property Name="IsSlideshow" Type="bit" Nullable="false" />
           <Property Name="Description" Type="text" />
         </EntityType>
         <EntityType Name="photos">
@@ -105,6 +104,7 @@
           <Property Name="FileName" Type="text" Nullable="false" />
           <Property Name="AlbumId" Type="guid" Nullable="false" />
           <Property Name="MainImage" Type="bit" Nullable="false" />
+          <Property Name="Slideshow" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tags">
           <Key>
@@ -294,13 +294,8 @@
           </AssociationSet>
           <EntitySet Name="favoritealbums" EntityType="photoshareModel.favoritealbum" />
           <EntitySet Name="favoritephotos" EntityType="photoshareModel.favoritephoto" />
-          <EntitySet Name="photoalbums" EntityType="photoshareModel.photoalbum" />
           <AssociationSet Name="FavoriatesOwner" Association="photoshareModel.FavoriatesOwner">
             <End Role="user" EntitySet="users" />
-            <End Role="favoritealbum" EntitySet="favoritealbums" />
-          </AssociationSet>
-          <AssociationSet Name="FavoritesAlbum" Association="photoshareModel.FavoritesAlbum">
-            <End Role="photoalbum" EntitySet="photoalbums" />
             <End Role="favoritealbum" EntitySet="favoritealbums" />
           </AssociationSet>
           <AssociationSet Name="FavoritePhoto1" Association="photoshareModel.FavoritePhoto1">
@@ -311,6 +306,16 @@
             <End Role="user" EntitySet="users" />
             <End Role="favoritephoto" EntitySet="favoritephotos" />
           </AssociationSet>
+          <EntitySet Name="tags" EntityType="photoshareModel.tag" />
+          <AssociationSet Name="TagOwner" Association="photoshareModel.TagOwner">
+            <End Role="user" EntitySet="users" />
+            <End Role="tag" EntitySet="tags" />
+          </AssociationSet>
+          <EntitySet Name="photoalbums" EntityType="photoshareModel.photoalbum" />
+          <AssociationSet Name="FavoritesAlbum" Association="photoshareModel.FavoritesAlbum">
+            <End Role="photoalbum" EntitySet="photoalbums" />
+            <End Role="favoritealbum" EntitySet="favoritealbums" />
+          </AssociationSet>
           <AssociationSet Name="Album" Association="photoshareModel.Album">
             <End Role="photoalbum" EntitySet="photoalbums" />
             <End Role="photo" EntitySet="photos" />
@@ -318,11 +323,6 @@
           <AssociationSet Name="userAlbums" Association="photoshareModel.userAlbums">
             <End Role="user" EntitySet="users" />
             <End Role="photoalbum" EntitySet="photoalbums" />
-          </AssociationSet>
-          <EntitySet Name="tags" EntityType="photoshareModel.tag" />
-          <AssociationSet Name="TagOwner" Association="photoshareModel.TagOwner">
-            <End Role="user" EntitySet="users" />
-            <End Role="tag" EntitySet="tags" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="comment">
@@ -353,9 +353,9 @@
           <NavigationProperty Name="photos" Relationship="photoshareModel.Owner" FromRole="user" ToRole="photo" />
           <NavigationProperty Name="favoritealbums" Relationship="photoshareModel.FavoriatesOwner" FromRole="user" ToRole="favoritealbum" />
           <NavigationProperty Name="favoritephotos" Relationship="photoshareModel.FavoritePhotoOwner" FromRole="user" ToRole="favoritephoto" />
-          <NavigationProperty Name="photoalbums" Relationship="photoshareModel.userAlbums" FromRole="user" ToRole="photoalbum" />
           <NavigationProperty Name="tags" Relationship="photoshareModel.TagOwner" FromRole="user" ToRole="tag" />
           <Property Type="String" Name="Phone" />
+          <NavigationProperty Name="photoalbums" Relationship="photoshareModel.userAlbums" FromRole="user" ToRole="photoalbum" />
         </EntityType>
         <Association Name="CommentsOwner">
           <End Role="users" Type="photoshareModel.user" Multiplicity="1" />
@@ -383,8 +383,9 @@
           <NavigationProperty Name="comments" Relationship="photoshareModel.PhotoComment" FromRole="photo" ToRole="comment" />
           <NavigationProperty Name="user" Relationship="photoshareModel.Owner" FromRole="photo" ToRole="user" />
           <NavigationProperty Name="favoritephotos" Relationship="photoshareModel.FavoritePhoto1" FromRole="photo" ToRole="favoritephoto" />
-          <NavigationProperty Name="photoalbum" Relationship="photoshareModel.Album" FromRole="photo" ToRole="photoalbum" />
           <Property Type="Boolean" Name="MainImage" Nullable="false" />
+          <Property Type="Boolean" Name="Slideshow" Nullable="false" />
+          <NavigationProperty Name="photoalbum" Relationship="photoshareModel.Album" FromRole="photo" ToRole="photoalbum" />
         </EntityType>
         <Association Name="PhotoComment">
           <End Type="photoshareModel.photo" Role="photo" Multiplicity="1" />
@@ -432,20 +433,6 @@
           <NavigationProperty Name="photo" Relationship="photoshareModel.FavoritePhoto1" FromRole="favoritephoto" ToRole="photo" />
           <NavigationProperty Name="user" Relationship="photoshareModel.FavoritePhotoOwner" FromRole="favoritephoto" ToRole="user" />
         </EntityType>
-        <EntityType Name="photoalbum">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="Guid" Name="Owner" Nullable="false" />
-          <Property Type="DateTime" Name="Date" />
-          <Property Type="Boolean" Name="IsSlideshow" Nullable="false" />
-          <Property Type="String" Name="Description" />
-          <NavigationProperty Name="favoritealbums" Relationship="photoshareModel.FavoritesAlbum" FromRole="photoalbum" ToRole="favoritealbum" />
-          <NavigationProperty Name="photos" Relationship="photoshareModel.Album" FromRole="photoalbum" ToRole="photo" />
-          <NavigationProperty Name="user" Relationship="photoshareModel.userAlbums" FromRole="photoalbum" ToRole="user" />
-        </EntityType>
         <Association Name="FavoriatesOwner">
           <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
           <End Type="photoshareModel.favoritealbum" Role="favoritealbum" Multiplicity="*" />
@@ -455,18 +442,6 @@
             </Principal>
             <Dependent Role="favoritealbum">
               <PropertyRef Name="Owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FavoritesAlbum">
-          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="1" />
-          <End Type="photoshareModel.favoritealbum" Role="favoritealbum" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="photoalbum">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="favoritealbum">
-              <PropertyRef Name="AlbumId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -494,30 +469,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Album">
-          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="1" />
-          <End Type="photoshareModel.photo" Role="photo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="photoalbum">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="photo">
-              <PropertyRef Name="AlbumId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="userAlbums">
-          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
-          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="photoalbum">
-              <PropertyRef Name="Owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tag">
           <Key>
             <PropertyRef Name="Id" />
@@ -539,6 +490,55 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="tag">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="photoalbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="Guid" Name="Owner" Nullable="false" />
+          <Property Type="DateTime" Name="Date" />
+          <Property Type="String" Name="Description" />
+          <NavigationProperty Name="favoritealbums" Relationship="photoshareModel.FavoritesAlbum" FromRole="photoalbum" ToRole="favoritealbum" />
+          <NavigationProperty Name="photos" Relationship="photoshareModel.Album" FromRole="photoalbum" ToRole="photo" />
+          <NavigationProperty Name="user" Relationship="photoshareModel.userAlbums" FromRole="photoalbum" ToRole="user" />
+        </EntityType>
+        <Association Name="FavoritesAlbum">
+          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="1" />
+          <End Type="photoshareModel.favoritealbum" Role="favoritealbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photoalbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="favoritealbum">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Album">
+          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="1" />
+          <End Type="photoshareModel.photo" Role="photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="photoalbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photo">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userAlbums">
+          <End Type="photoshareModel.user" Role="user" Multiplicity="1" />
+          <End Type="photoshareModel.photoalbum" Role="photoalbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="photoalbum">
               <PropertyRef Name="Owner" />
             </Dependent>
           </ReferentialConstraint>
@@ -570,6 +570,7 @@
           <EntitySetMapping Name="photos">
             <EntityTypeMapping TypeName="photoshareModel.photo">
               <MappingFragment StoreEntitySet="photos">
+                <ScalarProperty Name="Slideshow" ColumnName="Slideshow" />
                 <ScalarProperty Name="MainImage" ColumnName="MainImage" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
@@ -601,18 +602,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="photoalbums">
-            <EntityTypeMapping TypeName="photoshareModel.photoalbum">
-              <MappingFragment StoreEntitySet="photoalbums">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IsSlideshow" ColumnName="IsSlideshow" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tags">
             <EntityTypeMapping TypeName="photoshareModel.tag">
               <MappingFragment StoreEntitySet="tags">
@@ -622,6 +611,17 @@
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="photoalbums">
+            <EntityTypeMapping TypeName="photoshareModel.photoalbum">
+              <MappingFragment StoreEntitySet="photoalbums">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -650,67 +650,66 @@
         <EntityTypeShape EntityType="photoshareModel.comment" Width="1.5" PointX="5.25" PointY="10.25" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="photoshareModel.user" Width="1.5" PointX="0.75" PointY="5.375" Height="3.5186979166666674" IsExpanded="true" />
         <AssociationConnector Association="photoshareModel.CommentsOwner" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="9.0859993489583335" />
-          <ConnectorPoint PointX="1.5" PointY="12.088440755208335" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="12.088440755208335" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="12.088440755208335" />
-          <ConnectorPoint PointX="5.25" PointY="12.088440755208335" />
+          <ConnectorPoint PointX="1.264649296875" PointY="9.27830078125" />
+          <ConnectorPoint PointX="1.264649296875" PointY="11.862491186523439" />
+          <ConnectorPoint PointX="1.7052438151041669" PointY="11.862491186523439" />
+          <ConnectorPoint PointX="1.8719104817708334" PointY="11.862491186523439" />
+          <ConnectorPoint PointX="5.25" PointY="11.862491186523439" />
         </AssociationConnector>
         <EntityTypeShape EntityType="photoshareModel.photo" Width="1.5" PointX="3" PointY="2" Height="3.3263964843749996" />
         <AssociationConnector Association="photoshareModel.PhotoComment" >
-          <ConnectorPoint PointX="4.5" PointY="5.1340950520833317" />
-          <ConnectorPoint PointX="4.875" PointY="5.5090950520833317" />
-          <ConnectorPoint PointX="4.875" PointY="11.137968377604167" />
-          <ConnectorPoint PointX="5.25" PointY="11.137968377604167" />
+          <ConnectorPoint PointX="4.5" PointY="5.5186979166666656" />
+          <ConnectorPoint PointX="4.875" PointY="5.8936979166666656" />
+          <ConnectorPoint PointX="4.875" PointY="11.024993593261719" />
+          <ConnectorPoint PointX="5.25" PointY="11.024993593261719" />
         </AssociationConnector>
         <AssociationConnector Association="photoshareModel.Owner" >
           <ConnectorPoint PointX="1.5" PointY="5.375" />
-          <ConnectorPoint PointX="1.5" PointY="3.5670475260416659" />
-          <ConnectorPoint PointX="3" PointY="3.5670475260416659" />
+          <ConnectorPoint PointX="1.5" PointY="3.6874995" />
+          <ConnectorPoint PointX="3" PointY="3.6874995" />
         </AssociationConnector>
         <EntityTypeShape EntityType="photoshareModel.favoritealbum" Width="1.5" PointX="8.25" PointY="6.375" Height="2.1725878906249996" />
         <EntityTypeShape EntityType="photoshareModel.favoritephoto" Width="1.5" PointX="5.25" PointY="4.5" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="photoshareModel.photoalbum" Width="1.5" PointX="3" PointY="8.75" Height="2.7494921875000031" />
         <AssociationConnector Association="photoshareModel.FavoriatesOwner" >
-          <ConnectorPoint PointX="2.25" PointY="7.41311004638672" />
-          <ConnectorPoint PointX="3.2291666666666665" PointY="7.413110046386719" />
-          <ConnectorPoint PointX="3.3958333333333335" PointY="7.41311004638672" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="7.413110046386719" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="7.41311004638672" />
-          <ConnectorPoint PointX="8.25" PointY="7.41311004638672" />
-        </AssociationConnector>
-        <AssociationConnector Association="photoshareModel.FavoritesAlbum" >
-          <ConnectorPoint PointX="3.75" PointY="8.75" />
-          <ConnectorPoint PointX="3.75" PointY="8.12944091796875" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="8.12944091796875" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="8.12944091796875" />
-          <ConnectorPoint PointX="8.25" PointY="8.12944091796875" />
+          <ConnectorPoint PointX="2.25" PointY="6.8362939453125016" />
+          <ConnectorPoint PointX="3.6354141666666666" PointY="6.8362939453125007" />
+          <ConnectorPoint PointX="3.8020808333333336" PointY="6.8362939453125016" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="6.8362939453125007" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="6.8362939453125016" />
+          <ConnectorPoint PointX="8.25" PointY="6.8362939453125016" />
         </AssociationConnector>
         <AssociationConnector Association="photoshareModel.FavoritePhoto1" >
-          <ConnectorPoint PointX="4.5" PointY="4.881945742187499" />
-          <ConnectorPoint PointX="5.25" PointY="4.881945742187499" />
+          <ConnectorPoint PointX="4.5" PointY="4.978096458333332" />
+          <ConnectorPoint PointX="5.25" PointY="4.978096458333332" />
         </AssociationConnector>
         <AssociationConnector Association="photoshareModel.FavoritePhotoOwner" >
-          <ConnectorPoint PointX="2.25" PointY="6.0237939453125016" />
-          <ConnectorPoint PointX="3.2291666666666665" PointY="6.0237939453125007" />
-          <ConnectorPoint PointX="3.3958333333333335" PointY="6.0237939453125016" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="6.0237939453125007" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="6.0237939453125016" />
-          <ConnectorPoint PointX="5.25" PointY="6.0237939453125016" />
-        </AssociationConnector>
-        <AssociationConnector Association="photoshareModel.Album" >
-          <ConnectorPoint PointX="3.3125" PointY="8.75" />
-          <ConnectorPoint PointX="3.3125" PointY="5.1340950520833317" />
-        </AssociationConnector>
-        <AssociationConnector Association="photoshareModel.userAlbums" >
-          <ConnectorPoint PointX="2.25" PointY="8.9179996744791659" />
-          <ConnectorPoint PointX="3" PointY="8.9179996744791659" />
+          <ConnectorPoint PointX="2.25" PointY="6.1268929036458344" />
+          <ConnectorPoint PointX="3.6354141666666666" PointY="6.1268929036458335" />
+          <ConnectorPoint PointX="3.8020808333333336" PointY="6.1268929036458344" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="6.1268929036458335" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="6.1268929036458344" />
+          <ConnectorPoint PointX="5.25" PointY="6.1268929036458344" />
         </AssociationConnector>
         <EntityTypeShape EntityType="photoshareModel.tag" Width="1.5" PointX="3" PointY="13" Height="2.5571907552083317" />
         <AssociationConnector Association="photoshareModel.TagOwner" >
-          <ConnectorPoint PointX="1.9062525" PointY="9.0859993489583335" />
-          <ConnectorPoint PointX="1.9062525" PointY="14.278595377604166" />
+          <ConnectorPoint PointX="1.7885771484375002" PointY="9.27830078125" />
+          <ConnectorPoint PointX="1.7885771484375002" PointY="14.278595377604166" />
           <ConnectorPoint PointX="3" PointY="14.278595377604166" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="photoshareModel.photoalbum" Width="1.5" PointX="3" PointY="7" Height="2.5571907552083317" />
+        <AssociationConnector Association="photoshareModel.FavoritesAlbum" >
+          <ConnectorPoint PointX="4.5" PointY="7.7737939453125" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="7.7737939453124989" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="7.7737939453125" />
+          <ConnectorPoint PointX="8.25" PointY="7.7737939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.Album" >
+          <ConnectorPoint PointX="3.7187475" PointY="7" />
+          <ConnectorPoint PointX="3.7187475" PointY="5.5186979166666656" />
+        </AssociationConnector>
+        <AssociationConnector Association="photoshareModel.userAlbums" >
+          <ConnectorPoint PointX="2.25" PointY="8.139150390625" />
+          <ConnectorPoint PointX="3" PointY="8.139150390625" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

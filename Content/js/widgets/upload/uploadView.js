@@ -21,6 +21,7 @@ define([
         content: null,
         initialize: function (defaults) {
             this.render();
+            this.hideWatermark();
         },
 
         render: function () {
@@ -28,16 +29,25 @@ define([
             return this;
         },
 
+        hideWatermark: function () {
+            if (this.model.get("HideWatermark")) {
+                this.$("#watermark-label").hide();
+            }
+        },
+
         initFileUpload: function () {
+            'use strict';
             var fileUpload = $(this.el).find("#fileupload"),
             self = this;
-            fileUpload.fileupload({
-                url: this.model.get("Url"),
+            fileUpload.fileupload({ url: this.model.get("Url") });
+            fileUpload.fileupload('option', {
                 dropZone: $(this.el),
+                url: this.model.get("Url"),
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
                 formData: _.bind(function () {
                     var watermark = this.$("#watermark").is(":checked"),
                         data = this.model.get("Data") || [];
-                    data.push({ name: "Watermark", value: watermark});
+                    data.push({ name: "Watermark", value: watermark });
                     return data;
                 }, this),
                 process: [

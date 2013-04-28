@@ -15,5 +15,8 @@ namespace photoshare.Interfaces
         void Favorite(string id, string userId);
         void UnFavorite(string id, string userId);
         void UpdatePhoto(PhotoModel photo);
+        PhotoModel AddSlideshowPhoto(PhotoModel photo, HttpRequestBase request);
+        void RemoveSlideshowPhoto(PhotoModel photo);
+        List<PhotoModel> SlideshowPhotos();
     }
 }

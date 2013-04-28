@@ -18,10 +18,12 @@ namespace photoshare.Models
         public bool Watermark { get; set; }
         public bool FileExists { get; set; }
         public bool Favorite { get; set; }
+        public bool Slideshow { get; set; }
     }
 
     public class PhotoEntity
     {
+        public bool Slideshow { get; set; }
         public Guid Id { get; set; }
         public Guid AlbumId { get; set; }
         public string Title { get; set; }

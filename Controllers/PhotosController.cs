@@ -123,5 +123,45 @@ namespace photoshare.Controllers
             var tags = this.mTagService.GetTags(model);
             return Json(new { Available = tags }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult Slideshow()
+        {
+            var model = this.mPhotoService.SlideshowPhotos();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpDelete]
+        [AjaxAuthorize]
+        [ActionName("Slideshow")]
+        public ActionResult DeleteSlideshow(PhotoModel model)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+
+            this.mPhotoService.RemoveSlideshowPhoto(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [AjaxAuthorize]
+        [ActionName("Slideshow")]
+        public ActionResult AddSlideshow(PhotoModel model)
+        {
+            var user = this.mSessionService.GetSession();
+            if (user.LoginStatus != Models.Enums.LoginStatus.LoggedIn || user.AccessLevel == Models.Enums.AccessLevel.NoAccess)
+            {
+                this.HttpContext.Response.StatusCode = 401;
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+            model.Owner = new Guid(user.Id);
+            model.AlbumId = new Guid(user.Id);
+            this.mPhotoService.AddSlideshowPhoto(model, this.HttpContext.Request);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

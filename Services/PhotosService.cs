@@ -94,5 +94,53 @@ namespace photoshare.Services
             var entity = Mapper.Map<PhotoEntity>(photo);
             this.mPhotoRepository.Update(entity);
         }
+
+        public PhotoModel AddSlideshowPhoto(PhotoModel photo, HttpRequestBase request)
+        {
+            var entity = Mapper.Map<PhotoEntity>(photo);
+            entity.Slideshow = true;
+            this.SaveSlideshowImage(photo, request);
+            var result = this.mPhotoRepository.Add(entity);
+            Mapper.Map(result, photo);
+            //add photo to slideshow folder.
+            return photo;
+        }
+
+        private string InitSlideshowDirectory()
+        {
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Content/img/slideshow")));
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
+        }
+
+        private void SaveSlideshowImage(PhotoModel photo, HttpRequestBase request)
+        {
+            var file = request.Files[0];
+            string filename = file.FileName;
+            photo.FileName = filename;
+            string path = this.InitSlideshowDirectory();
+            path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("{0}\\{1}", path, filename)));
+            file.SaveAs(path);
+        }
+
+        public void RemoveSlideshowPhoto(PhotoModel photo)
+        {
+            var entity = Mapper.Map<PhotoEntity>(photo);
+            var path = this.InitSlideshowDirectory();
+            path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("{0}\\{1}", path, entity.FileName)));
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            this.mPhotoRepository.Delete(entity);
+        }
+
+        public List<PhotoModel> SlideshowPhotos()
+        {
+            return Mapper.Map<List<PhotoModel>>(this.mPhotoRepository.Slideshow());
+        }
     }
 }

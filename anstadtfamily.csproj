@@ -414,6 +414,7 @@
     <Content Include="Content\js\widgets\album\albumView.js" />
     <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
     <Content Include="Content\js\widgets\portfolio\albumTemplate.html" />
+    <Content Include="Content\js\widgets\album\photoTemplate.html" />
     <Content Include="Content\js\widgets\portfolio\portfolioCollection.js" />
     <Content Include="Content\js\widgets\portfolio\portfolioItemView.js" />
     <Content Include="Content\js\widgets\portfolio\nls\portfolio.js" />
@@ -422,6 +423,13 @@
     <Content Include="Content\js\widgets\portfolio\portfolioItemTemplate.html" />
     <Content Include="Content\js\widgets\portfolio\portfolioView.js" />
     <Content Include="Content\js\widgets\portfolio\portfolioTemplate.html" />
+    <Content Include="Content\js\widgets\secure\slideshow\nls\slideshow.js" />
+    <Content Include="Content\js\widgets\secure\slideshow\slideshowCollection.js" />
+    <Content Include="Content\js\widgets\secure\slideshow\slideshowListTemplate.html" />
+    <Content Include="Content\js\widgets\secure\slideshow\slideshowTemplate.html" />
+    <Content Include="Content\js\widgets\secure\slideshow\slideshowItemView.js" />
+    <Content Include="Content\js\widgets\secure\slideshow\slideshowView.js" />
+    <Content Include="Content\js\widgets\secure\slideshow\slideshowModel.js" />
     <Content Include="Content\js\widgets\secure\users\userTemplate.html" />
     <Content Include="Content\js\widgets\secure\users\userListTemplate.html" />
     <Content Include="Content\js\widgets\secure\users\nls\users.js" />
@@ -597,7 +605,9 @@
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
     <Content Include="Views\Shared\_CarouselLayout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\img\slideshow\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

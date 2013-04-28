@@ -30,8 +30,11 @@ namespace vdz.ca.Mappers
             );
             Mapper.CreateMap<PhotoModel, PhotoEntity>().ForMember(
                     dest => dest.Id,
-                    opt => opt.MapFrom(src => new Guid(src.Id) == Guid.Empty ? Guid.NewGuid() : new Guid(src.Id))
-            ).ReverseMap();
+                    opt => opt.MapFrom(src => string.IsNullOrWhiteSpace(src.Id) ? Guid.NewGuid() : new Guid(src.Id))
+            ).ReverseMap().ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => src.Id == Guid.Empty ? Guid.NewGuid().ToString() : src.Id.ToString())
+            );
             Mapper.CreateMap<photoalbum, PhotoAlbumModel>()
                 .ForMember(
                     dest => dest.Clean,
