@@ -23,9 +23,11 @@ define([
         collection: null,
         modal: null,
         modalModel: null,
+        masonryContainer: null,
         className: "slideshow-collection",
         initialize: function (options) {
             this.render();
+            this.masonryContainer = this.$("#slideshow-list");
             this.collection = new SlideshowCollection();
             this.listenTo(this.collection, "reset", this.addAll);
             this.listenTo(this.collection, "add", this.addOne);
@@ -47,7 +49,22 @@ define([
 
         addOne: function (photo) {
             var item = new SlideshowItemView({ "model": photo });
-            this.$("#slidewhos-list-body").append(item.el);
+            //this.setupMasonry();
+
+            //var i = $(item.el);
+            this.masonryContainer.append(item.el);
+        },
+
+        setupMasonry: function () {
+            this.masonryContainer = this.$("#slideshow-list");
+            this.masonryContainer.imagesLoaded(_.bind(function () {
+                this.masonryContainer.masonry({
+                    itemSelector: ".item",
+                    columWidth: 300,
+                    isAnimated: true
+                });
+                $(window).resize();
+            }, this));
         },
 
         addClick: function () {
@@ -68,7 +85,7 @@ define([
         },
 
         uploaded: function (photo) {
-            this.collection.add(photo.result.files[0]);
+            this.collection.add(photo.result);
         },
 
         hideModal: function () {

@@ -76,7 +76,7 @@ namespace vdz.ca.Mappers
             Mapper.CreateMap<UserModelBase, UserModel>().ReverseMap();
             Mapper.CreateMap<UserModelBase, UserEntity>().ForMember(
                 dest => dest.Id,
-                opt => opt.MapFrom(src => new Guid(src.Id) == Guid.Empty ? Guid.NewGuid() : new Guid(src.Id))
+                opt => opt.MapFrom(src => string.IsNullOrWhiteSpace(src.Id) ? Guid.NewGuid() : new Guid(src.Id))
             ).ReverseMap();
             Mapper.CreateMap<user, UserEntity>().ForMember(
                 dest => dest.FavoritePhotos,
@@ -101,7 +101,7 @@ namespace vdz.ca.Mappers
             Mapper.CreateMap<UserModel, LoginModel>().ReverseMap();
             Mapper.CreateMap<PhotoAlbumModel, PhotoAlbumEntity>().ForMember(
                     dest => dest.Id,
-                    opt => opt.MapFrom(src => new Guid(src.Id) == Guid.Empty ? Guid.NewGuid().ToString() : src.Id.ToString())
+                    opt => opt.MapFrom(src => string.IsNullOrWhiteSpace(src.Id) ? Guid.NewGuid() : new Guid(src.Id))
             ).ReverseMap().ForMember(
                     dest => dest.Clean,
                     opt => opt.MapFrom(src => src.Title.ToLowerInvariant().Replace(" ", "-"))

@@ -399,9 +399,11 @@
     <Content Include="Content\js\templates\portfolioTemplate.html" />
     <Content Include="Content\js\templates\ratesTemplate.html" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbTemplate.html" />
+    <Content Include="Content\js\widgets\carousel\carouselItemView.js" />
     <Content Include="Content\js\widgets\carousel\carouselModel.js" />
     <Content Include="Content\js\widgets\carousel\carouselTemplate.html" />
     <Content Include="Content\js\widgets\carousel\carouselView.js" />
+    <Content Include="Content\js\widgets\carousel\carouselItemTemplate.html" />
     <Content Include="Content\js\widgets\carousel\nls\carousel.js" />
     <Content Include="Content\js\widgets\breadcrumbs\nls\breadcrumbs.js" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsModel.js" />
@@ -412,6 +414,7 @@
     <Content Include="Content\js\widgets\album\albumModel.js" />
     <Content Include="Content\js\widgets\album\albumTemplate.html" />
     <Content Include="Content\js\widgets\album\albumView.js" />
+    <Content Include="Content\js\widgets\carousel\carouselCollection.js" />
     <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
     <Content Include="Content\js\widgets\portfolio\albumTemplate.html" />
     <Content Include="Content\js\widgets\album\photoTemplate.html" />

@@ -1,20 +1,31 @@
 define([
-    "./carouselModel",
+    "./carouselCollection",
+    "./carouselItemView",
     "text!./carouselTemplate.html",
+    "text!./carouselIndicatorsTemplate.html",
     "i18n!./nls/carousel"
 ], function (
-    carouselModel,
+    carouselCollection,
+    carouselItemView,
     template,
+    indicatorsTemplate,
     i18n
     ) {
     var CarouselView = Backbone.View.extend({
         template: _.template(template),
+        indicatorsTemplate: _.template(indicatorsTemplate),
         i18n: i18n,
-        model: null,
+        collection: null,
+        carouselId: null,
+        carouselContainer: null,
         _visible: true,
         initialize: function (defaults) {
-            this.listenTo(this.model, "change", this.render);
-            this.model.fetch();
+            this.defaults = defaults;
+            this.collection = new carouselCollection([], this.defaults);
+            this.render();
+            this.carouselContainer = this.$(".carousel-inner");
+            this.listenTo(this.collection, "reset", this.addAll);
+            this.collection.fetch();
         },
 
         visible: function () {
@@ -25,7 +36,7 @@ define([
             if (!this._visible) {
                 return;
             }
-            $("#" + this.model.get("Id")).slideUp();
+            this.$("#" + this.defaults.Id).slideUp();
             this._visible = false;
         },
 
@@ -33,22 +44,39 @@ define([
             if (this._visible) {
                 return;
             }
-            $("#" + this.model.get("Id")).slideDown();
+            this.$("#" + this.defaults.Id).slideDown();
             this._visible = true;
         },
 
+        addOne: function (item) {
+            var itemView = new carouselItemView({ "model": item });
+            this.carouselContainer.append(itemView.el);
+        },
+
+        addAll: function () {
+            this.setupIndicators();
+            this.collection.at(0).set({ "First": true }, { "silent": true });
+            this.collection.each(this.addOne, this);
+        },
+
+        setupIndicators: function () {
+            if (this.defaults.ShowIndicator) {
+                this.$("#carouselIndicators").append(this.indicatorsTemplate({ "length": this.collection.toJSON().length, "model": this.defaults }));
+            }
+        },
+
         render: function () {
-            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n }));
-            $("#" + this.model.get("Id")).carousel();
+            $(this.el).html(this.template({ "model": this.defaults, "i18n": this.i18n }));
+            this.$("#" + this.defaults.Id).carousel();
             this._finished();
             return this;
         },
 
         _finished: function () {
             if (this._visible) {
-                $("#" + this.model.get("Id")).show();
+                $("#" + this.defaults.Id).show();
             } else {
-                $("#" + this.model.get("Id")).hide();
+                $("#" + this.defaults.Id).hide();
             }
             this.trigger("finished");
         }

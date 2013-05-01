@@ -64,6 +64,7 @@ define([
                     columWidth: 194,
                     isAnimated: true
                 });
+                $(window).resize();
             }, this));
         },
 

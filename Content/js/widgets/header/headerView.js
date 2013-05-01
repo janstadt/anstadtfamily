@@ -7,8 +7,7 @@ define([
     "../modal/modalModel",
     "../login/loginView",
     "../login/loginModel",
-    "../carousel/carouselView",
-    "../carousel/carouselModel"
+    "../carousel/carouselView"
 ], function (
     headerModel,
     template,
@@ -18,8 +17,7 @@ define([
     modalModel,
     loginView,
     loginModel,
-    carouselView,
-    carouselModel) {
+    carouselView) {
     var HeaderView = Backbone.View.extend({
         template: _.template(template),
         categoriesTemplate: _.template(categoriesTemplate),
@@ -67,9 +65,7 @@ define([
         },
 
         _setupCarousel: function () {
-            var carousel = new carouselModel();
-            carousel.set({ "id": "header-carousel" });
-            this.carouselView = new carouselView({ "model": carousel });
+            this.carouselView = new carouselView({ "Id": "header-carousel", "ShowIndicator": true, "ShowNavigation": true });
             $("#header-slide").html(this.carouselView.el);
             this.listenTo(this.carouselView, "finished", this.setupAffix);
         },

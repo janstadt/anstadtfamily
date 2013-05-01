@@ -466,7 +466,31 @@
 		padding:3px;
 		background-color:#efefef;
 		.border-radius(5px, 5px, 5px, 5px);
-		.user-collection, .tag-collection, .slideshow-collection {
+		.slideshow-collection {
+			border:1px solid #d8d8d8;
+			#slideshow-list{
+				.item {
+					position:relative;
+					padding-bottom:5px;
+					.options-container {
+						position:absolute;
+						color: @commonColor;
+						top:0;
+						right:0;
+						padding:5px;
+						background-color:#fff;
+						border-left:1px solid #aaaaaa;
+						border-bottom:1px solid #aaaaaa;
+						.border-radius(0px, 0px, 5px, 0px);
+						a {
+							cursor:pointer;
+							text-indent:-9000px;
+						}
+					}
+				}
+			}
+		}
+		.user-collection, .tag-collection {
 			border:1px solid #d8d8d8;
 			table{
 				th{

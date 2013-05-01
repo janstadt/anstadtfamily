@@ -1,6 +1,6 @@
 define([
     "./slideshowModel",
-    "text!./slideshowTemplate.html",
+    "text!./slideshowListTemplate.html",
     "i18n!./nls/slideshow"
 ], function (
     SlideshowModel,
@@ -9,9 +9,12 @@ define([
     var SlideshowItemView = Backbone.View.extend({
         model: null,
         i18n: i18n,
+        className: "item",
+        attributes: function () {
+            return {id : this.model.get("Id") };
+        },
         template: _.template(template),
         initialize: function (model, options) {
-            this.model = model;
             this.render();
         },
 
@@ -20,7 +23,7 @@ define([
         },
 
         render: function () {
-            $(this.el).html(this.template({ "i18n": this.i18n }));
+            $(this.el).html(this.template({ "i18n": this.i18n, "model": this.model.toJSON() }));
             return this;
         },
         

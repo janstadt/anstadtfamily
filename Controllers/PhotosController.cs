@@ -158,8 +158,6 @@ namespace photoshare.Controllers
                 this.HttpContext.Response.StatusCode = 401;
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
-            model.Owner = new Guid(user.Id);
-            model.AlbumId = new Guid(user.Id);
             this.mPhotoService.AddSlideshowPhoto(model, this.HttpContext.Request);
             return Json(model, JsonRequestBehavior.AllowGet);
         }

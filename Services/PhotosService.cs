@@ -97,9 +97,12 @@ namespace photoshare.Services
 
         public PhotoModel AddSlideshowPhoto(PhotoModel photo, HttpRequestBase request)
         {
-            var entity = Mapper.Map<PhotoEntity>(photo);
-            entity.Slideshow = true;
             this.SaveSlideshowImage(photo, request);
+            var entity = Mapper.Map<PhotoEntity>(photo);
+            var user = this.mUserRepository.Get("slideshowAdmin");
+            entity.Owner = user.Id;
+            entity.AlbumId = new Guid(user.PhotoAlbums[0].Id);
+            entity.Slideshow = true;
             var result = this.mPhotoRepository.Add(entity);
             Mapper.Map(result, photo);
             //add photo to slideshow folder.
@@ -108,12 +111,13 @@ namespace photoshare.Services
 
         private string InitSlideshowDirectory()
         {
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("~/Content/img/slideshow")));
+            string relpath = "~/Content/img/slideshow";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(relpath));
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            return path;
+            return relpath;
         }
 
         private void SaveSlideshowImage(PhotoModel photo, HttpRequestBase request)
@@ -122,15 +126,15 @@ namespace photoshare.Services
             string filename = file.FileName;
             photo.FileName = filename;
             string path = this.InitSlideshowDirectory();
-            path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("{0}\\{1}", path, filename)));
+            path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("{0}/{1}", path, filename)));
             file.SaveAs(path);
         }
 
         public void RemoveSlideshowPhoto(PhotoModel photo)
         {
-            var entity = Mapper.Map<PhotoEntity>(photo);
+            var entity = this.mPhotoRepository.Get(photo.Id);
             var path = this.InitSlideshowDirectory();
-            path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("{0}\\{1}", path, entity.FileName)));
+            path = Path.Combine(HttpContext.Current.Server.MapPath(string.Format("{0}/{1}", path, entity.FileName)));
             if (File.Exists(path))
             {
                 File.Delete(path);
