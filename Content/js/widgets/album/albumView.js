@@ -17,16 +17,14 @@ define([
         initialize: function (defaults) {
             this.model = new albumModel({ "Title": defaults.SubId, "Type": defaults.PageId });
             this.model.fetch({ success: _.bind(this.success, this), error: _.bind(this.error, this) });
-            this.render();
+            this.bootstrap();
         },
-        render: function () {
+        bootstrap: function () {
             window.application.showLoading(this.$el);
             return this;
         },
         success: function (model, response) {
-            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n }));
-            this.masonryContainer = this.$(".photos");
-            this.addPhotos();
+            window.application.hideLoading(this.$el, _.bind(this.addPhotos, this));
             return this;
         },
 
@@ -34,6 +32,8 @@ define([
             var asdf = "asdf";
         },
         addPhotos: function () {
+            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n }));
+            this.masonryContainer = this.$(".photos");
             var photos = this.model.get("Photos");
             _.each(photos, _.bind(this.addPhoto, this));
         },

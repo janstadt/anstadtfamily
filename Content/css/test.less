@@ -28,12 +28,19 @@
 
 	#footer{clear:both;}
 
-    .masthead
-    {
-        height:200px;
-        background: url("../img/banner.png") no-repeat center transparent;
-        padding:10px 0;
-        }
+	#globalHeader{
+		.masthead-link {
+			display:block;
+			width:1170px;
+			margin:0 auto;
+			.masthead
+			{
+				height:200px;
+				background: url("../img/banner.png") no-repeat center transparent;
+				padding:10px 0;
+			}
+		}
+	}
         
     #header-slide
     {
@@ -876,4 +883,10 @@
 			}
 		}
 	}
-
+	#albumContainer {
+		.featurette-heading{
+			padding-bottom:5px;
+			border-bottom: 2px solid #ccc;
+			.date {float:right;font-size:30px;margin-top:18px}
+		}
+	}

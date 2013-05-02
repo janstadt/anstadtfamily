@@ -16,6 +16,7 @@ define([
         initialize: function (defaults) {
             this.collection = new portfolioCollection([], defaults);
             this.render();
+            window.application.showLoading(this.$el);
             this.collection.fetch({ success: _.bind(this.success, this), error: _.bind(this.error, this) });
         },
         render: function () {
@@ -28,9 +29,13 @@ define([
             this.$("#portfolioItems").append(pView.el);
         },
 
-        success: function (collection, response) {
+        addAll: function () {
             this.collection.forEach(this.addOne);
             $(window).resize();
+        },
+
+        success: function (collection, response) {
+            window.application.hideLoading(this.$el, _.bind(this.addAll, this));
         },
         error: function (model, response) {
             var asdf = "asdf";

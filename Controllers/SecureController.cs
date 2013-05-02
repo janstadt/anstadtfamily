@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using photoshare.Models;
 using photoshare.Interfaces;
+using photoshare.Helpers;
 
 namespace photoshare.Controllers
 {
@@ -17,14 +18,14 @@ namespace photoshare.Controllers
         }
         
         [HttpGet]
-        [Authorize]
+        [AjaxAuthorize]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        [Authorize]
+        [AjaxAuthorize]
         public ActionResult Current()
         {
             var model = this.mSessionService.GetSession();

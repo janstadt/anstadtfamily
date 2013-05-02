@@ -24,13 +24,13 @@
                 <input type="checkbox" name="Favorite" <% if(model.Favorite) { %>checked="checked"<%} %> />
             </div>
         </li>
+        <li class="control-group" id="tags"></li>
         <li class="control-group">
             <label class="control-label"><%- i18n.Description %></label><span><%- model.Description %></span>
             <div class="controls">
                 <textarea rows="3" name="Description"><%- model.Description %></textarea>
             </div>
         </li>
-        <li class="control-group" id="tags"></li>
         <li class="hide" id="saveError">
             <div class="alert alert-error"><%- i18n.Error %></div>
         </li>

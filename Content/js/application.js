@@ -36,7 +36,7 @@ define([
             $(element).prepend('<div class="loadSpinner"><div class="loadSpinnerIcon">Loading...</div></div>');
         },
 
-        hideLoading: function (element) {
+        hideLoading: function (element, callback) {
             if (typeof element === 'undefined' || element === null) {
                 return;
             }
@@ -47,7 +47,7 @@ define([
             if (children.length > 0) {
                 var $firstChild = $(children[0]);
                 if ($firstChild.hasClass('loadSpinner')) {
-                    $firstChild.remove();
+                    $firstChild.fadeOut(500, function () { $(this).remove(); if (callback) { callback(); } });
                 }
             }
         },

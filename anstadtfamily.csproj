@@ -404,6 +404,7 @@
     <Content Include="Content\js\widgets\carousel\carouselTemplate.html" />
     <Content Include="Content\js\widgets\carousel\carouselView.js" />
     <Content Include="Content\js\widgets\carousel\carouselItemTemplate.html" />
+    <Content Include="Content\js\widgets\carousel\carouselIndicatorsTemplate.html" />
     <Content Include="Content\js\widgets\carousel\nls\carousel.js" />
     <Content Include="Content\js\widgets\breadcrumbs\nls\breadcrumbs.js" />
     <Content Include="Content\js\widgets\breadcrumbs\breadcrumbsModel.js" />
