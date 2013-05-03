@@ -5,14 +5,20 @@ define([], function () {
         validation: {
             Title: {
                 required: true
+            },
+            Date: {
+                required: true
+            },
+            Description: {
+                required: true
             }
-        },
-        SetAccessor: function (model) {
-            this._parent = model;
-        },
-        GetAccessor: function () {
-            return this._parent;
-        }
-    });
-    return PhotoAlbumModel;
+    },
+    SetAccessor: function (model) {
+        this._parent = model;
+    },
+    GetAccessor: function () {
+        return this._parent;
+    }
+});
+return PhotoAlbumModel;
 });

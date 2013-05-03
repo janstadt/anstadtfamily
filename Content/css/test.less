@@ -1,10 +1,12 @@
 @import "elements.less";
+
     /* GLOBAL STYLES
     -------------------------------------------------- */
     /* Padding below the footer and lighter body text */
 	@backgroundColor:#da8e8d;
 	@commonColor:#4f5264;
     body {
+	  //font-family:bitter,georgia,serif;
       padding-bottom: 40px;
       color: @commonColor;
       background: url("../img/bg.jpg") repeat top left fixed;
@@ -21,6 +23,10 @@
 			height:42px;
 			text-indent:9000px;
 		}
+	}
+
+	.featurette-heading {
+		//font-face: dosis,'HelveticaNeue-CondensedBold','trebuchet ms',sans-serif;
 	}
 
 	.floatLeft{float:left;}
@@ -717,6 +723,9 @@
 					margin-left:85px;
 					&.input-append {
 						display:block;
+						p {
+							font-size:14px;
+						}
 					}
 				}
 				.submit {
