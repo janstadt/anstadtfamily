@@ -1,0 +1,34 @@
+﻿<div id="contactUs">
+    <form>
+        <legend><%- i18n.yourInfo %></legend>
+        <div class="control-group">
+            <label class="control-label" for="Name"><%- i18n.name %></label>
+            <div class="controls">
+                <input type="text" id="name" name="Name" data-error-style="inline" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Email"><%- i18n.email %></label>
+            <div class="controls">
+                <input type="text" id="email" name="Email" data-error-style="inline" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Number"><%- _.template(i18n.spam, model) %></label>
+            <div class="controls">
+                <input type="text" id="number" name="Number" data-error-style="inline" />
+            </div>
+        </div>
+        <legend><%- i18n.yourMessage %></legend>
+        <div class="control-group">
+            <label class="control-label" for="Message"><%- i18n.message %></label>
+            <div class="controls">
+                <textarea id="message" name="Message" data-error-style="inline" />
+            </div>
+        </div>
+        <div class="alert alert-error hide" id="loginError"></div>
+        <div class="submit">
+            <button type="button" class="btn btn-primary" id="submit"><%- i18n.submit %></button>
+        </div>
+    </form>
+</div>

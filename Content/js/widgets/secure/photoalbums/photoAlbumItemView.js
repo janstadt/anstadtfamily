@@ -28,12 +28,17 @@ define([
         events: {
             "click a#unfavoriteLink": "unFavoriteClick",
             "click a#favoriteLink": "favoriteClick",
-            "click a#deleteLink": "deleteClick"
+            "click a#deleteLink": "deleteClick",
+            "touchend a.album": "processClick"
         },
 
         render: function () {
             $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n, "accessor": this.model.GetAccessor() }));
             return this;
+        },
+
+        processClick: function (evt) {
+            $(evt.currentTarget).click();
         },
 
         unFavoriteClick: function (evt) {

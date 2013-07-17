@@ -343,9 +343,21 @@ namespace photoshare.Services
             for (int i = 0; i < categories.Count; i++)
             {
                 var port = this.GetPortfolio((new PortfolioModel() { Id = categories[i].Name }));
+                //Stupid hack to get either the main photo or the first photo in the album if a main one hasnt been starred.
                 if (port.Albums.Count > 0)
                 {
-                    port.Albums.ForEach(x => x.Photos = x.Photos.Where(y => y.MainImage).ToList());
+                    foreach (PhotoAlbumModel photoAlbum in port.Albums)
+                    {
+                        var main = photoAlbum.Photos.Where(x => x.MainImage).ToList();
+                        if (main.Count > 0)
+                        {
+                            photoAlbum.Photos = main;
+                        }
+                        else
+                        {
+                            photoAlbum.Photos.RemoveRange(1, photoAlbum.Photos.Count - 1);
+                        }
+                    }
                     model.Add(port);
                 }
             }
@@ -367,6 +379,7 @@ namespace photoshare.Services
             var portfolio = this.GetPortfolio(new PortfolioModel() { Id = model.Type });
             string cleanUrl = model.Id.Replace("-", " ").ToLowerInvariant();
             var album = portfolio.Albums.FirstOrDefault(x => x.Title.ToLowerInvariant() == cleanUrl);
+            album.Type = model.Type;
             album.Description = album.Description.Replace("\r\n", "<br/>");
             return album;
         }

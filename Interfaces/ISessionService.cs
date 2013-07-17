@@ -13,5 +13,6 @@ namespace photoshare.Interfaces
         LoginModel GetSession();
         LoginHeaderModel GetHeaderSession();
         void Logout();
+        void Contact(ContactUsModel model);
     }
 }

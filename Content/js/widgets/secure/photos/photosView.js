@@ -7,7 +7,9 @@ define([
      "../../modal/modalView",
     "../../modal/modalModel",
     "../../upload/uploadView",
-    "../../upload/uploadModel"
+    "../../upload/uploadModel",
+    "../../photoSlideshow/photosCollection",
+    "../../photoSlideshow/photoSlideshowView"
 ], function (
     template,
     i18n,
@@ -17,7 +19,9 @@ define([
     ModalView,
     ModalModel,
     UploadView,
-    UploadModel) {
+    UploadModel,
+    PhotosSlideshowCollection,
+    PhotoSlideshowView) {
     var PhotoPhotosView = Backbone.View.extend({
         template: _.template(template),
         photoTemplate: _.template(PhotoItemTemplate),
@@ -45,7 +49,7 @@ define([
         events: {
             "click a.addphotos": "addPhotoClick",
             "click a.cancel": "cancelPhotoClick",
-            "click button#savePhoto": "savePhotoClick",
+            "click button#savePhoto": "savePhotoClick"
         },
 
         render: function () {
@@ -122,7 +126,6 @@ define([
             
             //hide modal when finished
             this.listenTo(uploadView, "finished", _.bind(this.hideModal, this)); 
-
             this.listenTo(uploadView, "add", _.bind(this.uploaded, this));
                         
             this.modal.setContent(uploadView.el);

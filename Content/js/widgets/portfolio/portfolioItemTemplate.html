@@ -1,6 +1,6 @@
 ﻿<div>
     <h2 class="featurette-heading">
-        <%- model.Id.toLowerCase() %>
+        <% if(unique){ %><a href="/#/portfolio"><%- i18n.PortoflioHeading %></a> / <%} %><%- model.Id.toLowerCase() %>
     </h2>
     <div class="photo-albums <%-model.Id %>"></div>
 </div>

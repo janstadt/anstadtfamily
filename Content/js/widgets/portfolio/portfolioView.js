@@ -25,7 +25,7 @@ define([
         },
 
         addOne: function (model) {
-            var pView = new portfolioItemView({ "model": model });
+            var pView = new portfolioItemView({ "model": model, "IsUnique": model.collection.Id });
             this.$("#portfolioItems").append(pView.el);
         },
 

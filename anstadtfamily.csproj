@@ -117,18 +117,24 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\ServiceStack.Razor.3.9.28\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -191,6 +197,8 @@
     <Compile Include="Enums\AccessLevel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\BreadcrumbModel.cs" />
+    <Compile Include="Models\ContactUsModel.cs" />
+    <Compile Include="Models\EmailEntity.cs" />
     <Compile Include="Models\PortfolioModel.cs" />
     <Compile Include="Models\SlideshowModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -221,71 +229,6 @@
     <Compile Include="Services\SessionService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bundler\bundler.js" />
-    <Content Include="bundler\node.exe" />
-    <Content Include="bundler\node_modules\clean-css\index.js" />
-    <Content Include="bundler\node_modules\clean-css\lib\clean.js" />
-    <Content Include="bundler\node_modules\clean-css\node_modules\optimist\index.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\browser.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\cake.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\coffee-script.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\command.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\grammar.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\helpers.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\index.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\lexer.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\nodes.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\optparse.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\parser.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\repl.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\rewriter.js" />
-    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\scope.js" />
-    <Content Include="bundler\node_modules\less\lib\less\browser.js" />
-    <Content Include="bundler\node_modules\less\lib\less\colors.js" />
-    <Content Include="bundler\node_modules\less\lib\less\cssmin.js" />
-    <Content Include="bundler\node_modules\less\lib\less\functions.js" />
-    <Content Include="bundler\node_modules\less\lib\less\index.js" />
-    <Content Include="bundler\node_modules\less\lib\less\parser.js" />
-    <Content Include="bundler\node_modules\less\lib\less\rhino.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\alpha.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\anonymous.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\assignment.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\call.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\color.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\comment.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\condition.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\dimension.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\directive.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\element.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\expression.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\import.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\javascript.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\keyword.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\media.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\mixin.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\operation.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\paren.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\quoted.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\rule.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\ruleset.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\selector.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\url.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\value.js" />
-    <Content Include="bundler\node_modules\less\lib\less\tree\variable.js" />
-    <Content Include="bundler\node_modules\lib\parse-js.js" />
-    <Content Include="bundler\node_modules\lib\process.js" />
-    <Content Include="bundler\node_modules\lib\squeeze-more.js" />
-    <Content Include="bundler\node_modules\sass\lib\sass.js" />
-    <Content Include="bundler\node_modules\step\lib\step.js" />
-    <Content Include="bundler\node_modules\uglify-js.js" />
-    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.dll" />
-    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.dll.CodeAnalysisLog.xml" />
-    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.pdb" />
-    <Content Include="bundler\vs2010-extension\BundlerRunOnSave.pkgdef" />
-    <Content Include="bundler\vs2010-extension\extension.vsixmanifest" />
-    <Content Include="bundler\vs2010-extension\favicon.ico" />
-    <Content Include="bundler\vs2010-extension\ServiceStack-logo.png" />
     <None Include="Content\css\bootstrap\accordion.less" />
     <None Include="Content\css\bootstrap\alerts.less" />
     <None Include="Content\css\bootstrap\bootstrap.less" />
@@ -329,18 +272,24 @@
     <None Include="Content\css\bootstrap\wells.less" />
     <None Include="Content\css\common.less" />
     <None Include="Content\css\elements.less" />
-    <None Include="Content\css\site.less" />
     <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
-    <None Include="Content\css\test.less" />
+    <None Include="Content\css\site.less" />
+    <Content Include="Content\css\jquery.tagit.css" />
+    <Content Include="Content\css\site.css" />
+    <Content Include="Content\img\banner.png" />
     <Content Include="Content\img\bg.jpg" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\img\glyphicons_011_camera.png" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\masthead.jpg" />
+    <Content Include="Content\img\slideshow\luslideshow.jpg" />
+    <Content Include="Content\img\slideshow\luslideshow2.jpg" />
+    <Content Include="Content\img\slideshow\luslideshow3.jpg" />
     <Content Include="Content\js\application.js" />
     <Content Include="Content\js\config.js" />
     <Content Include="Content\js\nls\global.js" />
@@ -374,6 +323,7 @@
     <Content Include="Content\js\shared\lib\jquery.imagesloaded.min.js" />
     <Content Include="Content\js\shared\lib\jquery.masonry.js" />
     <Content Include="Content\js\shared\lib\jquery.masonry.min.js" />
+    <Content Include="Content\js\shared\lib\jquery.mobile-1.3.1.min.js" />
     <Content Include="Content\js\shared\lib\jquery.wookmark.js" />
     <Content Include="Content\js\shared\lib\less-1.3.3.min.js" />
     <Content Include="Content\js\shared\lib\moment.js" />
@@ -381,6 +331,7 @@
     <Content Include="Content\js\router.js" />
     <Content Include="Content\js\shared\lib\serialize-object.js" />
     <Content Include="Content\js\shared\lib\ss-validation.js" />
+    <Content Include="Content\js\shared\lib\tag-it.js" />
     <Content Include="Content\js\shared\lib\tag-it.min.js" />
     <Content Include="Content\js\shared\lib\text.js" />
     <Content Include="Content\js\shared\models\favoritesModel.js" />
@@ -416,7 +367,18 @@
     <Content Include="Content\js\widgets\album\albumTemplate.html" />
     <Content Include="Content\js\widgets\album\albumView.js" />
     <Content Include="Content\js\widgets\carousel\carouselCollection.js" />
+    <Content Include="Content\js\widgets\contactus\contactUsModel.js" />
+    <Content Include="Content\js\widgets\contactus\contactUsTemplate.html" />
+    <Content Include="Content\js\widgets\contactus\contactUsView.js" />
+    <Content Include="Content\js\widgets\contactus\nls\contactus.js" />
     <Content Include="Content\js\widgets\header\categoriesTemplate.html" />
+    <Content Include="Content\js\widgets\photoSlideshow\photoSlideshowIndicatorsTemplate.html" />
+    <Content Include="Content\js\widgets\photoSlideshow\slideshowItemTemplate.html" />
+    <Content Include="Content\js\widgets\photoSlideshow\slideshowItemView.js" />
+    <Content Include="Content\js\widgets\photoSlideshow\nls\photoSlideshow.js" />
+    <Content Include="Content\js\widgets\photoSlideshow\photosCollection.js" />
+    <Content Include="Content\js\widgets\photoSlideshow\photoSlideshowTemplate.html" />
+    <Content Include="Content\js\widgets\photoSlideshow\photoSlideshowView.js" />
     <Content Include="Content\js\widgets\portfolio\albumTemplate.html" />
     <Content Include="Content\js\widgets\album\photoTemplate.html" />
     <Content Include="Content\js\widgets\portfolio\portfolioCollection.js" />
@@ -562,9 +524,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="default.htm" />
     <Content Include="Global.asax" />
-    <Content Include="Content\css\Site.css" />
     <Content Include="jqunback-1.51.min.js" />
     <Content Include="README.jQuery.vsdoc.txt" />
     <Content Include="README.txt" />
@@ -602,28 +562,16 @@
     <Content Include="Content\js\shared\lib\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Secure\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
-    <Content Include="Views\Shared\_CarouselLayout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\img\slideshow\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bundler\bundler.cmd" />
-    <None Include="bundler\coffee.cmd" />
-    <None Include="bundler\node_modules\coffee-script\package.json" />
-    <None Include="bundler\node_modules\less\package.json" />
-    <None Include="bundler\node_modules\sass\package.json" />
-    <None Include="bundler\node_modules\step\package.json" />
-    <None Include="bundler\vs2010-extension\BundlerRunOnSave.dll.lastcodeanalysissucceeded" />
-    <None Include="bundler\vs2010-extension\BundlerRunOnSave.vsix" />
     <Content Include="Views\Home\Index.cshtml" />
     <EntityDeploy Include="Models\photoShareEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

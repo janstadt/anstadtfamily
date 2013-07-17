@@ -1,6 +1,6 @@
 ﻿define({
     "root": {
-        "ContactUs": "Contact Us",
+        "ContactUs": "Contact Me",
         "Twitter": "Twitter",
         "Facebook": "Facebook",
         "Logo": "my2PeasPhotography"

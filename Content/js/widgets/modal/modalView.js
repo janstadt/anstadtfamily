@@ -21,10 +21,18 @@ define([
                 var modalContainer = this.$("#" + this.model.get("Id"));
                 for (var callback in options.callbacks) {
                     modalContainer.on(callback, function () {
-                        options.callbacks[callback].apply(options.scope); 
+                        options.callbacks[callback].apply(options.scope);
                     });
                 }
             }
+        },
+
+        overrideSize: function () {
+            this.$el.addClass("modalOverride");
+        },
+
+        setBodySize: function (width, height) {
+            this.$("#modalBody").animate({ "width": width, "height": height }, 200);
         },
 
         setContent: function (content) {

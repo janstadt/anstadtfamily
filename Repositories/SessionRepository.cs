@@ -91,5 +91,10 @@ namespace photoshare.Repositories
             HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
             HttpContext.Current.Response.Cookies.Add(authCookie);
         }
+
+        public void SendEmail(EmailEntity model)
+        {
+            //do email shiznit here.
+        }
     }
 }

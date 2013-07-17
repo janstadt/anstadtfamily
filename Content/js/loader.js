@@ -10,14 +10,14 @@ require.config({
         use: "shared/plugins/use",
         "jquery.ui": "shared/lib/jquery-ui-1.8.24",
         'jquery.ui.widget': 'shared/lib/jquery.file.upload/js/vendor/jquery.ui.widget',
-        'tmpl' : "shared/lib/jquery.file.upload/js/tmpl.min",
+        'tmpl': "shared/lib/jquery.file.upload/js/tmpl.min",
+        "tagit": "shared/lib/tag-it.min",
         'load-image' : "shared/lib/jquery.file.upload/js/load-image.min",
         'canvas-to-blob' : "shared/lib/jquery.file.upload/js/canvas-to-blob.min",
         'jquery.iframe-transport': 'shared/lib/jquery.file.upload/js/jquery.iframe-transport',
         'jquery.fileupload': 'shared/lib/jquery.file.upload/js/jquery.fileupload',
         'jquery.fileupload-fp': 'shared/lib/jquery.file.upload/js/jquery.fileupload-fp',
-        'jquery.fileupload-ui': 'shared/lib/jquery.file.upload/js/jquery.fileupload-ui',
-        "tagit": "shared/lib/tag-it"
+        'jquery.fileupload-ui': 'shared/lib/jquery.file.upload/js/jquery.fileupload-ui'
     },
 
     use: {

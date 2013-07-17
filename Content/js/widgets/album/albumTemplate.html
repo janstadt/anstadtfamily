@@ -1,5 +1,6 @@
 ﻿ <h2 class="featurette-heading">
-        <%- model.Title %>  <span class="muted date"><%- moment(model.Date).format("MM/DD/YYYY") %></span>
+        <a href="/#/portfolio"><%-i18n.portfolio %></a> / <a href="/#/portfolio/<%-model.Type %>"><%-model.Type %></a> / <%- model.Title %>  <span class="muted date"><%- moment(model.Date).format("MM/DD/YYYY") %></span>
 </h2>
 <div><%= model.Description %></div>
 <div class="photos"></div>
+<div id="photos-modal"></div>

@@ -9,7 +9,7 @@
     </div>
 <%} %>
 
-<a class="album" href="#/user/<%- model.Owner %>/photoalbum/<%- model.Id %>">
+<a class="album" onclick="javascript:void(0);" href="#/user/<%- model.Owner %>/photoalbum/<%- model.Id %>">
     <% if(model.Photos.length > 0){%> <img src="Albums/<%- model.Id %>/Small/<%- model.Photos[0].FileName %>" /> <%} %>
     <span class="header">
         <span class="title"><%- model.Title %></span>

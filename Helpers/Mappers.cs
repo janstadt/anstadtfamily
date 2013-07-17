@@ -170,6 +170,22 @@ namespace vdz.ca.Mappers
                 dest => dest.Name,
                 opt => opt.MapFrom(src => src)
             );
+            Mapper.CreateMap<ContactUsModel, EmailEntity>().ForMember(
+                dest => dest.EmailFrom,
+                opt => opt.MapFrom(src => src.Email.Split(';').ToList())
+            ).ForMember(
+                dest => dest.Message,
+                opt => opt.MapFrom(src => src.Message)
+            ).ForMember(
+                dest => dest.Name,
+                opt => opt.MapFrom(src => src.Name)
+            ).ForMember(
+                dest => dest.EmailTo,
+                opt => opt.UseValue(ContactUsModel.DEFAULT_TO.ToList())
+            ).ForMember(
+                dest => dest.Subject,
+                opt => opt.UseValue(ContactUsModel.DEFAULT_SUBJECT)
+            );
         }
     }
 }

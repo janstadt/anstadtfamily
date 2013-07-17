@@ -53,5 +53,12 @@ namespace photoshare.Controllers
             var model = this.mSessionService.GetHeaderSession();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Contact(ContactUsModel model)
+        {
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

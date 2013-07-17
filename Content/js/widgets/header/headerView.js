@@ -55,7 +55,7 @@ define([
                 var mast, slider, height;
                 height = $(".masthead").outerHeight() + $("#header-slide").outerHeight();
                 return height;
-            }
+                }
             }
             });
         },

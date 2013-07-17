@@ -2,7 +2,6 @@ define([
     "text!./tagTemplate.html",
     "i18n!./nls/tag",
     "./tagModel",
-    "jquery.ui.widget",
     "tagit"
 ], function (
     template,

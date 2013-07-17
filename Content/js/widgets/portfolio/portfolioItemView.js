@@ -15,13 +15,23 @@ define([
         model: null,
         content: null,
         masonryContainer: null,
+
+        events: {
+            "touchend a.item": "processClick"
+        },
+
+        processClick: function (e) {
+            $(e.currentTarget).click();
+        },
+
         initialize: function (defaults) {
+            this.IsUnique = defaults.IsUnique;
             this.render();
             this.masonryContainer = this.$(".photo-albums." + this.model.get("Id"));
             this.addItems();
         },
         render: function () {
-            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n }));
+            $(this.el).html(this.template({ "model": this.model.toJSON(), "i18n": this.i18n, "unique": this.IsUnique }));
             return this;
         },
         addItems: function () {

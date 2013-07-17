@@ -88,5 +88,11 @@ namespace photoshare.Services
             var all = this.mTagRepository.Categories();
             return Mapper.Map<List<TagModel>>(all);
         }
+
+        public void Contact(ContactUsModel model)
+        {
+            var entity = Mapper.Map<EmailEntity>(model);
+            this.mSessionRepository.SendEmail(entity);
+        }
     }
 }

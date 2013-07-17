@@ -14,5 +14,6 @@ namespace photoshare.Interfaces
         bool IsAuthenticated();
         string GetCurrentUsername();
         void CreateAuthCookie(UserModel user);
+        void SendEmail(EmailEntity model);
     }
 }

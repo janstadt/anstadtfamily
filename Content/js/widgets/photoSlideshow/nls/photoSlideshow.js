@@ -1,5 +1,5 @@
 ﻿define({
     "root": {
-       "portfolio": "portfolio"
+       
     }
 });

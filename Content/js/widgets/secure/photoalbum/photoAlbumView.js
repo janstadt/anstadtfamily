@@ -25,8 +25,6 @@ define([
             this.sessionModel = new SessionModel();
             this.listenTo(this.sessionModel, "change", this.setAccessor);
             this.sessionModel.fetch();
-
-
             return this;
         },
 
@@ -58,15 +56,7 @@ define([
             this.photoCollection.SetAccessor(this.sessionModel.toJSON());
             this.photosView = new PhotosView({ collection: this.photoCollection, userId: this.options.PageId, albumId: this.options.SubId });
             $(this.el).append(this.photosView.el);
-            //this.displayControls();
-        }//,
-
-//        displayControls: function () {
-//            var user = window.application.user;
-//            if (user.AccessLevel === 1 || user.AccessLevel === 2) {
-//                this.photosView.showControls();
-//            }
-//        }
+        }
     });
     return PhotoAlbumView;
 });

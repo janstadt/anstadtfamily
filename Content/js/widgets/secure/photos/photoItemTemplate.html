@@ -11,7 +11,7 @@
         <a class="delete icon-remove" id="deleteLink" title="<%- i18n.Delete %>" href="javascript:void(0);"><%- i18n.Delete %></a>
         <%} %>
     </div>
-<a href="#/user/<%- model.Owner %>/photo/<%- model.Id %>">
+<a onclick="javascript:void(0);" href="#/user/<%- model.Owner %>/photo/<%- model.Id %>">
     <img class="photo" src="Albums/<%- model.AlbumId %>/Small/<%- model.FileName %>" />
     <%if(model.FileName){ %>
     <span class="header">

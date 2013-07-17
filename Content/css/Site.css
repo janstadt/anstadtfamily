@@ -1,75 +1,1515 @@
-body
-{
-    font-size: .85em;
-    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+/* GLOBAL STYLES
+    -------------------------------------------------- */
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/* GLOBAL STYLES
+    -------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+body {
+  padding-bottom: 40px;
+  color: #4f5264;
+  background: url("../img/bg.jpg") repeat top left fixed;
 }
+.modal-body {
+  max-height: 550px;
+}
+.modalOverride .modal .modal-body {
+  max-height: 100%;
+}
+.modalOverride .modal .modal-body div.item > img {
+  height: auto;
+}
+.albumSlideshow.carousel .item {
+  border: 1px solid  #aaa;
+}
+.albumSlideshow.carousel .carousel-indicators {
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background-color: #fff;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 0px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border-left: 1px solid #aaa;
+  border-bottom: 1px solid  #aaa;
+}
+.albumSlideshow.carousel .carousel-indicators li {
+  background-color: #4f5264;
+}
+.albumSlideshow.carousel .carousel-indicators li.active {
+  background-color: #da8e8d;
+}
+.container {
+  width: 1170px;
+}
+.loadSpinner {
+  margin: 0 auto;
+  width: 42px;
+}
+.loadSpinner .loadSpinnerIcon {
+  background: url("../img/loading.gif") no-repeat 0 0;
+  width: 42px;
+  height: 42px;
+  text-indent: 9000px;
+}
+.floatLeft {
+  float: left;
+}
+.floatRight {
+  float: right;
+}
+#footer {
+  clear: both;
+}
+#globalHeader .masthead-link {
+  display: block;
+  width: 1170px;
+  margin: 0 auto;
+}
+#globalHeader .masthead-link .masthead {
+  height: 200px;
+  background: url("../img/banner.png") no-repeat center transparent;
+  padding: 10px 0;
+}
+#header-slide {
+  border: 1px solid #d8d8d8;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  padding-bottom: 0;
+  background: #fff;
+}
+#header,
+#page {
+  background: #fff;
+  padding: 0 10px;
+  border: 1px solid #d8d8d8;
+  border-top: none;
+  border-bottom: none;
+}
+#header.loginPage,
+#page.loginPage {
+  border: 1px solid #d8d8d8;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+#page {
+  border-bottom: 1px solid #d8d8d8;
+}
+.loginPage {
+  -webkit-border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 400px;
+}
+.loginPage #login {
+  margin: 10px auto;
+}
+/* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  z-index: 10;
+}
+.navbar-inner.affix {
+  top: 0px;
+  width: 1170px;
+  z-index: 1001;
+  padding: 0;
+}
+.navbar .divider-vertical {
+  height: 49px;
+  border-left: 1px solid #fc9f9f;
+  border-right: 1px solid #c17c7c;
+  margin: 0;
+}
+/* Remove border and change up box shadow for more contrast */
+.navbar .navbar-inner {
+  border: 0;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  background-color: #da8e8d;
+  background-image: none;
+  border-radius: 0px;
+  padding: 0;
+}
+/* Downsize the brand/project name a bit */
+.navbar .brand {
+  padding: 14px 20px 16px;
+  /* Increase vertical padding to match navbar links */
 
-header,
-footer,
-nav,
-section {
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.navbar .nav {
+  width: 100%;
+}
+/* Navbar links: increase padding for taller navbar */
+.navbar .nav > li > a,
+.navbar .nav > .active > a,
+.navbar .nav > li > a:hover,
+.navbar .nav > li > a:focus,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus,
+.navbar .nav li.dropdown.open > .dropdown-toggle {
+  padding: 15px 20px;
+  color: #fff;
+  text-shadow: none;
+  background: none;
+}
+.navbar .nav > li > a:hover,
+.navbar .nav > li > a:focus {
+  -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+}
+.navbar .nav li.dropdown > .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open > .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open > a:hover .caret,
+.navbar .nav li.dropdown.open > a:focus .caret,
+.navbar .nav li.dropdown > a:hover .caret,
+.navbar .nav li.dropdown > a:focus .caret {
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+}
+/* Offset the responsive button for proper vertical alignment */
+.navbar .btn-navbar {
+  margin-top: 10px;
+}
+/* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+/* Carousel base class */
+.carousel {
+  margin-bottom: 0;
+}
+.carousel-indicators li.active {
+  background-color: #da8e8d;
+}
+.carousel .container {
+  position: relative;
+  z-index: 9;
+}
+.carousel-control {
+  height: 80px;
+  margin-top: 0;
+  font-size: 120px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  background-color: transparent;
+  border: 0;
+  z-index: 10;
+  color: #DA8E8D;
+}
+.carousel-control:hover {
+  color: #da8e8d;
+}
+/*.carousel .item {
+      height: 500px;
+      position:static;
+    }*/
+.carousel img {
+  position: relative;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+.carousel-caption {
+  background-color: transparent;
+  max-width: 550px;
+  padding: 0 20px;
+  margin-top: 200px;
+}
+.carousel-caption h1,
+.carousel-caption .lead {
+  margin: 0;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+.carousel-caption .btn {
+  margin-top: 10px;
+}
+/* MARKETING CONTENT
+    -------------------------------------------------- */
+/* Center align the text within the three columns below the carousel */
+.marketing .span4 {
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .span4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/* Featurettes
+    ------------------------- */
+.featurette-divider {
+  margin: 80px 0;
+  /* Space out the Bootstrap <hr> more */
+
+}
+.featurette {
+  padding-top: 120px;
+  /* Vertically center images part 1: add padding above and below text. */
+
+  overflow: hidden;
+  /* Vertically center images part 2: clear their floats. */
+
+}
+.featurette-image {
+  margin-top: -120px;
+  /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+
+}
+/* Give some space on the sides of the floated elements so text doesn't run right into it. */
+.featurette-image.pull-left {
+  margin-right: 40px;
+}
+.featurette-image.pull-right {
+  margin-left: 40px;
+}
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+.featurette-heading a {
+  color: #4f5264;
+}
+/* RESPONSIVE CSS
+    -------------------------------------------------- */
+@media (max-width: 979px) {
+  .container.navbar-wrapper {
+    margin-bottom: 0;
+    width: auto;
+  }
+  .navbar-inner {
+    border-radius: 0;
+    margin: -20px 0;
+  }
+  .carousel .item {
+    height: 500px;
+  }
+  .carousel img {
+    width: auto;
+    height: 500px;
+  }
+  .featurette {
+    height: auto;
+    padding: 0;
+  }
+  .featurette-image.pull-left,
+  .featurette-image.pull-right {
     display: block;
+    float: none;
+    max-width: 40%;
+    margin: 0 auto 20px;
+  }
 }
-
-/* Styles for basic forms
------------------------------------------------------------*/
-
-fieldset 
-{
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
+@media (max-width: 767px) {
+  .navbar-inner {
+    margin: -20px;
+  }
+  .carousel {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  .carousel .item {
+    height: 300px;
+  }
+  .carousel img {
+    height: 300px;
+  }
+  .carousel-caption {
+    width: 65%;
+    padding: 0 70px;
+    margin-top: 100px;
+  }
+  .carousel-caption h1 {
+    font-size: 30px;
+  }
+  .carousel-caption .lead,
+  .carousel-caption .btn {
+    font-size: 18px;
+  }
+  .marketing .span4 + .span4 {
+    margin-top: 40px;
+  }
+  .featurette-heading {
+    font-size: 30px;
+  }
+  .featurette .lead {
+    font-size: 18px;
+    line-height: 1.5;
+  }
 }
-
-legend 
-{
-    font-size:1.2em;
-    font-weight: bold;
+.list-navigation,
+.user-info,
+.photoalbum-info {
+  float: left;
+  width: 300px;
+  padding: 3px;
+  background-color: #efefef;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 }
-
-textarea 
-{
-    min-height: 75px;
+.list-navigation ul,
+.user-info ul,
+.photoalbum-info ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #d8d8d8;
+  border-bottom: none;
 }
-
-.editor-label 
-{
-    margin: 1em 0 0 0;
+.list-navigation ul .section,
+.user-info ul .section,
+.photoalbum-info ul .section {
+  background: #eeeeee;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e6e6e6), color-stop(1, #ffffff));
+  background: -ms-linear-gradient(bottom, #e6e6e6 0%, #ffffff 100%);
+  background: -moz-linear-gradient(center bottom, #e6e6e6 0%, #ffffff 100%);
+  background: -o-linear-gradient(#ffffff, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  border-bottom: 1px solid #d8d8d8;
+  border-top: none;
+  padding: 0;
 }
-
-.editor-field 
-{
-    margin:0.5em 0 0 0;
+.list-navigation ul .section a.section-head,
+.user-info ul .section a.section-head,
+.photoalbum-info ul .section a.section-head {
+  padding: 10px;
+  color: #4f5264;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
 }
-
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error
-{
-    color: #ff0000;
+.list-navigation ul .section a.options,
+.user-info ul .section a.options,
+.photoalbum-info ul .section a.options {
+  float: right;
+  text-indent: -10000px;
+  margin: 12px 10px 12px 0px;
+  cursor: pointer;
 }
-
-.field-validation-valid
-{
-    display: none;
+.list-navigation ul .section a.save,
+.user-info ul .section a.save,
+.photoalbum-info ul .section a.save {
+  display: none;
 }
-
-.input-validation-error
-{
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
+.list-navigation ul .section a.cancel,
+.user-info ul .section a.cancel,
+.photoalbum-info ul .section a.cancel {
+  display: none;
 }
-
-.validation-summary-errors
-{
-    font-weight: bold;
-    color: #ff0000;
+.list-navigation ul li,
+.user-info ul li,
+.photoalbum-info ul li {
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #fff;
+  padding: 5px;
+  margin: 0;
 }
-
-.validation-summary-valid
-{
-    display: none;
+.list-navigation ul li.control-group,
+.user-info ul li.control-group,
+.photoalbum-info ul li.control-group {
+  margin-bottom: 0px;
+}
+.list-navigation ul li.control-group.active a,
+.user-info ul li.control-group.active a,
+.photoalbum-info ul li.control-group.active a {
+  text-decoration: none;
+  color: #4f5264;
+  font-weight: bold;
+}
+.list-navigation ul li.control-group.active i,
+.user-info ul li.control-group.active i,
+.photoalbum-info ul li.control-group.active i {
+  display: inline-block;
+  margin-right: 10px;
+  float: right;
+}
+.list-navigation ul li.control-group i,
+.user-info ul li.control-group i,
+.photoalbum-info ul li.control-group i {
+  display: none;
+}
+.list-navigation ul li.control-group div.controls.no-label,
+.user-info ul li.control-group div.controls.no-label,
+.photoalbum-info ul li.control-group div.controls.no-label {
+  margin-left: 5px;
+}
+.list-navigation ul li.control-group span,
+.user-info ul li.control-group span,
+.photoalbum-info ul li.control-group span {
+  padding-top: 5px;
+  display: inline-block;
+  margin-left: 12px;
+}
+.list-navigation ul li.control-group label,
+.user-info ul li.control-group label,
+.photoalbum-info ul li.control-group label {
+  width: 65px;
+}
+.list-navigation ul li.control-group .controls,
+.user-info ul li.control-group .controls,
+.photoalbum-info ul li.control-group .controls {
+  margin-left: 60px;
+}
+.list-navigation.full,
+.user-info.full,
+.photoalbum-info.full {
+  width: 99%;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.list-navigation.full ul,
+.user-info.full ul,
+.photoalbum-info.full ul {
+  border-top: none;
+}
+.list-navigation.full ul li > label,
+.user-info.full ul li > label,
+.photoalbum-info.full ul li > label {
+  width: 90px;
+}
+.list-navigation label,
+.user-info label,
+.photoalbum-info label {
+  display: inline-block;
+  width: 50px;
+}
+.list-navigation input,
+.user-info input,
+.photoalbum-info input,
+.list-navigation select,
+.user-info select,
+.photoalbum-info select,
+.list-navigation textarea,
+.user-info textarea,
+.photoalbum-info textarea {
+  display: none;
+}
+.list-navigation.editing .section a.edit,
+.user-info.editing .section a.edit,
+.photoalbum-info.editing .section a.edit {
+  display: none;
+}
+.list-navigation.editing .section a.save,
+.user-info.editing .section a.save,
+.photoalbum-info.editing .section a.save {
+  display: block;
+}
+.list-navigation.editing .section a.cancel,
+.user-info.editing .section a.cancel,
+.photoalbum-info.editing .section a.cancel {
+  display: block;
+}
+.list-navigation.editing input,
+.user-info.editing input,
+.photoalbum-info.editing input,
+.list-navigation.editing select,
+.user-info.editing select,
+.photoalbum-info.editing select,
+.list-navigation.editing textarea,
+.user-info.editing textarea,
+.photoalbum-info.editing textarea {
+  display: inline;
+}
+.list-navigation.editing ul li span,
+.user-info.editing ul li span,
+.photoalbum-info.editing ul li span {
+  display: none;
+}
+.list-navigation.editing ul li.tagit-choice > span,
+.user-info.editing ul li.tagit-choice > span,
+.photoalbum-info.editing ul li.tagit-choice > span {
+  display: inline-block;
+}
+.photoalbum-info {
+  width: 350px;
+}
+.photoalbum-info ul li.control-group {
+  margin-bottom: 0px;
+}
+.photoalbum-info ul li.control-group span {
+  padding-top: 5px;
+  display: inline-block;
+  margin-left: 12px;
+}
+.photoalbum-info ul li.control-group label {
+  width: 90px;
+}
+.photoalbum-info ul li.control-group .controls {
+  margin-left: 95px;
+}
+.photoalbum-info.editing .section a.edit {
+  display: none;
+}
+.photoalbum-info.editing .section a.save {
+  display: block;
+}
+.photoalbum-info.editing .section a.cancel {
+  display: block;
+}
+.photoalbum-info.editing input,
+.photoalbum-info.editing textarea {
+  display: inline;
+}
+.photoalbum-info.editing ul li span {
+  display: none;
+}
+.list-widget-placeholder,
+.user-albums,
+.user-photos {
+  float: right;
+  width: 800px;
+  position: relative;
+  padding: 3px;
+  background-color: #efefef;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.list-widget-placeholder .slideshow-collection,
+.user-albums .slideshow-collection,
+.user-photos .slideshow-collection {
+  border: 1px solid #d8d8d8;
+}
+.list-widget-placeholder .slideshow-collection #slideshow-list .item,
+.user-albums .slideshow-collection #slideshow-list .item,
+.user-photos .slideshow-collection #slideshow-list .item {
+  position: relative;
+  padding-bottom: 5px;
+}
+.list-widget-placeholder .slideshow-collection #slideshow-list .item .options-container,
+.user-albums .slideshow-collection #slideshow-list .item .options-container,
+.user-photos .slideshow-collection #slideshow-list .item .options-container {
+  position: absolute;
+  color: #4f5264;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background-color: #fff;
+  border-left: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaaaaa;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 0px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.list-widget-placeholder .slideshow-collection #slideshow-list .item .options-container a,
+.user-albums .slideshow-collection #slideshow-list .item .options-container a,
+.user-photos .slideshow-collection #slideshow-list .item .options-container a {
+  cursor: pointer;
+  text-indent: -9000px;
+}
+.list-widget-placeholder .user-collection,
+.user-albums .user-collection,
+.user-photos .user-collection,
+.list-widget-placeholder .tag-collection,
+.user-albums .tag-collection,
+.user-photos .tag-collection {
+  border: 1px solid #d8d8d8;
+}
+.list-widget-placeholder .user-collection table,
+.user-albums .user-collection table,
+.user-photos .user-collection table,
+.list-widget-placeholder .tag-collection table,
+.user-albums .tag-collection table,
+.user-photos .tag-collection table {
+  margin-bottom: 0px;
+}
+.list-widget-placeholder .user-collection table th,
+.user-albums .user-collection table th,
+.user-photos .user-collection table th,
+.list-widget-placeholder .tag-collection table th,
+.user-albums .tag-collection table th,
+.user-photos .tag-collection table th {
+  background: #eeeeee;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e6e6e6), color-stop(1, #ffffff));
+  background: -ms-linear-gradient(bottom, #e6e6e6 0%, #ffffff 100%);
+  background: -moz-linear-gradient(center bottom, #e6e6e6 0%, #ffffff 100%);
+  background: -o-linear-gradient(#ffffff, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  padding: 10px;
+}
+.list-widget-placeholder .user-collection table th.category,
+.user-albums .user-collection table th.category,
+.user-photos .user-collection table th.category,
+.list-widget-placeholder .tag-collection table th.category,
+.user-albums .tag-collection table th.category,
+.user-photos .tag-collection table th.category,
+.list-widget-placeholder .user-collection table td.category,
+.user-albums .user-collection table td.category,
+.user-photos .user-collection table td.category,
+.list-widget-placeholder .tag-collection table td.category,
+.user-albums .tag-collection table td.category,
+.user-photos .tag-collection table td.category {
+  text-align: center;
+}
+.list-widget-placeholder .user-collection table th.create-th,
+.user-albums .user-collection table th.create-th,
+.user-photos .user-collection table th.create-th,
+.list-widget-placeholder .tag-collection table th.create-th,
+.user-albums .tag-collection table th.create-th,
+.user-photos .tag-collection table th.create-th {
+  text-align: right;
+}
+.list-widget-placeholder .user-collection table th.create-th a,
+.user-albums .user-collection table th.create-th a,
+.user-photos .user-collection table th.create-th a,
+.list-widget-placeholder .tag-collection table th.create-th a,
+.user-albums .tag-collection table th.create-th a,
+.user-photos .tag-collection table th.create-th a {
+  overflow: hidden;
+  text-indent: 9000px;
+  cursor: pointer;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr,
+.user-albums .user-collection table #user-list-body tr,
+.user-photos .user-collection table #user-list-body tr,
+.list-widget-placeholder .tag-collection table #user-list-body tr,
+.user-albums .tag-collection table #user-list-body tr,
+.user-photos .tag-collection table #user-list-body tr,
+.list-widget-placeholder .user-collection table #tag-list-body tr,
+.user-albums .user-collection table #tag-list-body tr,
+.user-photos .user-collection table #tag-list-body tr,
+.list-widget-placeholder .tag-collection table #tag-list-body tr,
+.user-albums .tag-collection table #tag-list-body tr,
+.user-photos .tag-collection table #tag-list-body tr {
+  border-top: 1px solid #fff;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr td.save-td,
+.user-albums .user-collection table #user-list-body tr td.save-td,
+.user-photos .user-collection table #user-list-body tr td.save-td,
+.list-widget-placeholder .tag-collection table #user-list-body tr td.save-td,
+.user-albums .tag-collection table #user-list-body tr td.save-td,
+.user-photos .tag-collection table #user-list-body tr td.save-td,
+.list-widget-placeholder .user-collection table #tag-list-body tr td.save-td,
+.user-albums .user-collection table #tag-list-body tr td.save-td,
+.user-photos .user-collection table #tag-list-body tr td.save-td,
+.list-widget-placeholder .tag-collection table #tag-list-body tr td.save-td,
+.user-albums .tag-collection table #tag-list-body tr td.save-td,
+.user-photos .tag-collection table #tag-list-body tr td.save-td {
+  text-align: right;
+  width: 40px;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr td.save-td a,
+.user-albums .user-collection table #user-list-body tr td.save-td a,
+.user-photos .user-collection table #user-list-body tr td.save-td a,
+.list-widget-placeholder .tag-collection table #user-list-body tr td.save-td a,
+.user-albums .tag-collection table #user-list-body tr td.save-td a,
+.user-photos .tag-collection table #user-list-body tr td.save-td a,
+.list-widget-placeholder .user-collection table #tag-list-body tr td.save-td a,
+.user-albums .user-collection table #tag-list-body tr td.save-td a,
+.user-photos .user-collection table #tag-list-body tr td.save-td a,
+.list-widget-placeholder .tag-collection table #tag-list-body tr td.save-td a,
+.user-albums .tag-collection table #tag-list-body tr td.save-td a,
+.user-photos .tag-collection table #tag-list-body tr td.save-td a {
+  vertical-align: middle;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr div,
+.user-albums .user-collection table #user-list-body tr div,
+.user-photos .user-collection table #user-list-body tr div,
+.list-widget-placeholder .tag-collection table #user-list-body tr div,
+.user-albums .tag-collection table #user-list-body tr div,
+.user-photos .tag-collection table #user-list-body tr div,
+.list-widget-placeholder .user-collection table #tag-list-body tr div,
+.user-albums .user-collection table #tag-list-body tr div,
+.user-photos .user-collection table #tag-list-body tr div,
+.list-widget-placeholder .tag-collection table #tag-list-body tr div,
+.user-albums .tag-collection table #tag-list-body tr div,
+.user-photos .tag-collection table #tag-list-body tr div {
+  cursor: pointer;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr a,
+.user-albums .user-collection table #user-list-body tr a,
+.user-photos .user-collection table #user-list-body tr a,
+.list-widget-placeholder .tag-collection table #user-list-body tr a,
+.user-albums .tag-collection table #user-list-body tr a,
+.user-photos .tag-collection table #user-list-body tr a,
+.list-widget-placeholder .user-collection table #tag-list-body tr a,
+.user-albums .user-collection table #tag-list-body tr a,
+.user-photos .user-collection table #tag-list-body tr a,
+.list-widget-placeholder .tag-collection table #tag-list-body tr a,
+.user-albums .tag-collection table #tag-list-body tr a,
+.user-photos .tag-collection table #tag-list-body tr a {
+  display: none;
+  text-indent: 9000px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr a.category,
+.user-albums .user-collection table #user-list-body tr a.category,
+.user-photos .user-collection table #user-list-body tr a.category,
+.list-widget-placeholder .tag-collection table #user-list-body tr a.category,
+.user-albums .tag-collection table #user-list-body tr a.category,
+.user-photos .tag-collection table #user-list-body tr a.category,
+.list-widget-placeholder .user-collection table #tag-list-body tr a.category,
+.user-albums .user-collection table #tag-list-body tr a.category,
+.user-photos .user-collection table #tag-list-body tr a.category,
+.list-widget-placeholder .tag-collection table #tag-list-body tr a.category,
+.user-albums .tag-collection table #tag-list-body tr a.category,
+.user-photos .tag-collection table #tag-list-body tr a.category {
+  display: inline-block;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr input,
+.user-albums .user-collection table #user-list-body tr input,
+.user-photos .user-collection table #user-list-body tr input,
+.list-widget-placeholder .tag-collection table #user-list-body tr input,
+.user-albums .tag-collection table #user-list-body tr input,
+.user-photos .tag-collection table #user-list-body tr input,
+.list-widget-placeholder .user-collection table #tag-list-body tr input,
+.user-albums .user-collection table #tag-list-body tr input,
+.user-photos .user-collection table #tag-list-body tr input,
+.list-widget-placeholder .tag-collection table #tag-list-body tr input,
+.user-albums .tag-collection table #tag-list-body tr input,
+.user-photos .tag-collection table #tag-list-body tr input {
+  display: none;
+  margin-bottom: 0;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr select,
+.user-albums .user-collection table #user-list-body tr select,
+.user-photos .user-collection table #user-list-body tr select,
+.list-widget-placeholder .tag-collection table #user-list-body tr select,
+.user-albums .tag-collection table #user-list-body tr select,
+.user-photos .tag-collection table #user-list-body tr select,
+.list-widget-placeholder .user-collection table #tag-list-body tr select,
+.user-albums .user-collection table #tag-list-body tr select,
+.user-photos .user-collection table #tag-list-body tr select,
+.list-widget-placeholder .tag-collection table #tag-list-body tr select,
+.user-albums .tag-collection table #tag-list-body tr select,
+.user-photos .tag-collection table #tag-list-body tr select {
+  display: none;
+  width: auto;
+  margin-bottom: 0;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr span,
+.user-albums .user-collection table #user-list-body tr span,
+.user-photos .user-collection table #user-list-body tr span,
+.list-widget-placeholder .tag-collection table #user-list-body tr span,
+.user-albums .tag-collection table #user-list-body tr span,
+.user-photos .tag-collection table #user-list-body tr span,
+.list-widget-placeholder .user-collection table #tag-list-body tr span,
+.user-albums .user-collection table #tag-list-body tr span,
+.user-photos .user-collection table #tag-list-body tr span,
+.list-widget-placeholder .tag-collection table #tag-list-body tr span,
+.user-albums .tag-collection table #tag-list-body tr span,
+.user-photos .tag-collection table #tag-list-body tr span {
+  display: inline;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr:hover a.delete,
+.user-albums .user-collection table #user-list-body tr:hover a.delete,
+.user-photos .user-collection table #user-list-body tr:hover a.delete,
+.list-widget-placeholder .tag-collection table #user-list-body tr:hover a.delete,
+.user-albums .tag-collection table #user-list-body tr:hover a.delete,
+.user-photos .tag-collection table #user-list-body tr:hover a.delete,
+.list-widget-placeholder .user-collection table #tag-list-body tr:hover a.delete,
+.user-albums .user-collection table #tag-list-body tr:hover a.delete,
+.user-photos .user-collection table #tag-list-body tr:hover a.delete,
+.list-widget-placeholder .tag-collection table #tag-list-body tr:hover a.delete,
+.user-albums .tag-collection table #tag-list-body tr:hover a.delete,
+.user-photos .tag-collection table #tag-list-body tr:hover a.delete {
+  display: inline-block;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr.editing select,
+.user-albums .user-collection table #user-list-body tr.editing select,
+.user-photos .user-collection table #user-list-body tr.editing select,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing select,
+.user-albums .tag-collection table #user-list-body tr.editing select,
+.user-photos .tag-collection table #user-list-body tr.editing select,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing select,
+.user-albums .user-collection table #tag-list-body tr.editing select,
+.user-photos .user-collection table #tag-list-body tr.editing select,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing select,
+.user-albums .tag-collection table #tag-list-body tr.editing select,
+.user-photos .tag-collection table #tag-list-body tr.editing select,
+.list-widget-placeholder .user-collection table #user-list-body tr.editing input,
+.user-albums .user-collection table #user-list-body tr.editing input,
+.user-photos .user-collection table #user-list-body tr.editing input,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing input,
+.user-albums .tag-collection table #user-list-body tr.editing input,
+.user-photos .tag-collection table #user-list-body tr.editing input,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing input,
+.user-albums .user-collection table #tag-list-body tr.editing input,
+.user-photos .user-collection table #tag-list-body tr.editing input,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing input,
+.user-albums .tag-collection table #tag-list-body tr.editing input,
+.user-photos .tag-collection table #tag-list-body tr.editing input {
+  display: inline;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr.editing div,
+.user-albums .user-collection table #user-list-body tr.editing div,
+.user-photos .user-collection table #user-list-body tr.editing div,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing div,
+.user-albums .tag-collection table #user-list-body tr.editing div,
+.user-photos .tag-collection table #user-list-body tr.editing div,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing div,
+.user-albums .user-collection table #tag-list-body tr.editing div,
+.user-photos .user-collection table #tag-list-body tr.editing div,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing div,
+.user-albums .tag-collection table #tag-list-body tr.editing div,
+.user-photos .tag-collection table #tag-list-body tr.editing div,
+.list-widget-placeholder .user-collection table #user-list-body tr.editing span,
+.user-albums .user-collection table #user-list-body tr.editing span,
+.user-photos .user-collection table #user-list-body tr.editing span,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing span,
+.user-albums .tag-collection table #user-list-body tr.editing span,
+.user-photos .tag-collection table #user-list-body tr.editing span,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing span,
+.user-albums .user-collection table #tag-list-body tr.editing span,
+.user-photos .user-collection table #tag-list-body tr.editing span,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing span,
+.user-albums .tag-collection table #tag-list-body tr.editing span,
+.user-photos .tag-collection table #tag-list-body tr.editing span {
+  display: none;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr.editing a,
+.user-albums .user-collection table #user-list-body tr.editing a,
+.user-photos .user-collection table #user-list-body tr.editing a,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing a,
+.user-albums .tag-collection table #user-list-body tr.editing a,
+.user-photos .tag-collection table #user-list-body tr.editing a,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing a,
+.user-albums .user-collection table #tag-list-body tr.editing a,
+.user-photos .user-collection table #tag-list-body tr.editing a,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing a,
+.user-albums .tag-collection table #tag-list-body tr.editing a,
+.user-photos .tag-collection table #tag-list-body tr.editing a {
+  display: inline-block;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr.editing a.delete,
+.user-albums .user-collection table #user-list-body tr.editing a.delete,
+.user-photos .user-collection table #user-list-body tr.editing a.delete,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing a.delete,
+.user-albums .tag-collection table #user-list-body tr.editing a.delete,
+.user-photos .tag-collection table #user-list-body tr.editing a.delete,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing a.delete,
+.user-albums .user-collection table #tag-list-body tr.editing a.delete,
+.user-photos .user-collection table #tag-list-body tr.editing a.delete,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing a.delete,
+.user-albums .tag-collection table #tag-list-body tr.editing a.delete,
+.user-photos .tag-collection table #tag-list-body tr.editing a.delete,
+.list-widget-placeholder .user-collection table #user-list-body tr.editing a.category,
+.user-albums .user-collection table #user-list-body tr.editing a.category,
+.user-photos .user-collection table #user-list-body tr.editing a.category,
+.list-widget-placeholder .tag-collection table #user-list-body tr.editing a.category,
+.user-albums .tag-collection table #user-list-body tr.editing a.category,
+.user-photos .tag-collection table #user-list-body tr.editing a.category,
+.list-widget-placeholder .user-collection table #tag-list-body tr.editing a.category,
+.user-albums .user-collection table #tag-list-body tr.editing a.category,
+.user-photos .user-collection table #tag-list-body tr.editing a.category,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.editing a.category,
+.user-albums .tag-collection table #tag-list-body tr.editing a.category,
+.user-photos .tag-collection table #tag-list-body tr.editing a.category {
+  display: none;
+}
+.list-widget-placeholder .user-collection table #user-list-body tr.create-tr input,
+.user-albums .user-collection table #user-list-body tr.create-tr input,
+.user-photos .user-collection table #user-list-body tr.create-tr input,
+.list-widget-placeholder .tag-collection table #user-list-body tr.create-tr input,
+.user-albums .tag-collection table #user-list-body tr.create-tr input,
+.user-photos .tag-collection table #user-list-body tr.create-tr input,
+.list-widget-placeholder .user-collection table #tag-list-body tr.create-tr input,
+.user-albums .user-collection table #tag-list-body tr.create-tr input,
+.user-photos .user-collection table #tag-list-body tr.create-tr input,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.create-tr input,
+.user-albums .tag-collection table #tag-list-body tr.create-tr input,
+.user-photos .tag-collection table #tag-list-body tr.create-tr input,
+.list-widget-placeholder .user-collection table #user-list-body tr.create-tr select,
+.user-albums .user-collection table #user-list-body tr.create-tr select,
+.user-photos .user-collection table #user-list-body tr.create-tr select,
+.list-widget-placeholder .tag-collection table #user-list-body tr.create-tr select,
+.user-albums .tag-collection table #user-list-body tr.create-tr select,
+.user-photos .tag-collection table #user-list-body tr.create-tr select,
+.list-widget-placeholder .user-collection table #tag-list-body tr.create-tr select,
+.user-albums .user-collection table #tag-list-body tr.create-tr select,
+.user-photos .user-collection table #tag-list-body tr.create-tr select,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.create-tr select,
+.user-albums .tag-collection table #tag-list-body tr.create-tr select,
+.user-photos .tag-collection table #tag-list-body tr.create-tr select,
+.list-widget-placeholder .user-collection table #user-list-body tr.create-tr a,
+.user-albums .user-collection table #user-list-body tr.create-tr a,
+.user-photos .user-collection table #user-list-body tr.create-tr a,
+.list-widget-placeholder .tag-collection table #user-list-body tr.create-tr a,
+.user-albums .tag-collection table #user-list-body tr.create-tr a,
+.user-photos .tag-collection table #user-list-body tr.create-tr a,
+.list-widget-placeholder .user-collection table #tag-list-body tr.create-tr a,
+.user-albums .user-collection table #tag-list-body tr.create-tr a,
+.user-photos .user-collection table #tag-list-body tr.create-tr a,
+.list-widget-placeholder .tag-collection table #tag-list-body tr.create-tr a,
+.user-albums .tag-collection table #tag-list-body tr.create-tr a,
+.user-photos .tag-collection table #tag-list-body tr.create-tr a {
+  display: inline-block;
+}
+.list-widget-placeholder ul,
+.user-albums ul,
+.user-photos ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #d8d8d8;
+  border-bottom: none;
+}
+.list-widget-placeholder ul .section,
+.user-albums ul .section,
+.user-photos ul .section {
+  background: #eeeeee;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e6e6e6), color-stop(1, #ffffff));
+  background: -ms-linear-gradient(bottom, #e6e6e6 0%, #ffffff 100%);
+  background: -moz-linear-gradient(center bottom, #e6e6e6 0%, #ffffff 100%);
+  background: -o-linear-gradient(#ffffff, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  border-bottom: 1px solid #d8d8d8;
+  border-top: none;
+  padding: 0;
+}
+.list-widget-placeholder ul .section a.section-head,
+.user-albums ul .section a.section-head,
+.user-photos ul .section a.section-head {
+  padding: 10px;
+  color: #4f5264;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+}
+.list-widget-placeholder ul .section a.options,
+.user-albums ul .section a.options,
+.user-photos ul .section a.options {
+  float: right;
+  text-indent: -10000px;
+  margin: 12px 10px 12px 0px;
+  cursor: pointer;
+}
+.list-widget-placeholder ul .section a.cancel,
+.user-albums ul .section a.cancel,
+.user-photos ul .section a.cancel {
+  display: none;
+}
+.list-widget-placeholder ul li,
+.user-albums ul li,
+.user-photos ul li {
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #fff;
+  padding: 4px;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item,
+.user-albums ul li div#user-photoalbums div.item,
+.user-photos ul li div#user-photoalbums div.item,
+.list-widget-placeholder ul li div#user-photos div.item,
+.user-albums ul li div#user-photos div.item,
+.user-photos ul li div#user-photos div.item {
+  margin: 2px;
+  width: 193px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item #favorite,
+.user-albums ul li div#user-photoalbums div.item #favorite,
+.user-photos ul li div#user-photoalbums div.item #favorite,
+.list-widget-placeholder ul li div#user-photos div.item #favorite,
+.user-albums ul li div#user-photos div.item #favorite,
+.user-photos ul li div#user-photos div.item #favorite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item #favorite a,
+.user-albums ul li div#user-photoalbums div.item #favorite a,
+.user-photos ul li div#user-photoalbums div.item #favorite a,
+.list-widget-placeholder ul li div#user-photos div.item #favorite a,
+.user-albums ul li div#user-photos div.item #favorite a,
+.user-photos ul li div#user-photos div.item #favorite a {
+  cursor: pointer;
+  overflow: hidden;
+  width: 14px;
+  height: 14px;
+  margin: 3px 5px;
+  text-indent: 9000px;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item .features,
+.user-albums ul li div#user-photoalbums div.item .features,
+.user-photos ul li div#user-photoalbums div.item .features,
+.list-widget-placeholder ul li div#user-photos div.item .features,
+.user-albums ul li div#user-photos div.item .features,
+.user-photos ul li div#user-photos div.item .features {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item .features a,
+.user-albums ul li div#user-photoalbums div.item .features a,
+.user-photos ul li div#user-photoalbums div.item .features a,
+.list-widget-placeholder ul li div#user-photos div.item .features a,
+.user-albums ul li div#user-photos div.item .features a,
+.user-photos ul li div#user-photos div.item .features a {
+  cursor: pointer;
+  overflow: hidden;
+  width: 14px;
+  height: 14px;
+  margin: 3px 5px;
+  text-indent: 9000px;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item .features a.delete,
+.user-albums ul li div#user-photoalbums div.item .features a.delete,
+.user-photos ul li div#user-photoalbums div.item .features a.delete,
+.list-widget-placeholder ul li div#user-photos div.item .features a.delete,
+.user-albums ul li div#user-photos div.item .features a.delete,
+.user-photos ul li div#user-photos div.item .features a.delete {
+  float: right;
+  margin-right: 2px;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item:hover .features,
+.user-albums ul li div#user-photoalbums div.item:hover .features,
+.user-photos ul li div#user-photoalbums div.item:hover .features,
+.list-widget-placeholder ul li div#user-photos div.item:hover .features,
+.user-albums ul li div#user-photos div.item:hover .features,
+.user-photos ul li div#user-photos div.item:hover .features {
+  display: inline-block;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item span.header,
+.user-albums ul li div#user-photoalbums div.item span.header,
+.user-photos ul li div#user-photoalbums div.item span.header,
+.list-widget-placeholder ul li div#user-photos div.item span.header,
+.user-albums ul li div#user-photos div.item span.header,
+.user-photos ul li div#user-photos div.item span.header {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  background-color: #000;
+  opacity: .7;
+  color: #fff;
+  cursor: pointer;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item span.header span.title,
+.user-albums ul li div#user-photoalbums div.item span.header span.title,
+.user-photos ul li div#user-photoalbums div.item span.header span.title,
+.list-widget-placeholder ul li div#user-photos div.item span.header span.title,
+.user-albums ul li div#user-photos div.item span.header span.title,
+.user-photos ul li div#user-photos div.item span.header span.title {
+  padding-right: 20px;
+  word-wrap: break-word;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item span.header span.comments,
+.user-albums ul li div#user-photoalbums div.item span.header span.comments,
+.user-photos ul li div#user-photoalbums div.item span.header span.comments,
+.list-widget-placeholder ul li div#user-photos div.item span.header span.comments,
+.user-albums ul li div#user-photos div.item span.header span.comments,
+.user-photos ul li div#user-photos div.item span.header span.comments {
+  float: right;
+  overflow: hidden;
+  text-indent: 9000px;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item a,
+.user-albums ul li div#user-photoalbums div.item a,
+.user-photos ul li div#user-photoalbums div.item a,
+.list-widget-placeholder ul li div#user-photos div.item a,
+.user-albums ul li div#user-photos div.item a,
+.user-photos ul li div#user-photos div.item a {
+  display: inline-block;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item a.album,
+.user-albums ul li div#user-photoalbums div.item a.album,
+.user-photos ul li div#user-photoalbums div.item a.album,
+.list-widget-placeholder ul li div#user-photos div.item a.album,
+.user-albums ul li div#user-photos div.item a.album,
+.user-photos ul li div#user-photos div.item a.album {
+  background-image: url("../img/glyphicons_011_camera.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 128px;
+  width: 193px;
+}
+.list-widget-placeholder ul li div#user-photoalbums div.item a.hide,
+.user-albums ul li div#user-photoalbums div.item a.hide,
+.user-photos ul li div#user-photoalbums div.item a.hide,
+.list-widget-placeholder ul li div#user-photos div.item a.hide,
+.user-albums ul li div#user-photos div.item a.hide,
+.user-photos ul li div#user-photos div.item a.hide {
+  display: none;
+}
+.list-widget-placeholder ul li#create-album label,
+.user-albums ul li#create-album label,
+.user-photos ul li#create-album label {
+  width: auto;
+}
+.list-widget-placeholder ul li#create-album div.controls,
+.user-albums ul li#create-album div.controls,
+.user-photos ul li#create-album div.controls {
+  margin-left: 85px;
+}
+.list-widget-placeholder ul li#create-album div.controls.input-append,
+.user-albums ul li#create-album div.controls.input-append,
+.user-photos ul li#create-album div.controls.input-append {
+  display: block;
+}
+.list-widget-placeholder ul li#create-album div.controls.input-append p,
+.user-albums ul li#create-album div.controls.input-append p,
+.user-photos ul li#create-album div.controls.input-append p {
+  font-size: 14px;
+}
+.list-widget-placeholder ul li#create-album .submit,
+.user-albums ul li#create-album .submit,
+.user-photos ul li#create-album .submit {
+  clear: both;
+}
+.list-widget-placeholder ul li#create-album .description,
+.user-albums ul li#create-album .description,
+.user-photos ul li#create-album .description {
+  width: 400px;
+}
+.list-widget-placeholder ul li#create-album .description .control-label,
+.user-albums ul li#create-album .description .control-label,
+.user-photos ul li#create-album .description .control-label {
+  float: none;
+  text-align: left;
+}
+.list-widget-placeholder ul li#create-album .description .controls,
+.user-albums ul li#create-album .description .controls,
+.user-photos ul li#create-album .description .controls {
+  margin-left: 0;
+}
+.list-widget-placeholder ul li#create-album .description textarea,
+.user-albums ul li#create-album .description textarea,
+.user-photos ul li#create-album .description textarea {
+  width: 350px;
+}
+.list-widget-placeholder.editing a.options.addalbum,
+.user-albums.editing a.options.addalbum,
+.user-photos.editing a.options.addalbum,
+.list-widget-placeholder.editing a.options.addphotos,
+.user-albums.editing a.options.addphotos,
+.user-photos.editing a.options.addphotos {
+  display: none;
+}
+.list-widget-placeholder.editing a.options.cancel,
+.user-albums.editing a.options.cancel,
+.user-photos.editing a.options.cancel {
+  display: block;
+}
+div#contactUs textarea {
+  width: 350px;
+  height: 120px;
+}
+form#fileupload {
+  position: relative;
+}
+form#fileupload input#add-files-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 110px;
+}
+div.photos a.item,
+div.photo-albums a.item {
+  margin: 10px;
+  width: 270px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fff;
+}
+div.photos a.item img,
+div.photo-albums a.item img {
+  width: 100%;
+}
+div.photos a.item:hover,
+div.photo-albums a.item:hover {
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+div.photos a.item:hover span.header,
+div.photo-albums a.item:hover span.header {
+  display: block;
+}
+div.photos a.item span.header,
+div.photo-albums a.item span.header {
+  position: absolute;
+  display: none;
+  bottom: 5px;
+  right: -5px;
+  padding: 5px;
+  background-color: #fff;
+  color: #4f5264;
+  border-left: 1px solid #aaaaaa;
+  border-top: 1px solid #aaaaaa;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -moz-border-radius-topleft: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 5px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  cursor: pointer;
+}
+div.photos a.item span.header a > span.title,
+div.photo-albums a.item span.header a > span.title {
+  position: relative;
+  word-wrap: break-word;
+}
+.tagList.tagit {
+  max-width: 210px;
+  margin-left: 0;
+  background-color: #fff;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.tagList.tagit li {
+  border: none;
+  margin: 0;
+  color: #fff;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.tagList.tagit li span.tagit-label {
+  padding-top: 0;
+  margin-left: 0;
+}
+.tagList.tagit li.tagit-choice {
+  background: none;
+  background-color: #da8e8d;
+  border: 1px solid #ccc;
+}
+.tagList.tagit li.tagit-choice .tagit-close {
+  right: .3em;
+  color: #fff;
+}
+.tagList.tagit li.tagit-choice .tagit-close:hover > span {
+  text-decoration: underline;
+}
+.tagList.tagit li.tagit-choice .tagit-close span.text-icon {
+  display: inline-block;
+  padding-top: 0;
+  margin-left: 0;
+}
+.tagList.tagit li.tagit-choice .tagit-close span.ui-icon.ui-icon-close {
+  margin-left: 0;
+}
+.photo-info ul.tagList.tagit,
+.photoalbum-info ul.tagList.tagit {
+  background-color: transparent;
+  border: none;
+  -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  -moz-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+}
+.photo-info ul.tagList.tagit a.tagit-close,
+.photoalbum-info ul.tagList.tagit a.tagit-close {
+  display: none;
+}
+.photo-info.editing ul.tagList.tagit,
+.photoalbum-info.editing ul.tagList.tagit {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.photo-info.editing ul.tagList.tagit a.tagit-close,
+.photoalbum-info.editing ul.tagList.tagit a.tagit-close {
+  display: inline-block;
+}
+.ui-menu.ui-autocomplete {
+  max-width: 300px;
+  list-style-type: none;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  margin-top: 2px;
+  background-color: #fff;
+  padding: 2px;
+  margin: 2px 0 0;
+  min-width: 220px;
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+}
+.ui-menu.ui-autocomplete li a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.ui-menu.ui-autocomplete li.active a,
+.ui-menu.ui-autocomplete li:hover a {
+  text-decoration: none;
+  color: #fff;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #da8e8d;
+  background-image: -moz-linear-gradient(top, #da8e8d, #c17c7c);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#da8e8d), to(#c17c7c));
+  background-image: -webkit-linear-gradient(top, #da8e8d, #c17c7c);
+  background-image: -o-linear-gradient(top, #da8e8d, #c17c7c);
+  background-image: linear-gradient(to bottom, #da8e8d, #c17c7c);
+  background-repeat: repeat-x;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#da8e8d', endColorstr='#c17c7c', GradientType=0);
+}
+#albumContainer .featurette-heading {
+  border-bottom: 2px solid #ccc;
+}
+#albumContainer .featurette-heading .date {
+  float: right;
+  font-size: 30px;
+  margin-top: 10px;
 }

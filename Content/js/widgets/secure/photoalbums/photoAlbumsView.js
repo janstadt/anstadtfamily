@@ -71,7 +71,6 @@ define([
 
         addAll: function () {
             this.collection.each(this.initAddOne, this);
-            this.setupMasonry();
             this.showControls();
         },
 
@@ -81,6 +80,7 @@ define([
             var albumView = new PhotoAlbumView({ "model": album });
             var item = $(albumView.el);
             this.masonryContainer.append(item);
+            this.setupMasonry();
         },
 
         addOne: function (album) {
